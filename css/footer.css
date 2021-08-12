@@ -1,0 +1,70 @@
+.logo-desc,
+.social-media,
+.page-links,
+.recent-posts,
+.contact-us {
+  flex: 1 1 0px;
+  margin: 2rem;
+  text-align: center;
+}
+
+.page-links ul,
+.contact-us,
+.contact-text h6 {
+  line-height: 3rem;
+}
+
+.logo-desc p {
+  text-align: justify;
+}
+
+footer {
+  background: url("/images/footer-image.jpg") center no-repeat;
+  background-size: cover;
+  color: #bdbdbd;
+}
+
+.footer-bot-links {
+  flex: 0.3;
+}
+
+.lower-footer {
+  background-color: #000000;
+  padding: 2rem;
+}
+@media screen and (max-width: 1200px) {
+  .logo-desc,
+  .social-media,
+  .page-links,
+  .recent-posts,
+  .contact-us {
+    margin: 1rem;
+  }
+}
+@media screen and (max-width: 992px) {
+  .logo-desc,
+  .social-media,
+  .page-links,
+  .recent-posts,
+  .contact-us {
+    margin: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .page-links ul,
+  .contact-us,
+  .contact-text h6 {
+    line-height: 2rem;
+  }
+  .upper-footer {
+    flex-direction: column;
+  }
+  .logo-desc,
+  .social-media,
+  .page-links,
+  .recent-posts,
+  .contact-us {
+    margin: 0.5rem;
+  }
+}
