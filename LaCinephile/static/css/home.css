@@ -1,18 +1,3 @@
-/* Defines height & Width for image container */
-.features {
-  /* height: 50%; */
-  /* overflow: hidden; */
-}
-
-.carousel-item {
-  /* height: 100% !important; */
-}
-/* .carousel-item img {
-  width: 100% !important;
-  height: 100% !important;
-} */
-/* Carousel-item is a bootstrap class for responsive frameworks */
-
 .wrap {
   position: relative;
   z-index: 100;
@@ -78,7 +63,7 @@
   position: relative;
 }
 
-.slick-slide:after {
+/* .slick-slide:after {
   content: "";
   position: absolute;
   z-index: 2;
@@ -88,7 +73,7 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   transition: transform 0.4s;
-}
+} */
 
 .item.slick-slide {
   transform: scale(0.7) translate(640px);
@@ -142,9 +127,6 @@
   transition: all 0.25s ease-in-out;
 }
 
-.welcome-section {
-  background-image: url("/images/free-guy.webp");
-}
 .welcome-section p {
   color: #f2f2f2;
   font-size: 1.1rem;
@@ -195,7 +177,7 @@ a.effect-underline:hover:after {
 
 .card {
   color: var(--clr-neutral-100);
-  background-image: url(/images/sftwr.jpg);
+
   background-size: cover;
   padding: 10rem 0 0;
   max-width: 40ch;

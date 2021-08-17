@@ -1,64 +1,60 @@
-<head>
-  <link rel="stylesheet" href="./css/header.css" />
-  <link rel="stylesheet" href="./css/bootstrap.min.css" />
-  <link rel="stylesheet" href="./css/all.css" />
-</head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="#"
-      ><img src="/images/logo.png" class="img-fluid"
-    /></a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+{% load static %}
+<link rel="stylesheet" href="{% static './css/header.css' %}" />
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#"
-            >Home <span class="sr-only">(current)</span></a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Book</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Prices</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input
-          class="form-control mr-sm-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          id="search"
-          class="rounded-pill"
-        />
-        <button
-          class="btn btn-outline-danger my-2 my-sm-0"
-          type="submit"
-          id="search-btn"
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <a class="navbar-brand" href="#"
+    ><img src="{%static '/images/logo.png' %}" alt="logo" class="img-fluid"
+  /></a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#"
+          >Home <span class="sr-only">(current)</span></a
         >
-          Search
-        </button>
-      </form>
-      <div class="btn-group">
-        <button type="button" class="btn btn-outline-primary">
-          <i class="fas fa-sign-in-alt"></i> Login
-        </button>
-        <button type="button" class="btn btn-outline-light">
-          <i class="fas fa-user-plus"></i> Register
-        </button>
-      </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Book</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Prices</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        id="search"
+        class="rounded-pill"
+      />
+      <button
+        class="btn btn-outline-danger my-2 my-sm-0"
+        type="submit"
+        id="search-btn"
+      >
+        Search
+      </button>
+    </form>
+    <div class="btn-group">
+      <button type="button" class="btn btn-outline-primary">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+      <button type="button" class="btn btn-outline-light">
+        <i class="fas fa-user-plus"></i> Register
+      </button>
     </div>
-  </nav>
-</body>
+  </div>
+</nav>

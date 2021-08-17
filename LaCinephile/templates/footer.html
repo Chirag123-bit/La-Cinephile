@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/footer.css" />
-    <link rel="stylesheet" href="./css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./css/all.css" />
-    <title>Footer</title>
-  </head>
-  <body>
-    <footer d-flex flex-column>
+{% load static %} 
+
+<link rel="stylesheet" href="{% static './css/footer.css' %}" /> 
+
+
+    <footer d-flex flex-column style="background: url({% static '/images/footer-image.jpg' %}")" center no-repeat;">
       <div class="d-flex container-xl upper-footer">
         <div class="logo-desc">
           <div class="logo">
-            <img src="./images/logo.png" alt="Logo" class="img-fluid" />
+            <img src="{% static './images/logo.png' %}" alt="Logo" class="img-fluid" />
           </div>
           <div class="desc d-flex flex-column">
             <h4>Commited To Your Entertainment</h4>
@@ -50,11 +43,11 @@
         <div class="recent-posts d-flex flex-column">
           <h3 class="text-white">Recent Posts</h3>
           <ul class="list-unstyled">
-            <li>
+            <li class="my-3">
               <a>Doctor Strange assembles with the Avengers</a>
               <h6>April 2, 2019</h6>
             </li>
-            <li>
+            <li class="my-3">
               <a>5 movies to watch this week (29 Sep 2016)</a>
               <h6 class="text-danger">April 2, 2019</h6>
             </li>
@@ -93,5 +86,3 @@
             </div>
       </div>
     </footer>
-  </body>
-</html>

@@ -11,16 +11,6 @@ $(".slider").slick({
   touchMove: true,
   prevArrow: '<button class="slick-prev"> < </button>',
   nextArrow: '<button class="slick-next"> > </button>',
-
-  //         responsive: [
-  //             {
-  //               breakpoint: 576,
-  //               settings: {
-  //                 centerMode: false,
-  //                 variableWidth: false,
-  //               }
-  //             },
-  //         ]
 });
 
 var imgs = $(".slider img");
@@ -34,3 +24,10 @@ imgs.each(function () {
   });
   $(this).hide();
 });
+
+function removeAfter() {
+  document.querySelector(".slick-slide").classList.remove("hasactive");
+}
+document
+  .querySelector(".slick-active")
+  .addEventListener("mousein", removeAfter());
