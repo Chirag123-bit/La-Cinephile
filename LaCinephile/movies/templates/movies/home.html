@@ -12,7 +12,7 @@
 {% endblock css_files%}
 
 {% block main_content %}
-  <section class="welcome-section mb-5" style = "background-image: url({% static 'images/free-guy.webp'%})">
+  <section class="welcome-section mb-5" style = "background-image: url({% static 'images/free-guy.webp'%})" id="home">
     <div class="welcome-text container d-flex flex-column m-0">
       <h1 class="text-white decorated-text text-center">
         We’re Open and <span class="title-highlight">Safer & Cleaner</span>
@@ -161,7 +161,7 @@
                   <div class="card rounded item" style="background-image: url({{movie.poster}}); id = {{movie.name}}">
                   <div class="card-content">
                     <h2 class="card-title">{{movie.name}}</h2>
-                    <p class="card-body-custom text-white">{{movie.desc}}</p>
+                    <p class="card-body-custom text-white">{{movie.summary}}</p>
                   </div>
                   
                   </div>

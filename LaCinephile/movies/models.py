@@ -6,7 +6,8 @@ class Movie(models.Model):
     poster = models.ImageField(upload_to = 'static/images/movies')
     trailer = models.URLField()
     imdb = models.FloatField()
-    desc = models.TextField()
+    summary = models.CharField(max_length=500)
+    desc = models.TextField(default="Summary")
     actors = models.CharField(max_length=300)
     director = models.CharField(max_length=100)
 

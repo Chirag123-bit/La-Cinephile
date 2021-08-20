@@ -26,7 +26,6 @@ imgs.each(function () {
 });
 
 $(".slider").on('afterChange', function (event, slick, currentSlide, nextSlide) {
-      console.log($('.slick-current'))
-      $(".slick-slide").removeClass('act');
-      $('.slick-current').addClass('act');        
+      $(".slick-slide").removeClass('act'); // Removes class "act" from overall slider
+      $('.slick-current').addClass('act'); // Add class "act" to current slide
    });
