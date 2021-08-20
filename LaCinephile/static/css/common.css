@@ -1,3 +1,7 @@
 .title-highlight {
   color: #fe7900;
 }
+
+* {
+  scroll-behavior: smooth;
+}

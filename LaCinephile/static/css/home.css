@@ -3,14 +3,14 @@
   z-index: 100;
   width: 100%;
   padding: 0 60px;
-  background: url(https://images.unsplash.com/photo-1485069203392-8e1aeb1ebf02?auto=format&fit=crop&w=1054&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D)
-    center no-repeat;
+  
   -webkit-background-size: cover;
   background-size: cover;
   overflow: hidden;
+  height: max-content;
 }
 
-.wrap:after {
+/* .wrap:after {
   content: "";
   position: absolute;
   z-index: 2;
@@ -19,7 +19,7 @@
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
-}
+} */
 
 .slider {
   position: relative;
@@ -57,23 +57,23 @@
 }
 
 .item.slick-slide {
-  width: 400px;
+  width: 400px !important;
   height: 400px !important;
   transition: transform 0.4s;
   position: relative;
 }
 
-/* .slick-slide:after {
-  content: "";
+.slick-slide:after {
+  content:'';
   position: absolute;
   z-index: 2;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  transition: transform 0.4s;
-} */
+  background: rgba(0,0,0,.5);
+  transition: transform .4s;
+}
 
 .item.slick-slide {
   transform: scale(0.7) translate(640px);
@@ -94,7 +94,6 @@
 }
 
 .item.slick-slide.slick-center {
-  /* margin: 0 -10%; */
   transform: scale(1);
   z-index: 30;
 }
@@ -104,7 +103,7 @@
 }
 
 .welcome-section {
-  padding: 5rem;
+  padding: 8rem !important;
   overflow: hidden;
 }
 
@@ -174,79 +173,90 @@ a.effect-underline:hover:after {
 .get-started {
   background-color: #fffafa;
 }
+:root {
+  --clr-neutral-900: hsl(207, 19%, 9%);
+  --clr-neutral-100: hsl(0, 0%, 100%);
+  --clr-accent-400: hsl(142, 90%, 61%);
+}
 
 .card {
-  color: var(--clr-neutral-100);
-
-  background-size: cover;
+  color: #ffffff !important;
+  background-size: cover !important;
   padding: 10rem 0 0;
-  max-width: 40ch;
-  border-radius: 1rem;
-  overflow: hidden;
-  transition: transform 500ms ease;
+  max-width: 40ch !important;
+  overflow: hidden !important;
+  transition: transform 500ms ease !important;
 }
 
-.slick-center:hover {
-  transform: scale(1.05);
+ .act:hover{
+  transform: scale(1.05) !important;
 }
 .card-content {
-  padding: 1.5em;
+  padding: 1.5em !important;
+  width: 100% !important;
   background: linear-gradient(
     hsl(0 0% 0% /0),
     hsl(255 50% 50% /0.3) 20%,
     hsl(0 0% 0% /1)
-  );
-  transform: translateY(58%);
-  transition: transform 500ms ease;
+  ) !important;
+  transition: transform 500ms ease !important;
+  transform: translateY(58%) !important;
 }
 .card-content > *:not(.card-title) {
-  opacity: 0;
+  opacity: 0 !important;
   transition: opacity 500ms linear;
 }
-.slick-center:hover .card-content > * {
-  opacity: 1;
+ .act:hover  .card-content > * {
+  opacity: 1 !important;
 }
 
-.slick-center:hover .card-content {
-  transform: translateY(0);
+.act:hover  .card-content {
+  transform: translateY(0) !important;
 }
 
 .card-title {
-  position: relative;
-  width: max-content;
+  position: relative !important;
+  width: max-content !important;
 }
 .card-title::after {
   content: "";
-  position: absolute;
-  height: 4px;
-  background: var(--clr-accent-400);
-  width: calc(100% + 1.5rem);
-  left: calc(1.5rem * -1);
-  bottom: 0;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 500ms ease;
+  position: absolute !important;
+  height: 4px !important;
+  background: var(--clr-accent-400) !important;
+  width: calc(100% + 1.5rem) !important;
+  left: calc(1.5rem * -1) !important;
+  bottom: 0 !important;
+  transform: scaleX(0) !important;
+  transform-origin: left !important;
+  transition: transform 500ms ease !important;
 }
 
-.slick-center:hover .card .card-title::after {
-  transform: scaleX(1);
+.act:hover .card-title::after {
+  transform: scaleX(1) !important;
 }
 
 .button {
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  color: var(--clr-neutral-900);
-  background-color: var(--clr-accent-400);
-  padding: 0.5em 1.25em;
-  border-radius: 1rem;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  color: #13171b !important;
+  background-color: var(--clr-accent-400) !important;
+  padding: 0.5em 1.25em !important;
+  border-radius: 1rem !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  width: max-content !important;
 }
 
 .button:hover,
-button:focus {
-  background-color: var(--clr-neutral-100);
+.button:focus {
+  background-color: #ffffff !important;
 }
 
-.card-body {
-  color: rgb(255, 255, 255 /0.8);
+.card-body-custom {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.card p {
+  width: 100% !important;
 }

@@ -25,9 +25,8 @@ imgs.each(function () {
   $(this).hide();
 });
 
-function removeAfter() {
-  document.querySelector(".slick-slide").classList.remove("hasactive");
-}
-document
-  .querySelector(".slick-active")
-  .addEventListener("mousein", removeAfter());
+$(".slider").on('afterChange', function (event, slick, currentSlide, nextSlide) {
+      console.log($('.slick-current'))
+      $(".slick-slide").removeClass('act');
+      $('.slick-current').addClass('act');        
+   });
