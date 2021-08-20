@@ -11,6 +11,10 @@ i {
   transition: all 1s;
 }
 
+.navbar{
+	z-index: 1000 !important;
+}
+
 .navbar-logo{
 	padding: 15px;
 	color: #fff;

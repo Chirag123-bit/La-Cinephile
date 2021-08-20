@@ -1,46 +1,36 @@
-{% extends 'layout.html' %}
+{% extends 'layout.html' %} 
 {% load static %}
-
 {% block title %}
 <title>Movies</title>
-
 {% endblock title %}
 
 {% block css_files %}
-    <link rel="stylesheet" href="{% static '/css/movies.css' %}" />
-    <link rel="stylesheet" href="{% static '/css/common.css' %}" />
+
+<link rel="stylesheet" href="{% static '/css/movies.css' %}" />
+<link rel="stylesheet" href="{% static '/css/common.css' %}" />
+
 {% endblock css_files%}
+{% block main_content %} 
 
-{% block main_content %}
-
-<div class="container-fluid">
-    <h1 class="title-highlight">Now Showing</h1>
-    <div class="container">
-        {% for movie in movies %}
-        <div class="card">
-            <div class="card-content">
-                <h2 class="card-title">Something Awesome</h2>
-                <p class="card-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, atque.</p>
-                <a href="#"
-                   class="button" >Learn More</a>
-            </div>
-        </div>
-        {% endfor %}
+{% for movie in movies %}
+<div class="card mb-3 container border border-danger">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src= '{{movie.poster.url}}' class="img-fluid" alt="{{movie.title}}"/>
     </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{movie.title}}</h5>
+        <p class="card-text">{{movie.summary}}</p>
+        <p class="card-text">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </p>
+        <button type="button" class="btn btn-outline-success">Trailer</button>
+        <button type="button" class="btn btn-outline-danger">
+          Buy Tickets
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
-
-
-
-
-
-{% endblock main_content %}
-
-{% block js_files%}
-  <script src="{% static '/js/jquery/jquery-3.2.1.slim.min.js' %}"></script>
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"
-  ></script>
-    <script src="{% static '/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
-{% endblock js_files %}
+{% endfor %} {% endblock main_content%}
