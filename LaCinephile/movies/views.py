@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from .models import Movie
+from .models import Movie, Now_Showing, Up_Comming
 
 # Create your views here.
 
 def home(request):
-    movies = Movie.objects.all()
+    movies = Now_Showing.objects.all()
     context = {
         'movies':movies,
         'activate_home':"active"
@@ -13,10 +13,13 @@ def home(request):
     return render(request,'movies/home.html',context)
 
 def movies(request):
-    movies = Movie.objects.all()
+    movies = Now_Showing.objects.all()
+    umovies = Up_Comming.objects.all()
     context = {
         'movies':movies,
+        'umovies':umovies,
         'activate_movies':"active"
     }
 
     return render(request,'movies/movies.html',context)
+

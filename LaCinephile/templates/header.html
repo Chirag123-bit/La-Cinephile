@@ -4,7 +4,7 @@
 {% endblock css_files%}
 
 <nav class="navbar navbar-expand-custom navbar-mainbg">
-        <a class="navbar-brand navbar-logo width-limit" href="/#home"><img src="{% static 'images/logo.png' %}" class="img-fluid"></a>
+        <a class="navbar-brand navbar-logo width-limit" href="/#home"><img src="{% static 'images/logo.png' %}" class="img-fluid" alt="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars text-white"></i>
         </button>
@@ -32,5 +32,7 @@
             </ul>
         </div>
     </nav>
+    {% block js_files %}
     <script src="{% static '/js/jquery/jquery-3.2.1.slim.min.js' %}"></script>
     <script src= {% static './js/header.js' %}> </script>
+    {% endblock js_files %}

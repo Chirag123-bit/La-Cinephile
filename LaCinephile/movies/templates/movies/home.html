@@ -158,7 +158,7 @@
           <div class="slider">
             
               {% for movie in movies %}
-                  <div class="card rounded item" style="background-image: url({{movie.poster}}); id = {{movie.name}}">
+                  <div class="card rounded item" style="background-image: url({{movie.poster.url}});" id = "{{movie.name}}">
                   <div class="card-content">
                     <h2 class="card-title">{{movie.name}}</h2>
                     <p class="card-body-custom text-white">{{movie.summary}}</p>
