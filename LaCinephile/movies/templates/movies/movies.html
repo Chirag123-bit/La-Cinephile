@@ -12,13 +12,13 @@
 {% endblock css_files%}
 {% block main_content %} 
 <div id="now-showing">
-<h1> Now Showing </h1>
+<h1 class="title-highlight"> Now Showing </h1>
 {% for movie in movies %}
-<div class="card mb-3 container-md" id="movie-container">
+<div class="card mb-3 container-fluid rounded-5 shadowed mt-3" id="movie-container">
   <div class="row g-0">
-    <div class="col-md-4">
-      <img src= '{{movie.poster.url}}' class="img-fluid"  alt="{{movie.title}}"/>
-    </div>
+     <div class="col-md-4 back-img" style = "background:url({{movie.poster.url}})">
+      {% comment %} <img src= '{{movie.poster.url}}' class="img-fluid mov-height-container"  alt="{{movie.title}}"/> {% endcomment %}
+    </div> 
     <div class="col-md-8 d-flex flex-column" id="{{movie.name}}">
       <div class="card-body d-flex flex-column justify-content-center" >
         <h1 class="card-title text-center gradient-title">{{movie.name}}</h1>
@@ -29,10 +29,10 @@
         <p class="card-text">
           <small class="text-warning"> Directed By: {{movie.director}}</small>
         </p>
-        <p class="card-text text-justify">{{movie.desc}}</p>
+        <p class="card-text text-justify text-white">{{movie.desc}}</p>
         <p id="rating" > </p>
         <p class="card-text">
-          <small class="text-white">Ticket Available</small>
+          <small class="text-primary">Ticket Available</small>
         </p>
         <button type="button" class="btn btn-success border-0">
           Buy Tickets
