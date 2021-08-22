@@ -23,3 +23,15 @@ def movies(request):
 
     return render(request,'movies/movies.html',context)
 
+
+def show(request, id):
+    movie = Now_Showing.objects.get(id=id)
+    context = {
+        'movie' : movie,
+        'activate_movies':"active",
+    }
+    return render(request, 'movies/book.html', context)
+
+
+
+

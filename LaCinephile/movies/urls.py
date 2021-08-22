@@ -20,5 +20,6 @@ from . import views
 urlpatterns = [
     path('', views.home),
     path('all/', views.movies),
+    path('now/<int:id>', views.show),
 ]
 

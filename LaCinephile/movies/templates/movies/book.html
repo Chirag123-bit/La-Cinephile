@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+<title>{{movie.name}}</title>
+
+{% endblock title %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static '/css/home.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/common.css' %}" />
+{% endblock css_files%}
