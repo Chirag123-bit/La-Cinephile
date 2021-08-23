@@ -29,3 +29,15 @@ $(".slider").on('afterChange', function (event, slick, currentSlide, nextSlide) 
       $(".slick-slide").removeClass('act'); // Removes class "act" from overall slider
       $('.slick-current').addClass('act'); // Add class "act" to current slide
    });
+
+     $('.mcard').hover(function(){
+        if($(this).hasClass("active")){
+            $(this).find('.mbottom').slideUp(function(){
+            $('.mcard').removeClass("active");
+          })
+        }
+        else{
+          $(this).addClass("active");
+          $(this).find('.mbottom').stop().slideDown()
+        }
+      })

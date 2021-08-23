@@ -1,37 +1,72 @@
-#now-showing{
-    background-image: radial-gradient( circle 590px at 8.2% 13.8%,  rgba(18,35,60,1) 0%, #bbb 90% );
+.mcard{
+    position: relative;
+    height: 470px;
+    width: 340px;
+    display: block;
+    background: white;
+    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.15) !important;
+    transition: 0.3s linear !important;
 }
 
-#movie-container{
-    background-color: #FF3CAC;
-    background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
-    min-width: 90% !important;
-
+.mcard:hover{
+    box-shadow: 0px 1px 35px 0px rgba(0,0,0,0.3) !important;
 }
 
-/* .gradient-title{
-    background-image: linear-gradient( 92.7deg,  rgba(245,212,212,1) 8.5%, rgba(252,251,224,1) 90.2% );
-} */
-
-.card{
-    border-radius: 4px;
-    background: #fff;
-    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-    transition: .5s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
-    padding: 14px 80px 18px 36px;
-    cursor: pointer;
+.mcard.active .mimage img{
+    opacity: 0.6 !important;
+    transform: scale(1.1) !important;
+    transition: 0.3s linear !important;
 }
 
-.card:hover{
-     transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-}
 
-.back-img{
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
-}
-
-#now-showing{
+.mcard .mimage{
+    background: black;
+    height: 400px;
     overflow: hidden;
+}
+
+.mimage img{
+    transition: 0.3s linear !important;
+    height: 100%;
+    width: 100%;
+}
+
+.mcard .mcontent{
+    position: absolute;
+    bottom: 0px;
+    background: white; 
+    width: 100%;
+    text-align: center;
+    padding: 20px 30px;
+}
+.movie-cards{
+    display: grid;
+    place-items: center;
+}
+
+.mcontent .mtitle{
+    font-size: 24px;
+    font-weight: 600;
+    color: #333333;
+}
+
+.mcontent .msub-title{
+    font-size: 18px;
+    font-weight: 500;
+    color:#e74c3c;
+}
+
+.mbottom p{
+    color:#666666;
+    font-size: 16px;
+    text-align: justify;
+    line-height: 1.8em;
+
+}
+.mbottom{
+    display: none;
+}
+.mbottom .button{
+    transition: 0.3s linear !important;
+    position: static;
 }

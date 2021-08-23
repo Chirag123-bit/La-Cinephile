@@ -14,36 +14,27 @@
 {% endblock css_files%}
 {% block main_content %} 
 <div id="now-showing">
-<h1 class="title-highlight"> Now Showing </h1>
-{% for movie in movies %}
-<div class="card mb-3 container-fluid rounded-5 shadowed mt-3 pt-0" id="movie-container">
-  <div class="row g-0">
-     <div class="col-md-3 back-img" style = "background:url({{movie.poster.url}})">
-    </div> 
-    <div class="col-md-8 d-flex flex-column" id="{{movie.name}}">
-      <div class="card-body d-flex flex-column justify-content-center" >
-        <h1 class="card-title text-center gradient-title">{{movie.name}}</h1>
-        <p class="text-white"> Ratings  <i class="fas fa-star text-warning"></i>{{movie.imdb}}/10 </p>
-        <p class="card-text">
-          <small class="text-info"> Cast: {{movie.actors}}</small>
-        </p>
-        <p class="card-text">
-          <small class="text-warning"> Directed By: {{movie.director}}</small>
-        </p>
-        <p class="card-text text-justify text-white">{{movie.desc}}</p>
-        <p id="rating" > </p>
-        <p class="card-text">
-          <small class="text-primary">Ticket Available</small>
-        </p>
-        <button type="button" class="btn btn-success border-0">
-          Buy Tickets
-        </button>
-        <button type="button" class="btn btn-danger border-0">Watch Trailer</button>
+  <h1 class="title-highlight"> Now Showing </h1>
+  <div class="movie-cards d-flex flex-wrap justify-content-evenly">
+      {% for movie in movies %}
+      <div class="mcard my-4">
+        <div class="mimage">
+          <img src="{{movie.poster.url}}" alt='{{movie.name}}'>
+        </div>
+        <div class="mcontent">
+          <div class="mtitle">{{movie.name}}</div>
+          <div class="msub-title"><i class="fas fa-star text-warning"></i>{{movie.imdb}}/10 </p></div>
+          <div class="mbottom">
+            <p> {{movie.summary}} </p>
+            <hr>
+            <br>
+            <a href="#" class="button text-center">Learn More</a>
+          </div>
+        </div>
       </div>
-    </div>
+      {% endfor %}
   </div>
-</div>
-{% endfor %}
+
 
 <div id="up-comming">
 <h1> Upcomming Movies/ Releasing Soon </h1>
@@ -52,7 +43,7 @@
           <div class="slider">
             
               {% for movie in umovies %}
-                  <div class="card rounded item" style="background-image: url({{movie.poster.url}});" id = {{movie.name}}>
+                  <div class="card rounded item" style="background-image: url({{movie.poster.url}});" id = '{{movie.name}}'>
                   <div class="card-content">
                     <h2 class="card-title">{{movie.name}}</h2>
                     <p class="card-body-custom text-white">{{movie.summary}}</p>
@@ -72,11 +63,9 @@
  {% endblock main_content%}
 
 {% block js_files%}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{% static '/js/jquery/jquery-3.2.1.slim.min.js' %}"></script>
+    <script src="{% static '/js/jquery/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static '/js/movie.js' %}"></script>
     <script src="{% static '/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
-      <script src="{% static '/js/jquery/jquery-3.2.1.slim.min.js' %}"></script>
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -84,5 +73,6 @@
   ></script>
     <script src=" {% static '/js/slick.min.js' %}"></script>
     <script src="{% static '/js/home.js' %}"></script>
+
 
 {% endblock js_files %}

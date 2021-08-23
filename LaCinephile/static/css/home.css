@@ -243,7 +243,7 @@ a.effect-underline:hover:after {
   background-color: var(--clr-accent-400) !important;
   padding: 0.5em 1.25em !important;
   border-radius: 1rem !important;
-  position: absolute !important;
+  position: absolute ;
   bottom: 0 !important;
   width: max-content !important;
 }
