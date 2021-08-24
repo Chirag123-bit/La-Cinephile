@@ -15,7 +15,7 @@
 {% block main_content %} 
 <div id="now-showing">
   <h1 class="title-highlight"> Now Showing </h1>
-  <div class="movie-cards d-flex flex-wrap justify-content-evenly">
+  <div class="movie-cards d-flex flex-wrap justify-content-evenly comtainer-sm">
       {% for movie in movies %}
       <div class="mcard my-4">
         <div class="mimage">
@@ -28,7 +28,7 @@
             <p> {{movie.summary}} </p>
             <hr>
             <br>
-            <a href="#" class="button text-center">Learn More</a>
+            <a href="/movies/now/{{movie.id}}" class="button text-center">Learn More</a>
           </div>
         </div>
       </div>
