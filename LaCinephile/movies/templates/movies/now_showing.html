@@ -21,33 +21,41 @@
                 <img src="{{movie.poster.url}}" alt="{{movie.name}}" class="img-fluid height-limit">
             </div>
             <div class="com-md-2 text-white width-fourty">
-                <h1>{{movie.name}}</h1>
-                <p>
-                    <p class="msub-title"><h4>IMDB <span class="title-highlight">Ratings: </span> <br></h4>
-                        <p class="font-limit"><i class="fas fa-star text-warning"></i>{{movie.imdb}}/10 </p></p>
+                <h1 class="movie-title">{{movie.name}}</h1>
+                <p class="msub-title"><h4>IMDB <span class="title-highlight">Ratings: </span> <br></h4>
+                    <p class="font-limit"><i class="fas fa-star text-warning"></i>{{movie.imdb}}/10 </p>
                 </p>
+               
                 <p> <h4 class="title-highlight"> Cast:</h4> {{movie.actors}}</p>
                 <p> <h4 class="title-highlight"> Directed By:</h4> {{movie.director}}</p>
                 <div class="d-flex justify-content-between">
-                    <a href="#" class="button position-static  text-center"><i class="fas fa-play"></i> Watch Trailer</a>
+                    <a href="#mtrailer-vid" class="button position-static  text-center"  id="playvideo"><i class="fas fa-play"></i> Watch Trailer</a>
                     <a href="#" class="button position-static  text-center"><i class="fas fa-ticket-alt"></i> Book Now</a>
                 </div>
                 <p>
                     <hr class="back-color">
                     <h3 class="title-highlight my-2"> Synopsis: </h3>
+                    <div class="text-content text-justify">
                     {{movie.desc}}
+                    </div>
                 </p>
                 
             </div>
         </div>
 
-        <div class="row">
-
+        <div class="row embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" id="mtrailer-vid" src="{{movie.trailer}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
         </div>
 
     </div>
 
 </div>
 
+<script>
+    $("#playvideo").click(function(){
+     $("#mtrailer-vid")[0].src += "?autoplay=1";
+    });
+
+   </script>
 
 {% endblock main_content %}

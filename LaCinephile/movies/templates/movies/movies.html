@@ -13,7 +13,7 @@
 
 {% endblock css_files%}
 {% block main_content %} 
-<div id="now-showing">
+<div id="now-showing" style="background-image:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url({% static '/images/movie-back.jpg' %}")" center fixed no-repeat;">
   <h1 class="title-highlight"> Now Showing </h1>
   <div class="movie-cards d-flex flex-wrap justify-content-evenly comtainer-sm">
       {% for movie in movies %}
@@ -37,7 +37,7 @@
 
 
 <div id="up-comming">
-<h1> Upcomming Movies/ Releasing Soon </h1>
+<h1 class="text-white"> Upcomming Movies/ Releasing Soon </h1>
 <div class="movies-carausel">
         <div class="wrap d-flex flex-column align-items-md-center" style="background: url({% static 'images/blur-unsplashed.jpg' %}) no-repeat;">
           <div class="slider">

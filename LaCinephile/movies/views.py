@@ -30,7 +30,7 @@ def show(request, id):
         'movie' : movie,
         'activate_movies':"active",
     }
-    return render(request, 'movies/book.html', context)
+    return render(request, 'movies/now_showing.html', context)
 
 
 

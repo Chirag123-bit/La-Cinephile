@@ -1,6 +1,9 @@
 .movie-details{
     padding: 3% 0;
 }
+.movie-viewer{
+    background-attachment: fixed !important;
+}
 
 .width-fourty{
     width: 63%;
@@ -20,5 +23,12 @@
 @media only screen and (max-width: 991px) {
     .movie{
         justify-content: center !important;
+    }
+
+    .width-fourty{
+        width: 100%;
+    }
+    .movie-title{
+        text-align: center;
     }
 }
