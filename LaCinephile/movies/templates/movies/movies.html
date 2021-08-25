@@ -43,7 +43,7 @@
           <div class="slider">
             
               {% for movie in umovies %}
-                  <div class="card rounded item" style="background-image: url({{movie.poster.url}});" id = '{{movie.name}}'>
+                  <div class="card rounded item" style="background-image: url({{movie.poster.url}});" id = '{{movie.id}}'>
                   <div class="card-content">
                     <h2 class="card-title">{{movie.name}}</h2>
                     <p class="card-body-custom text-white">{{movie.summary}}</p>
@@ -53,7 +53,7 @@
                 {% endfor %}
                 
           </div>
-          <a href="#" class="button mb-4 text-center">Learn More</a>
+          <a  class="button mb-4 text-center" id="upcomming-button" onclick="getId()">Learn More</a>
         </div>
       </div>
 </div>
@@ -72,7 +72,11 @@
     crossorigin="anonymous"
   ></script>
     <script src=" {% static '/js/slick.min.js' %}"></script>
-    <script src="{% static '/js/home.js' %}"></script>
+    <script src="{% static '/js/movie.js' %}"></script>
+
+    <script>
+
+    </script>
 
 
 {% endblock js_files %}

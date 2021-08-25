@@ -30,14 +30,25 @@ $(".slider").on('afterChange', function (event, slick, currentSlide, nextSlide) 
       $('.slick-current').addClass('act'); // Add class "act" to current slide
    });
 
-     $('.mcard').hover(function(){
-        if($(this).hasClass("active")){
-            $(this).find('.mbottom').slideUp(function(){
-            $('.mcard').removeClass("active");
-          })
-        }
-        else{
-          $(this).addClass("active");
-          $(this).find('.mbottom').stop().slideDown()
-        }
-      })
+$('.mcard').hover(function(){
+  if($(this).hasClass("active")){
+      $(this).find('.mbottom').slideUp(function(){
+      $('.mcard').removeClass("active");
+    })
+  }
+  else{
+    $(this).addClass("active");
+    $(this).find('.mbottom').stop().slideDown()
+  }
+})
+
+function getId(){
+	console.log("a")
+	var id = $('.slick-current').attr('id');
+	console.log(id);
+	var anchor = document.getElementById('upcomming-button');
+	anchor.href = "/now/"
+	anchor.href += id;
+}
+
+
