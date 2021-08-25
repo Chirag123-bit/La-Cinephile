@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-<title>{{movie.name}}| Now Showing At La Cinephile</title>
+<title>{{movie.name}}| Comming Soon At La Cinephile</title>
 
 {% endblock title %}
 
@@ -22,15 +22,15 @@
             </div>
             <div class="com-md-2 text-white width-fourty">
                 <h1 class="movie-title">{{movie.name}}</h1>
-                <p class="msub-title"><h4 class="title-highlight">IMDB Rating: <br></h4>
-                    <p class="font-limit"><i class="fas fa-star text-warning"></i>{{movie.imdb}}/10 </p>
+                <p class="msub-title"><h4 class="title-highlight">Releasing On: <br></h4>
+                    <p class="font-limit">{{movie.release_date}} </p>
                 </p>
                
                 <p> <h4 class="title-highlight"> Cast:</h4> {{movie.actors}}</p>
                 <p> <h4 class="title-highlight"> Directed By:</h4> {{movie.director}}</p>
                 <div class="d-flex justify-content-between">
                     <a href="#mtrailer-vid" class="button position-static  text-center"  id="playvideo"><i class="fas fa-play"></i> Watch Trailer</a>
-                    <a href="#" class="button position-static  text-center"><i class="fas fa-ticket-alt"></i> Book Now</a>
+                    <a href="{{movie.external_site}}" target="_blank" class="button position-static text-center"><i class="fas fa-book-open"></i> Learn More</a>
                 </div>
                 <p>
                     <hr class="back-color">

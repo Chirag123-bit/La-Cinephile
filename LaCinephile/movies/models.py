@@ -24,3 +24,4 @@ class Now_Showing(Movie):
 
 class Up_Comming(Movie):
     release_date = models.CharField(max_length=50)
+    external_site = models.URLField(null=True)

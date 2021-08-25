@@ -32,6 +32,14 @@ def show(request, id):
     }
     return render(request, 'movies/now_showing.html', context)
 
+def up_show(request, id):
+    movie = Up_Comming.objects.get(id=id)
+    context = {
+        'movie' : movie,
+        'activate_movies':"active",
+    }
+    return render(request, 'movies/up_comming.html', context)
+
 
 
 
