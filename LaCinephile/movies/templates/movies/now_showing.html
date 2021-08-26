@@ -44,7 +44,7 @@
         </div>
 
         <div class="row embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" id="mtrailer-vid" src="{{movie.trailer}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+            <iframe class="embed-responsive-item" id="mtrailer-vid" src="{{movie.trailer}}" width="100%" height="100%"  frameborder="0" allowfullscreen autoplay muted></iframe>
         </div>
 
     </div>
@@ -52,9 +52,25 @@
 </div>
 
 <script>
-    $("#playvideo").click(function(){
-     $("#mtrailer-vid")[0].src += "?autoplay=1";
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+
+    function onYouTubeIframeAPIReady() {
+    player = new YT.Player('mtrailer-vid', {
+        
     });
+    }
+
+
+    document.getElementById("playvideo").addEventListener('click', function(event) {
+    console.log(player);
+    player.unmute
+    });
+
 
    </script>
 
