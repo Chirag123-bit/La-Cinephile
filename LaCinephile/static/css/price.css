@@ -1,0 +1,28 @@
+.rate-title{
+    padding: 60px 40px;
+    min-height: 460px;
+    text-decoration: underline;
+    text-decoration-color: #64bc46;
+}
+
+.hall-back{
+    position: relative;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.price-details{
+    padding-bottom: 0px;
+    background-color: transparent;
+}
+
+.ticket-section{
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.final,.head-col{
+    text-align: center;
+}

@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+<title>Prices</title>
+
+{% endblock title %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static '/css/price.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/common.css' %}" />
+    {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"> {% endcomment %}
+    <style>
+        .table1{
+            background: rgba(255,255,255,0.7);
+        }
+    </style>
+{% endblock css_files%}
+
+
+{% block main_content %}
+
+<div class="ticket-section" style="background-image:  url({% static 'images/ticket-back.jpg' %})">
+<div class="container-md price-details">
+    <div class="hall-back" style="background-image: url({% static 'images/fcube.jpg' %})">
+        <h1 class="rate-title col-sm-6"> 
+            <span class='text-white'> <strong> Ticket </strong> Rates </span>
+        </h1>
+    </div>
+    <div>
+    <table class="table col-sm-12 table1">
+    <thead>
+        <tr>
+        <th scope="col" >Ticket Categories</th>
+        {% for hall in hall_cat %}
+        <th scope="col" style="color:{{hall.color_code}}" class="head-col">{{hall.name}}</th>
+        {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for ticket in ticket_cat %}
+            <tr>
+
+            <th scope="row">{{ticket.name}}</th>
+
+            {% for hall in hall_cat %}
+                <p class="price" style="display: none">{{hall.price}}</p>
+                <p class="discount" style="display: none">{{ticket.discount}}</p>
+                <td class="final" style="color:{{hall.color_code}} !important"></td>
+            {% endfor %}
+            </tr>
+
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+</div>
+</div>
+
+<script>
+    for(let i =0; i<24;i++){
+    var price = Number(document.getElementsByClassName("price")[i].innerText);
+    var discount = Number(document.getElementsByClassName("discount")[i].innerText);
+    var final = price - discount;
+    document.getElementsByClassName("final")[i].innerHTML = final;
+    console.log(final)
+    }
+</script>
+<script src="{% static '/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
+
+{% endblock main_content %}

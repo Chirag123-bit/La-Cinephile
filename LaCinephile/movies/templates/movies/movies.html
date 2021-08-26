@@ -13,7 +13,7 @@
 
 {% endblock css_files%}
 {% block main_content %} 
-<div id="now-showing" style="background-image:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url({% static '/images/movie-back.jpg' %}")" center fixed no-repeat;">
+<div id="now-showing" style="background-image:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({% static '/images/movie-back.jpg' %}")" center fixed no-repeat;">
   <h1 class="title-highlight"> Now Showing </h1>
   <div class="movie-cards d-flex flex-wrap justify-content-evenly comtainer-sm">
       {% for movie in movies %}
@@ -23,9 +23,9 @@
         </div>
         <div class="mcontent">
           <div class="mtitle">{{movie.name}}</div>
-          <div class="msub-title"><i class="fas fa-star text-warning"></i>{{movie.imdb}}/10 </p></div>
+          <div class="msub-title"><i class="fas fa-star title-highlight"></i>{{movie.imdb}}/10 </p></div>
           <div class="mbottom">
-            <p> {{movie.summary}} </p>
+            <p class="text-dark"> {{movie.summary}} </p>
             <hr>
             <br>
             <a href="/movies/now/{{movie.id}}" class="button text-center">Learn More</a>
