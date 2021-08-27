@@ -239,3 +239,7 @@ a.effect-underline:hover:after {
 }
 
 
+.link-unstyled, .link-unstyled:link, .link-unstyled:hover {
+  color: inherit;
+  text-decoration: inherit;
+}

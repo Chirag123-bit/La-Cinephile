@@ -10,7 +10,6 @@
     position: relative;
     justify-content: center;
     align-items: center;
-    margin: 40px 0;
 }
 
 .movie-cards  .card{
@@ -70,4 +69,46 @@
 
 .sub-title{
     color:white
+}
+
+.now-showing-text {
+    padding: 8rem !important;
+    overflow: hidden;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  
+  .inner-movie-text{
+      width: 50%;
+  }
+  
+  .inner-movie-text p{
+      font-size: 1.2rem;
+      text-align: justify;
+  }
+
+  .inner-movie-text h1{
+      font-size: 3rem;
+      margin-bottom: 3rem;
+  }
+
+  .inner-movie-text-up{
+      width: 72%;
+  }
+
+  .inner-movie-text-up p{
+    width: 72%;
+    font-size: 1.2rem;
+    text-align: justify;
+}
+.movie-viewer{
+    background-size: contain;
+    background-attachment: fixed;
+    text-align: center;
+    padding: 5rem 0;
+}
+
+#up-comming{
+    background-attachment: fixed;
+    background-size: cover;
 }

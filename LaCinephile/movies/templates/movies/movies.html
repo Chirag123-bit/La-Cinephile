@@ -13,9 +13,18 @@
 
 {% endblock css_files%}
 {% block main_content %} 
-<div id="now-showing" style="background-image:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({% static '/images/movie-back.jpg' %}")" center fixed no-repeat;">
-  <h1 class="title-highlight"> Now Showing </h1>
-  <div class="movie-cards d-flex flex-wrap justify-content-evenly comtainer-sm">
+<div id="now-showing" >
+    <div class="now-showing-text p-5" style="background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)), url({% static '/images/movie-text-back.jpg' %});">
+      <div class="inner-movie-text">
+        <h1 class="title-highlight h1"> Movies At La Cinephile </h1>
+        <p class="text-white"> Discover latest movies at La Cinephile. Now at unbelievable rate! Don't miss your chances to enjoy your time at La CinePhile at an unbeliveable rate! </p>
+      </div>
+    </div>
+  
+  <div class="movie-viewer" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url({% static '/images/movie-back.jpg' %})" center fixed no-repeat;>
+    <h1 class="title-highlight h1"> Now Showing </h1>
+    <p class="text-white"> Discover latest movies playing at La Cinephile. Now at unbelievable rate! Take your drinks, pick up your popcorns and enjoy! </p>
+  <div class="movie-cards d-flex flex-wrap justify-content-evenly comtainer-sm" >
       {% for movie in movies %}
       <div class="card">
         <div class ="img8x">
@@ -37,33 +46,14 @@
       {% endfor %}
 
   </div>
+  </div>
 
-  <!-- <div class="mcard my-4">
-        <div class="mimage">
-          <img src="{{movie.poster.url}}" alt='{{movie.name}}'>
-        </div>
-        <div class="mcontent">
-          <div class="mtitle">{{movie.name}}</div>
-          <div class="msub-title"><i class="fas fa-star title-highlight"></i>{{movie.imdb}}/10 </p></div>
-          <div class="mbottom">
-            <p class="text-dark"> {{movie.summary}} </p>
-            <hr>
-            <br>
-            <a href="/movies/now/{{movie.id}}" class="button text-center">Learn More</a>
-          </div>
-        </div>
-      </div> -->
-<!-- <div class="container d-flex flex-wrap movie-wrapper">
-  
-</div>
-</div> -->
-
-<div id="up-comming">
-<h1 class="text-white"> Upcomming Movies/ Releasing Soon </h1>
-<div class="movies-carausel">
-        <div class="wrap d-flex flex-column align-items-md-center" style="background: url({% static 'images/blur-unsplashed.jpg' %}) no-repeat;">
+<div id="up-comming" style="background-image: url({% static 'images/blur-unsplashed.jpg' %});">
+    <div class="movies-carausel">
+        <div class="wrap d-flex flex-column align-items-md-center up-section-container" >
+        <h1 class="title-highlight h1"> Upcomming Movies/ Releasing Soon </h1>
+        <p class="text-white"> Discover movies releasing soon at La Cinephile. Now at unbelievable rate! Take your drinks, pick up your popcorns and enjoy! </p>
           <div class="slider">
-            
               {% for movie in umovies %}
                   <div class="vcard rounded item" style="background-image: url({{movie.poster.url}});" id = '{{movie.id}}'>
                   <div class="vcard-content">
@@ -72,8 +62,7 @@
                   </div>
                   
                   </div>
-                {% endfor %}
-                
+                {% endfor %}   
           </div>
           <a href="up/" class="button mb-4 text-center" id="upcomming-button" onclick="getId2()">Learn More</a>
         </div>
