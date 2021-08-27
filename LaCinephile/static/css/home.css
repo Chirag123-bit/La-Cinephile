@@ -174,7 +174,7 @@ a.effect-underline:hover:after {
   background-color: #fffafa;
 }
 
-.card {
+.vcard {
   color: #ffffff !important;
   background-size: cover !important;
   padding: 10rem 0 0;
@@ -186,7 +186,7 @@ a.effect-underline:hover:after {
  .act:hover{
   transform: scale(1.05) !important;
 }
-.card-content {
+.vcard-content {
   padding: 1.5em !important;
   width: 100% !important;
   background: linear-gradient(
@@ -197,23 +197,23 @@ a.effect-underline:hover:after {
   transition: transform 500ms ease !important;
   transform: translateY(58%) !important;
 }
-.card-content > *:not(.card-title) {
+.vcard-content > *:not(.vcard-title) {
   opacity: 0 !important;
   transition: opacity 500ms linear;
 }
- .act:hover  .card-content > * {
+ .act:hover  .vcard-content > * {
   opacity: 1 !important;
 }
 
-.act:hover  .card-content {
+.act:hover  .vcard-content {
   transform: translateY(0) !important;
 }
 
-.card-title {
+.vcard-title {
   position: relative !important;
   width: max-content !important;
 }
-.card-title::after {
+.vcard-title::after {
   content: "";
   position: absolute !important;
   height: 4px !important;
@@ -226,14 +226,16 @@ a.effect-underline:hover:after {
   transition: transform 500ms ease !important;
 }
 
-.act:hover .card-title::after {
+.act:hover .vcard-title::after {
   transform: scaleX(1) !important;
 }
 
-.card-body-custom {
+.vcard-body-custom {
   color: rgba(255, 255, 255, 0.8) !important;
 }
 
-.card p {
+.vcard p {
   width: 100% !important;
 }
+
+

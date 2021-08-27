@@ -17,7 +17,28 @@
   <h1 class="title-highlight"> Now Showing </h1>
   <div class="movie-cards d-flex flex-wrap justify-content-evenly comtainer-sm">
       {% for movie in movies %}
-      <div class="mcard my-4">
+      <div class="card">
+        <div class ="img8x">
+            <img src="{{movie.poster.url}}" class="img-fluid" alt='{{movie.name}}'>
+          </div>
+          <div class="content">
+              <div class="content8x d-flex flex-column align-items-md-center">
+                <h3 class="mb-0">{{movie.name}}</h3>
+                <div class="sub-title"><i class="fas fa-star title-highlight"></i>{{movie.imdb}}/10 </p></div> 
+                <p>
+                  {{movie.summary}}
+                </p>
+                <br>
+                <a href="/movies/now/{{movie.id}}" class="button text-center my-0">Learn More</a>
+              </div>
+  
+          </div>
+    </div>
+      {% endfor %}
+
+  </div>
+
+  <!-- <div class="mcard my-4">
         <div class="mimage">
           <img src="{{movie.poster.url}}" alt='{{movie.name}}'>
         </div>
@@ -31,10 +52,11 @@
             <a href="/movies/now/{{movie.id}}" class="button text-center">Learn More</a>
           </div>
         </div>
-      </div>
-      {% endfor %}
-  </div>
-
+      </div> -->
+<!-- <div class="container d-flex flex-wrap movie-wrapper">
+  
+</div>
+</div> -->
 
 <div id="up-comming">
 <h1 class="text-white"> Upcomming Movies/ Releasing Soon </h1>
@@ -43,10 +65,10 @@
           <div class="slider">
             
               {% for movie in umovies %}
-                  <div class="card rounded item" style="background-image: url({{movie.poster.url}});" id = '{{movie.id}}'>
-                  <div class="card-content">
-                    <h2 class="card-title">{{movie.name}}</h2>
-                    <p class="card-body-custom text-white">{{movie.summary}}</p>
+                  <div class="vcard rounded item" style="background-image: url({{movie.poster.url}});" id = '{{movie.id}}'>
+                  <div class="vcard-content">
+                    <h2 class="vcard-title">{{movie.name}}</h2>
+                    <p class="vcard-body-custom text-white">{{movie.summary}}</p>
                   </div>
                   
                   </div>

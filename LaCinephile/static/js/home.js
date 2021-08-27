@@ -30,17 +30,7 @@ $(".slider").on('afterChange', function (event, slick, currentSlide, nextSlide) 
       $('.slick-current').addClass('act'); // Add class "act" to current slide
    });
 
-$('.mcard').hover(function(){ // Toggle active class to active slider
-  if($(this).hasClass("active")){ // Check wheter current element has active class
-      $(this).find('.mbottom').slideUp(function(){ //If it does remove it as we are moving out of that element
-      $('.mcard').removeClass("active");
-    })
-  }
-  else{ //If it does not it add it as we are hovering on that element
-    $(this).addClass("active");
-    $(this).find('.mbottom').stop().slideDown()
-  }
-})
+
 
 function getId(){ // change href attrinute of anchor tag to slider movie's url
 	var id = $('.slick-current').attr('id'); // get current slide from slider
