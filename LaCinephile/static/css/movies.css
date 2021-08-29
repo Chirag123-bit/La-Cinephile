@@ -112,3 +112,43 @@
     background-attachment: fixed;
     background-size: cover;
 }
+
+@media screen and (max-width: 900px) {
+    .inner-movie-text{
+        width: 80% !important;
+    }
+    .inner-movie-text h1{
+        margin-bottom: 2rem !important;
+    }
+    .title-highlight{
+        font-size: 2rem !important;
+    }
+}
+@media screen and (max-width: 660px) {
+    .inner-movie-text{
+        width: 100% !important;
+    }
+    .inner-movie-text h1{
+        text-align: center;
+    }
+    .now-showing-text{
+        padding: 5rem 1rem !important;
+    }
+}
+@media screen and (max-width: 525px) {
+    .up-section-container{
+        padding: 1.5rem !important;
+    }
+    .up-section-container p, .movie-viewer h1{
+        font-size: 0.8rem !important;
+        text-align: center;
+    }
+    .up-section-container h1, .movie-viewer h1{
+        text-align: center;
+        font-size: 1.5rem !important;
+    }
+    .inner-movie-text p{
+        font-size: 1rem;
+        text-align: center;
+    }
+}

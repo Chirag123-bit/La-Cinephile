@@ -1,5 +1,5 @@
 .movie-details{
-    padding: 3% 0;
+    padding: 6% 0;
 }
 .movie-viewer{
     background-attachment: fixed !important;
@@ -30,5 +30,20 @@
     }
     .movie-title{
         text-align: center;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .embed-responsive{
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    .width-fourty{
+        margin-left: 1rem;
+    }
+}
+@media only screen and (max-width: 320px) {
+
+    .width-fourty{
+        margin-left: 0.1rem;
     }
 }
