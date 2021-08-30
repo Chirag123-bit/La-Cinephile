@@ -23,8 +23,7 @@
 
 /* Change navbar styling on scroll */
 .navbar.active {
-    /* background: #000; */
-	backdrop-filter: blur(15px);
+	backdrop-filter: blur(25px);
     box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -50,12 +49,31 @@
         backdrop-filter: blur(15px);
     }
 
-    .navbar .navbar-brand, .navbar .nav-link {
+     .navbar .nav-link {
         color: #555;
     }
+	.navbar .navbar-brand{
+		color: orange;
+	}
+	 .navbar.active .navbar-brand{
+	color: white !important;
+	}
+	.navbar-nav{
+		align-items: center;
+	}
+	.btns-section{
+		width: max-content;
+		align-items: center;
+		margin: auto;
+	}
+	.btns-section .nav-item,  .btns-section .nav-item button{
+		width: 100%;
+	}
+	
+	
 }
 
-.navbar-nav  li::before{
+ .effect-class li::before{
 	content: "";
 	position: absolute;
 	height: 33.33%;
@@ -66,7 +84,7 @@
 	top: 33.33%;
 	transition: all 0.5s;
 }
-.navbar-nav  li::after{
+.effect-class  li::after{
 	content: "";
 	position: absolute;
 	height: 33.33%;
@@ -81,7 +99,7 @@
 	z-index: 1;
 }
 
-.navbar-nav  li a::before{
+.effect-class  li a::before{
 	position: absolute;
 	content: "";
 	height: 33.33%;
@@ -93,7 +111,7 @@
 	transition: all 0.5s;
 }
 
-.navbar-nav  li:hover::before, .navbar-nav  li:hover::after, .navbar-nav li:hover a::before{
+.effect-class li:hover::before, .effect-class  li:hover::after, .effect-class li:hover a::before{
 	width: 100%;
 }
 
@@ -101,6 +119,58 @@
     color: white;
 }
 
-.nav-item.active{
-	border-bottom: 3px solid blue;
+.highlight.active{
+	border-bottom: 3px solid #fff;
 }
+#toggle-btn{
+	color:orange
+}
+
+.navbar-toggler{
+	border: 0;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus{
+	outline: none;
+	box-shadow: none;
+	border: 0;
+}
+
+.toggler-icon{
+	width: 30px;
+	height: 3px;
+	background-color: #fff;
+	display: block;
+	transition: all 0.5s;
+}
+
+.middle-bar{
+	margin: 5px auto;
+}
+
+.navbar-toggler .top-bar{
+	transform: rotate(45deg);
+	transform-origin: 10% 10%;
+}
+.navbar-toggler .middle-bar{
+	opacity: 0;
+	filter: alpha(opacity=0)
+}
+.navbar-toggler .bottom-bar{
+	transform: rotate(-45deg);
+	transform-origin: 10% 10%;
+}
+
+.navbar-toggler.collapsed .top-bar{
+	transform: rotate(0)
+}
+.navbar-toggler.collapsed .middle-bar{
+	opacity: 1;
+	filter: alpha(opacity=100)
+}
+.navbar-toggler.collapsed .bottom-bar{
+	transform: rotate(0)
+}
+
