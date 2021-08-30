@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'halls.apps.HallsConfig',
     'tickets.apps.TicketsConfig',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -21,6 +21,10 @@
             background: rgba(255,255,255,0.2);
             color:white
         }
+        .link-unstyled, .link-unstyled:link, .link-unstyled:hover {
+            color: inherit;
+            text-decoration: inherit;
+        }
       
     </style>
 {% endblock css_files%}
@@ -51,7 +55,7 @@
                             <li> Good Viewing Angles</li>
                             <li> Dedicated Staffs</li>
                         </ul>
-                        <button class="btn btn-outline-warning btn-lg btn-block">See Pricing</button>
+                        <button class="btn btn-outline-warning btn-lg btn-block"><a href="#price-tbl" class="link-unstyled">See Pricing</a></button>
                     </div>
 
                 </div>
@@ -59,7 +63,7 @@
              <div class="col mb-4">
                 <div class="card shadow-lg">
                     <div class="card-header">
-                    <h4 class="text-primary">Premium</h4>
+                    <h4 class="text-success">Premium</h4>
                     </div>
 
                     <div class="card-body">
@@ -71,7 +75,7 @@
                             <li> Best Viewing Angles</li>
                             <li> Dedicated Food Delivery Staffs</li>
                         </ul>
-                        <button class="btn btn-success btn-lg btn-block">See Pricing</button>
+                        <button class="btn btn-success btn-lg btn-block"><a href="#price-tbl" class="link-unstyled">See Pricing</a></button>
                     </div>
 
                 </div>
@@ -92,7 +96,7 @@
                             <li> Premium Seats</li>
                             <li> Better Viewing Angles</li>
                         </ul>
-                        <button class="btn btn-outline-primary btn-lg btn-block">See Pricing</button>
+                        <button class="btn btn-outline-primary btn-lg btn-block"><a href="#price-tbl" class="link-unstyled">See Pricing</a></button>
                     </div>
 
                 </div>
@@ -109,13 +113,13 @@
 
 <div class="ticket-section" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),  url({% static 'images/ticket-back.jpg' %})">
 <div class="container-md price-details">
-    <div class="hall-back" style="background-image: url({% static 'images/fcube.jpg' %})">
+    <div class="hall-back" style="background-image: url({% static 'images/fcube.jpg' %})" id="price-tbl">
         <h1 class="rate-title col-sm-6"> 
             <span class='text-white'> <strong> Ticket </strong> Rates </span>
         </h1>
     </div>
     <div>
-    <table class="table col-sm-12 table1 mb-0">
+    <table class="table col-sm-12 table1 mb-0" >
     <thead>
         <tr>
         <th scope="col" class="text-white">Ticket Categories</th>

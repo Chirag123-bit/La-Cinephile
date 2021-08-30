@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>Register to La CinePhile</title>
+
+{% endblock title %}
+
+{% block css_files %}
+    {% comment %} <link rel="stylesheet" href="{% static '/css/common.css' %}" /> {% endcomment %}
+{% endblock css_files%}
+
+{% block main_content %}
+
+<div class="container py-5">
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-sm-6 col-md-5">
+            {{form.first_name | as_crispy_field}}
+        </div>
+        <div class="form-group col-sm-6 col-md-5">
+            {{form.last_name | as_crispy_field}}
+        </div>
+    </div> 
+    <div class="form-row">
+        <div class="form-group col-md-10">
+            {{form.email | as_crispy_field}}
+        </div>
+    </div> 
+    <div class="form-row">
+        <div class="form-group col-md-10">
+            {{form.username | as_crispy_field}}
+        </div>
+    </div> 
+    <div class="form-row">
+        <div class="form-group col-sm-6 col-md-5">
+            {{form.password1 | as_crispy_field}}
+        </div>
+        <div class="form-group col-sm-6 col-md-5">
+            {{form.password2 | as_crispy_field}}
+        </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-warning"> Sign Up </button>
+</form>
+</div>
+
+{% endblock main_content %}
