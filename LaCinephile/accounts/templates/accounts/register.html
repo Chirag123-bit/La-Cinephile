@@ -1,50 +1,75 @@
 {% extends 'layout.html' %}
 {% load crispy_forms_tags %}
-
+{% load static %}
 {% block title %}
 <title>Register to La CinePhile</title>
 
 {% endblock title %}
 
 {% block css_files %}
-    {% comment %} <link rel="stylesheet" href="{% static '/css/common.css' %}" /> {% endcomment %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 {% endblock css_files%}
 
 {% block main_content %}
 
-<div class="container py-5">
-<form action="" method="POST">
-    {% csrf_token %}
-    <div class="form-row">
-        <div class="form-group col-sm-6 col-md-5">
-            {{form.first_name | as_crispy_field}}
+<style>
+    .registration-container{
+        background-size:cover;
+        background-attachment:fixed;
+    }
+    form label{
+        color:#fff;
+    }
+    .form-row{
+        justify-content:center;
+    }
+    .blur-back{
+        backdrop-filter:blur(3px);
+    }
+    .form-text{
+        color:wheat !important;
+    }
+</style>
+<div class="registration-container py-5" style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url({% static '/images/register-back.jpg' %});">
+    <div class="container py-5 my-5 blur-back">
+        {% include 'accounts/message.html' %}
+        <h1 class="h1 text-warning text-center">Registration Form </h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-sm-6 col-md-5">
+                {{form.first_name | as_crispy_field}}
+            </div>
+            <div class="form-group col-sm-6 col-md-5">
+                {{form.last_name | as_crispy_field}}
+            </div>
+        </div> 
+        <div class="form-row">
+            <div class="form-group col-md-10">
+                {{form.email | as_crispy_field}}
+            </div>
+        </div> 
+        <div class="form-row">
+            <div class="form-group col-md-10">
+                {{form.username | as_crispy_field}}
+            </div>
+        </div> 
+        <div class="form-row">
+            <div class="form-group col-sm-6 col-md-5">
+                {{form.password1 | as_crispy_field}}
+            </div>
+            <div class="form-group col-sm-6 col-md-5">
+                {{form.password2 | as_crispy_field}}
+            </div>
         </div>
-        <div class="form-group col-sm-6 col-md-5">
-            {{form.last_name | as_crispy_field}}
+        <div class="btn-comtainer d-flex justify-content-center">
+        <button type="submit" class="btn btn-warning btn-lg"> Sign Up </button>
         </div>
-    </div> 
-    <div class="form-row">
-        <div class="form-group col-md-10">
-            {{form.email | as_crispy_field}}
-        </div>
-    </div> 
-    <div class="form-row">
-        <div class="form-group col-md-10">
-            {{form.username | as_crispy_field}}
-        </div>
-    </div> 
-    <div class="form-row">
-        <div class="form-group col-sm-6 col-md-5">
-            {{form.password1 | as_crispy_field}}
-        </div>
-        <div class="form-group col-sm-6 col-md-5">
-            {{form.password2 | as_crispy_field}}
-        </div>
+    </form>
     </div>
-
-
-    <button type="submit" class="btn btn-warning"> Sign Up </button>
-</form>
 </div>
-
 {% endblock main_content %}
+
+{% block js_files %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+{% endblock js_files %}
