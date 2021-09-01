@@ -16,7 +16,7 @@
                 <ul class="navbar-nav mx-auto effect-class">
                     <li class="nav-item {{activate_home}} highlight"><a href="/#home" class="nav-link text-uppercase font-weight-bold"><i class="fas fa-tachometer-alt"></i>Home<span class="sr-only">(current)</span></a></li>
                     <li class="nav-item {{activate_movies}} highlight"><a href="/movies/all" class="nav-link text-uppercase font-weight-bold"><i class="fas fa-ticket-alt"></i>Movies</a></li>
-                    <li class="nav-item highlight"><a href="#" class="nav-link text-uppercase font-weight-bold"><i class="fas fa-ticket-alt"></i>Book</a></li>
+                    <li class="nav-item {{activate_book}} highlight"><a href="/hall/book" class="nav-link text-uppercase font-weight-bold"><i class="fas fa-ticket-alt"></i>Book</a></li>
                     <li class="nav-item {{activate_prices}} highlight"><a href="/hall/prices"  class="nav-link text-uppercase font-weight-bold"><i class="fas fa-tags"></i>Prices</a></li>
                 </ul>
                 {% if user.is_authenticated %}

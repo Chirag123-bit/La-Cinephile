@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'halls.apps.HallsConfig',
     'tickets.apps.TicketsConfig',
     'crispy_forms',
+    'rest_framework',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
