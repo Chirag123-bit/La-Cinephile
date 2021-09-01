@@ -1,80 +1,97 @@
 .navbar {
-    transition: all 0.4s;
+	transition: all 0.4s;
 }
-.navbar li{
-    position: relative;
+
+.navbar li {
+	position: relative;
 	height: 100%;
 }
 
 .navbar .nav-link {
-    color: #fff;
+	color: #fff;
 }
 
 .navbar .nav-link:hover,
 .navbar .nav-link:focus {
-    color: #fff;
-    text-decoration: none;
+	color: #fff;
+	text-decoration: none;
 }
 
 .navbar .navbar-brand {
-    color: #fff;
+	color: #fff;
 }
 
+.show .dropdown-item:hover {
+	background: transparent !important;
+	color: orange !important;
+}
+
+.drop-blur {
+	backdrop-filter: blur(15px);
+}
 
 /* Change navbar styling on scroll */
 .navbar.active {
 	backdrop-filter: blur(25px);
-    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
+	box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
 	transition: all 0.4s;
 }
 
-.navbar.active .nav-link, .navbar.active .navbar-brand {
+.navbar.active .nav-link,
+.navbar.active .navbar-brand {
 	transition: all 0.4s;
-    color: orange;
+	color: orange;
 }
 
 .navbar.active .nav-link:hover,
 .navbar.active .nav-link:focus {
-    color: #555;
-    text-decoration: none;
+	color: #555;
+	text-decoration: none;
 }
 
-#navbarSupportedContent i{
+#navbarSupportedContent i {
 	padding: 0 0.5rem;
 }
 
 
 /* Change navbar styling on small viewports */
 @media (max-width: 991.98px) {
-    .navbar {
-        backdrop-filter: blur(15px);
-    }
 
-     .navbar .nav-link {
-        color: #555;
-    }
-	.navbar .navbar-brand{
+	.navbar {
+		backdrop-filter: blur(15px);
+	}
+
+	.navbar .nav-link {
+		color: #555;
+	}
+
+	.navbar .navbar-brand {
 		color: orange;
 	}
-	 .navbar.active .navbar-brand{
-	color: white !important;
+
+	.navbar.active .navbar-brand {
+		color: white !important;
 	}
-	.navbar-nav{
+
+	.navbar-nav {
 		align-items: center;
 	}
-	.btns-section{
+
+	.btns-section {
 		width: max-content;
 		align-items: center;
 		margin: auto;
 	}
-	.btns-section .nav-item,  .btns-section .nav-item button{
+
+	.btns-section .nav-item,
+	.btns-section .nav-item button {
 		width: 100%;
 	}
-	
-	
+
+
 }
 
- .effect-class li::before{
+.effect-class li::before {
 	content: "";
 	position: absolute;
 	height: 33.33%;
@@ -85,7 +102,8 @@
 	top: 33.33%;
 	transition: all 0.4s;
 }
-.effect-class  li::after{
+
+.effect-class li::after {
 	content: "";
 	position: absolute;
 	height: 33.33%;
@@ -96,11 +114,12 @@
 	bottom: 0;
 	transition: all 0.4s;
 }
-.navbar-nav  li a{
+
+.navbar-nav li a {
 	z-index: 1;
 }
 
-.effect-class  li a::before{
+.effect-class li a::before {
 	position: absolute;
 	content: "";
 	height: 33.33%;
@@ -112,37 +131,41 @@
 	transition: all 0.4s;
 }
 
-.effect-class li:hover::before, .effect-class  li:hover::after, .effect-class li:hover a::before{
+.effect-class li:hover::before,
+.effect-class li:hover::after,
+.effect-class li:hover a::before {
 	width: 100%;
 }
 
 .navbar.active li:hover .nav-link {
-    color: white;
+	color: white;
 }
 
-.highlight.active{
+.highlight.active {
 	border-bottom: 3px solid orange;
 }
-.highlight.active a{
+
+.highlight.active a {
 	color: orange;
 }
-#toggle-btn{
-	color:orange
+
+#toggle-btn {
+	color: orange
 }
 
-.navbar-toggler{
+.navbar-toggler {
 	border: 0;
 }
 
 .navbar-toggler:focus,
 .navbar-toggler:active,
-.navbar-toggler-icon:focus{
+.navbar-toggler-icon:focus {
 	outline: none;
 	box-shadow: none;
 	border: 0;
 }
 
-.toggler-icon{
+.toggler-icon {
 	width: 30px;
 	height: 3px;
 	background-color: #fff;
@@ -150,31 +173,34 @@
 	transition: all 0.4s;
 }
 
-.middle-bar{
+.middle-bar {
 	margin: 5px auto;
 }
 
-.navbar-toggler .top-bar{
+.navbar-toggler .top-bar {
 	transform: rotate(45deg);
 	transform-origin: 10% 10%;
 }
-.navbar-toggler .middle-bar{
+
+.navbar-toggler .middle-bar {
 	opacity: 0;
 	filter: alpha(opacity=0)
 }
-.navbar-toggler .bottom-bar{
+
+.navbar-toggler .bottom-bar {
 	transform: rotate(-45deg);
 	transform-origin: 10% 10%;
 }
 
-.navbar-toggler.collapsed .top-bar{
-	transform: rotate(0)
-}
-.navbar-toggler.collapsed .middle-bar{
-	opacity: 1;
-	filter: alpha(opacity=100)
-}
-.navbar-toggler.collapsed .bottom-bar{
+.navbar-toggler.collapsed .top-bar {
 	transform: rotate(0)
 }
 
+.navbar-toggler.collapsed .middle-bar {
+	opacity: 1;
+	filter: alpha(opacity=100)
+}
+
+.navbar-toggler.collapsed .bottom-bar {
+	transform: rotate(0)
+}
