@@ -20,7 +20,6 @@ def prices(request):
 
 
 def book(request):
-    movies = Now_Showing.objects.all()
     mh = Movie_Hall.objects.all()
     context={
         'activate_book':'active',
@@ -28,6 +27,53 @@ def book(request):
     }
     return render(request, 'halls/reservation.html',context)
 
+
+def movie_json(request):
+    movies = list(Now_Showing.objects.values())
+    return JsonResponse({'data':movies})
+
+def hall_json(request, *args, **kwargs):
+    selected_movie = kwargs.get('movie')
+    obj_model = Movie_Hall.objects.values('id', 'hall__name', 'hall__category__name').filter(movie__id=selected_movie)
+    print(obj_model)
+    resp=[]
+    for i in obj_model:
+        print(i['id'])
+        di = {
+            "id":i['id'],
+            "hall":i['hall__name'],
+            "cat":i['hall__category__name']
+        }
+        resp.append(di)
+    return JsonResponse({'data':resp})
+
+
+def day_json(request, *args, **kwargs):
+    selection = kwargs.get('id')
+    obj_model = Movie_Hall.objects.values('id', 'day').filter(movie__id=selection)
+    print(obj_model)
+    resp=[]
+    for i in obj_model:
+        print(i['id'])
+        di = {
+            "id":i['id'],
+            "day":i['day'],
+        }
+        resp.append(di)
+    return JsonResponse({'data':resp})
+
+
+# def test(request):
+#     mh = Movie_Hall.objects.all()
+#     movies = Now_Showing.objects.all()
+#     # print(movies)
+#     for i in mh:
+#         print(i.movie.name)
+#         print(i.hall.h_Name)
+#     context={
+#         'mh':mh
+#     }
+#     return render(request, 'halls/test.html',context)
 
 
 

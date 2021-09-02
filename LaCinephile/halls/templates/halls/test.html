@@ -1,0 +1,20 @@
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for mv in mh %}
+    <tr>
+      <td scope="row">1</td>
+      <td>{{mv.Hall.h_Name}}</td>
+      <td>{{mv.Now_Showing.name}}</td>
+      <td>@mdo</td> 
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

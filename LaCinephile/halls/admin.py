@@ -8,7 +8,7 @@ admin.site.register(Hall)
 
 class Movie_HallAdmin(admin.ModelAdmin):
     def get_hall(self, obj):
-        return obj.hall.h_Name
+        return obj.hall.name
     def get_movie(self, obj):
         return obj.movie.name
     

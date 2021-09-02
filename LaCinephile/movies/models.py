@@ -1,4 +1,5 @@
 from django.db import models
+# from halls.models import Movie_Hall
 
 # Create your models here.
 class Movie(models.Model):
@@ -21,6 +22,7 @@ class Movie(models.Model):
 
 class Now_Showing(Movie):
     imdb = models.FloatField()
+
 
 class Up_Comming(Movie):
     release_date = models.CharField(max_length=50)

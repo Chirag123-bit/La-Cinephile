@@ -18,15 +18,14 @@
     <div class="movie-container">
         <label class="text-white" for="movie">Pick a movie:</label>
         <select id="movie">
-            {% comment %} {% for movie in movies %}
-                <option value="{{movie.id}}">{{movie.name}}</option>
-            {% endfor %}  {% endcomment %}
+            <option selected id="dis">Select A Movie</option>
         </select>
         <label class="text-white" for="hall">Pick a Hall:</label>
-        <select id="hall">
-            {% for hall in halls %}
-                <option value="{{hall.id}}">{{hall.name}}</option>
-            {% endfor %}
+        <select id="hall" disabled>
+        <option selected id="dis2" class="disabled">Select A Hall</option>
+        </select>
+        <select id="day" disabled>
+        <option selected id="dis3" class="">Select A Day</option>
         </select>
         </div>
 

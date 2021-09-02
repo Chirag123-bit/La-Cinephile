@@ -5,7 +5,8 @@ urlpatterns = [
     
     path('prices/', views.prices),
     path('book/', views.book),
-    path('hall-json/',views.get_json_hall_data, name="hall-json"),
-    path('test/', views.movie_detail),
+    path('test/', views.movie_json, name="test"),
+    path('test-hall/<int:movie>', views.hall_json, name="test-hall"),
+    path('day/<int:id>', views.day_json, name="day"),
 
 ]
