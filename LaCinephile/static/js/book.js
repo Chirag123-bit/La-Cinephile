@@ -40,14 +40,13 @@ hallRep.addEventListener('click', (e) => {
             e.target.classList.remove('selected')
             selectedSeats.splice(index, 1)
         } else {
-            console.log(e.target.id)
             e.target.classList.add('selected')
             selectedSeats.push(e.target.id)
         }
     }
 
     mseats.innerText = selectedSeats
-    seat_selected.innerText = selectedSeats;
+    seat_selected.setAttribute("value", selectedSeats);
 
     updateSelectedCount();
 })
@@ -210,7 +209,7 @@ time.addEventListener('change', e => {
     mtime.innerText = $("#time option:selected").text();
 
     id = e.target.value; //get value of movie_hall table
-    mid.innerText = id;
+    mid.setAttribute('value', id);
 
     $.ajax({ // Call a JSON request for selected movie
         type: "GET",
@@ -219,7 +218,7 @@ time.addEventListener('change', e => {
             const priceData = response.data //Store response data
             priceData.map(item => {
                 ticketPrice = item.price;
-                discountId = item.cat;
+                discountId.setAttribute('value', item.cat);
             })
 
         },

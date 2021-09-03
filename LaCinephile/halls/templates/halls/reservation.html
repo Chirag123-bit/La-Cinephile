@@ -184,10 +184,11 @@
         
                     </tbody>
                 </table>
-                <form class="form-group row">
-                    <input type="text" readonly class="form-control-plaintext" id="mid" value="" style="display:none">
-                    <input type="text" readonly class="form-control-plaintext" id="seat_selected" value="" style="display:none">
-                    <input type="text" readonly class="form-control-plaintext" id="discountId" value="" style="display:none">
+                <form class="form-group row" action="" method="POST">
+                    {% csrf_token %}
+                    <input type="text" class="form-control-plaintext" id="mid" name="mid" value="" style="display:none">
+                    <input type="text" class="form-control-plaintext" id="seat_selected" name="seat_selected" value="" style="display:none">
+                    <input type="text" class="form-control-plaintext" id="discountId" name="discountId" value="" style="display:none">
                     <button type="submit" class="btn btn-outline-success">Book</button>
                 </form>
             </div>

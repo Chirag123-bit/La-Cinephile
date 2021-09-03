@@ -7,6 +7,8 @@ from django.http import JsonResponse
 from halls.models import Movie_Hall
 import datetime
 from tickets.models import Categories, Ticket
+import json 
+
 
 
 def prices(request):
@@ -23,18 +25,22 @@ def prices(request):
 def book(request):
     mh = Movie_Hall.objects.all()
     if request.method == "POST":
-        print("Hello Other World")
         data = request.POST
-       
-        user = request.user.id
-        movie = data['mid']
-        seats = data['seat_selected']
-        discount = data['discountId']
+        user = request.user
+        movie = data.get('mid')
+        seats = data.get('seat_selected')
+        discount = data.get('discountId')
 
-        ticket = Ticket.Objects.create(user=user, movie=movie, seats=seats, discount=discount)
-        print(ticket)
+        print(seats)
+
+        mv = Movie_Hall.objects.filter(id=int(movie))[0]
+        dis = Categories.objects.filter(id=int(discount))[0]
+
+        ticket = Ticket(user=user, movie=mv, seats=seats, discount=dis)
+
         if ticket:
             populate_reserverd_seats(movie,seats)
+            ticket.save()
             return redirect("/")
 
     context={
@@ -45,10 +51,13 @@ def book(request):
 
 
 def populate_reserverd_seats(movie, seats):
-    print("Hello World")
     obj_model = Movie_Hall.objects.filter(id=movie)
-    old = obj_model['seats']
-    obj_model.update(old+seats)
+    old = obj_model[0].booked
+    if(old==None):
+        total = seats
+    else:
+        total = old+',' + seats
+    obj_model.update(booked = total)
 
 
 
