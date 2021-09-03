@@ -1,7 +1,9 @@
 .booking-pannel {
     font-family: 'Lato',
         'sans-serif';
-    background-color: gray;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .movie-container {
@@ -9,7 +11,6 @@
 }
 
 .movie-container select {
-    background-color: #fff;
     border: 0;
     border-radius: 5px;
     font-size: 14px;
@@ -20,13 +21,14 @@
     appearance: none;
 }
 
+
 .container-mv {
     perspective: 1000px;
     margin-bottom: 30px;
 }
 
 .seat {
-    background-color: #444451;
+    background-color: #40e90d;
     height: 12px;
     width: 15px;
     margin: 3px;
@@ -39,7 +41,7 @@
 }
 
 .seat.occupied {
-    background-color: #fff;
+    background-color: rgb(235, 12, 12);
 }
 
 .seat:nth-of-type(2) {
@@ -100,4 +102,17 @@ p.text span {
 
 .max-wd {
     width: max-content !important;
+}
+
+#hall-rep {
+    backdrop-filter: blur(10px);
+}
+
+#movie-book-details td,
+.showcase li small {
+    color: white !important;
+}
+
+.mv-selector {
+    width: 50%;
 }

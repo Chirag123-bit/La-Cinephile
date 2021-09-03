@@ -1,5 +1,7 @@
+from datetime import datetime
 from django.db import models
 from movies.models import Now_Showing
+import datetime
 
 # Create your models here.
 class Category(models.Model):
@@ -39,7 +41,9 @@ class Movie_Hall(models.Model):
     movie = models.ForeignKey(Now_Showing, related_name="movie", on_delete=models.CASCADE)
     hall = models.ForeignKey(Hall, related_name="hall", on_delete=models.CASCADE)
     time = models.CharField(max_length=100, choices=Time_CHOICES, default="7PM - 10PM'")
-    day = models.CharField(max_length=100, choices=Day_CHOICES, default="Sunday")
+    date = models.DateField( default=datetime.date.today)
+    discount = models.BooleanField(default=True)
+    booked = models.TextField(null=True)
 
     def __str__(self):
         return self.movie.name

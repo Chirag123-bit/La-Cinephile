@@ -14,7 +14,7 @@ class Movie_HallAdmin(admin.ModelAdmin):
     
     get_hall.short_description = 'Hall Name'
     get_movie.short_description = 'Movie Name'
-    list_display = [ 'get_hall', 'get_movie', 'time', 'day']
+    list_display = [ 'get_hall', 'get_movie', 'time', 'date']
 
 
 admin.site.register(Movie_Hall, Movie_HallAdmin)
