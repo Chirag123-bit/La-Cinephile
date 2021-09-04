@@ -1,12 +1,12 @@
 from django.shortcuts import redirect, render
 from .models import Category
-from tickets.models import Categories as ticket, Ticket
-from movies.models import Now_Showing
-from halls.models import Hall
+from tickets.models import Categories as ticket
+from movies.models import Now_Showing 
+from halls.models import Ticket
 from django.http import JsonResponse
 from halls.models import Movie_Hall
 import datetime
-from tickets.models import Categories, Ticket
+from tickets.models import Categories
 import json 
 
 
@@ -37,10 +37,12 @@ def book(request):
         dis = Categories.objects.filter(id=int(discount))[0]
 
         ticket = Ticket(user=user, movie=mv, seats=seats, discount=dis)
-
         if ticket:
-            populate_reserverd_seats(movie,seats)
-            ticket.save()
+            i=0
+            while(i<len(seats)):
+                ticket = Ticket(user=user, movie=mv, seats=seats[i:i+2], discount=dis)
+                ticket.save()
+                i+=3
             return redirect("/")
 
     context={
@@ -50,14 +52,6 @@ def book(request):
     return render(request, 'halls/reservation.html',context)
 
 
-def populate_reserverd_seats(movie, seats):
-    obj_model = Movie_Hall.objects.filter(id=movie)
-    old = obj_model[0].booked
-    if(old==None):
-        total = seats
-    else:
-        total = old+',' + seats
-    obj_model.update(booked = total)
 
 
 
@@ -100,13 +94,24 @@ def time_json(request, *args, **kwargs):
     hselection = kwargs.get('hid')
     day = kwargs.get('date')
 
-    obj_model = Movie_Hall.objects.values('id', 'time').filter(movie__id=mselection, hall__id=hselection, date=day)
+    obj_model = Movie_Hall.objects.values('id', 'time', 'booked').filter(movie__id=mselection, hall__id=hselection, date=day)
     resp=[]
 
     for i in obj_model:
         di = {
             "id":i['id'],
             "time":i['time'],
+        }
+        resp.append(di)
+    return JsonResponse({'data':resp})
+
+def seats_json(request, *args, **kwargs):
+    mh_id = kwargs.get("id")
+    obj_model = Ticket.objects.values('seats').filter(movie__id=mh_id)
+    resp=[]
+    for i in obj_model:
+        di = {
+            "seat":i['seats'],
         }
         resp.append(di)
     return JsonResponse({'data':resp})

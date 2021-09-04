@@ -1,5 +1,5 @@
 from django.db import models
-# from halls.models import Movie_Hall
+
 
 # Create your models here.
 class Movie(models.Model):

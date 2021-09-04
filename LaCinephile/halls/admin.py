@@ -1,10 +1,10 @@
 from django.contrib import admin
-from . models import Category, Hall, Movie_Hall
+from . models import Category, Hall, Movie_Hall,Ticket
 # Register your models here.
 
 admin.site.register(Category)
 admin.site.register(Hall)
-
+admin.site.register(Ticket)
 
 class Movie_HallAdmin(admin.ModelAdmin):
     def get_hall(self, obj):

@@ -1,6 +1,8 @@
 from datetime import datetime
+from tickets.models import Categories
 from django.db import models
 from movies.models import Now_Showing
+from django.contrib.auth.models import User
 import datetime
 
 # Create your models here.
@@ -43,7 +45,13 @@ class Movie_Hall(models.Model):
     time = models.CharField(max_length=100, choices=Time_CHOICES, default="7PM - 10PM'")
     date = models.DateField( default=datetime.date.today)
     discount = models.BooleanField(default=True)
-    booked = models.TextField(null=True)
+    booked = models.ManyToManyField(User, through="Ticket")
 
     def __str__(self):
         return self.movie.name
+
+class Ticket(models.Model):
+    user = models.ForeignKey(User, related_name='booking_user', on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie_Hall, related_name='booked_movie', on_delete=models.CASCADE)
+    seats = models.CharField(max_length=2, null=True)
+    discount = models.ForeignKey(Categories, related_name='discount_given', on_delete=models.CASCADE)

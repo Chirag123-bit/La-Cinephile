@@ -10,5 +10,6 @@ urlpatterns = [
     path('day/<int:mid>/<int:hid>', views.date_json, name="day"),
     path('time/<int:mid>/<int:hid>/<str:date>', views.time_json, name="time"),
     path('price/<int:hmid>', views.dis_price_json, name="price"),
+    path('seats/<int:id>', views.seats_json, name="Reserved"),
 
 ]

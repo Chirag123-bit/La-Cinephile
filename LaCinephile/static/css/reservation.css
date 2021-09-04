@@ -8,17 +8,14 @@
 
 .movie-container {
     margin: 20px 0;
+    width: 80%;
 }
 
 .movie-container select {
     border: 0;
     border-radius: 5px;
-    font-size: 14px;
-    margin-left: 10px;
-    padding: 5px 15px 5px 15px;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
+    font-size: 1rem;
+
 }
 
 

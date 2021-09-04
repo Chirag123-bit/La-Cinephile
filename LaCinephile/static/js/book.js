@@ -219,6 +219,7 @@ time.addEventListener('change', e => {
             priceData.map(item => {
                 ticketPrice = item.price;
                 discountId.setAttribute('value', item.cat);
+                populateSeats(id);
             })
 
         },
@@ -229,3 +230,22 @@ time.addEventListener('change', e => {
     })
 
 });
+
+function populateSeats(id) {
+    $.ajax({
+        type: "GET", // Call a JSON request for selected hall
+        url: `/hall/seats/${id}`, //URL to hit on
+        success: function (response) {
+            const seatData = response.data //Store response data
+            seatData.map(item => {
+                document.getElementById(item.seat).classList.add("occupied") //add occupied to every seat from json response
+            })
+
+        },
+        error: function (error) { //print that error
+            console.log(error)
+        }
+
+    })
+
+}

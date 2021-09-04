@@ -15,37 +15,38 @@
 {% block main_content %}
 
 <div class="booking-pannel d-flex flex-column align-items-center justify-content-center py-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({% static '/images/book-back.jpg' %});">
-    <div class="movie-container p-5 d-flex flex-wrap">
+    <div class="movie-container py-5 d-flex ">
 
-        <div class="mv-selector">
-        <label class="text-white" for="movie">Pick a movie:</label>
-        <select id="movie">
-            <option selected id="dis">Select A Movie</option>
-        </select>
-        </div>
+            <div class="mv-selector">
+                <label class="text-white" for="movie">Pick a movie:</label>
+                <select id="movie" class="mx-2 p-1">
+                    <option selected id="dis">Select A Movie</option>
+                </select>
+            </div>
 
-        <div class="mv-selector">
-        <label class="text-white" for="hall">Pick a Hall:</label>
-        <select id="hall" disabled background-color: rgba(255, 255, 255, .5) !important;>
-        <option selected id="dis2" class="disabled">Select A Hall</option>
-        </select>
-        </div>
+            <div class="mv-selector">
+                <label class="text-white" for="hall">Pick a Hall:</label>
+                <select id="hall" disabled class="mx-2 p-1" >
+                    <option selected id="dis2" class="disabled">Select A Hall</option>
+                </select>
+            </div>
 
-        <div class="mv-selector">
-        <label class="text-white" for="hall">Pick a Day:</label>
-        <select id="date" disabled background-color: rgba(255, 255, 255, .5) !important;>
-        <option selected id="dis3" class="">Select A Day</option>
-        </select>
-        </div>
 
-        <div class="mv-selector">
-        <label class="text-white" for="time">Pick a Time:</label>
-        <select id="time" disabled background-color: rgba(255, 255, 255, .5) !important;>
-        <option selected id="dis4" class="">Select A Time</option>
-        </select>
-        </div>
+            <div class="mv-selector">
+                <label class="text-white" for="hall">Pick a Day:</label>
+                <select id="date" disabled class="mx-2 p-1" >
+                    <option selected id="dis3" class="">Select A Day</option>
+                </select>
+            </div>
 
-        </div>
+            <div class="mv-selector">
+                <label class="text-white" for="time">Pick a Time:</label>
+                <select id="time" disabled class="mx-2 p-1" ;>
+                    <option selected id="dis4" class="">Select A Time</option>
+                </select>   
+            </div>
+ 
+    </div>
 
         
         <div class="container d-flex flex-wrap justify-content-around row">
@@ -85,8 +86,8 @@
                         <div class="seat" id="b1"></div>
                         <div class="seat" id="b2"></div>
                         <div class="seat" id="b3"></div>
-                        <div class="seat occupied" id="b4"></div>
-                        <div class="seat occupied" id="b5"></div>
+                        <div class="seat " id="b4"></div>
+                        <div class="seat " id="b5"></div>
                         <div class="seat" id="b6"></div>
                         <div class="seat" id="b7"></div>
                         <div class="seat" id="b8"></div>
@@ -99,8 +100,8 @@
                         <div class="seat" id="c4"></div>
                         <div class="seat" id="c5"></div>
                         <div class="seat" id="c6"></div>
-                        <div class="seat occupied" id="c7"></div>
-                        <div class="seat occupied" id="c8"></div>
+                        <div class="seat " id="c7"></div>
+                        <div class="seat " id="c8"></div>
                     </div>
 
                     <div class="row">
@@ -118,8 +119,8 @@
                         <div class="seat" id="e1"></div>
                         <div class="seat" id="e2"></div>
                         <div class="seat" id="e3"></div>
-                        <div class="seat occupied" id="e4"></div>
-                        <div class="seat occupied" id="e5"></div>
+                        <div class="seat " id="e4"></div>
+                        <div class="seat " id="e5"></div>
                         <div class="seat" id="e6"></div>
                         <div class="seat" id="e7"></div>
                         <div class="seat" id="e8"></div>
@@ -130,30 +131,14 @@
                         <div class="seat" id="f2"></div>
                         <div class="seat" id="f3"></div>
                         <div class="seat" id="f4"></div>
-                        <div class="seat occupied" id="f5"></div>
-                        <div class="seat occupied" id="f6"></div>
-                        <div class="seat occupied" id="f7"></div>
+                        <div class="seat " id="f5"></div>
+                        <div class="seat " id="f6"></div>
+                        <div class="seat " id="f7"></div>
                         <div class="seat" id="f8"></div>
                     </div>
                 </div>
             </div>
             <div id="movie-book-details" class="col-md-6">
-
-                {% comment %} <form>
-                    <div class="form-group row">
-                        <label for="mname" class="col-sm-2 col-form-label">Movie Name:</label>
-                        <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="mname_display" value="">
-                        <input type="text" readonly class="form-control-plaintext" id="mname" value="" style="display:none">
-                        </div>
-                        <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="mname_display" value="">
-                        <input type="text" readonly class="form-control-plaintext" id="mname" value="" style="display:none">
-                        </div>
-                    </div>
-                    
-                    </div>
-                </form> {% endcomment %}
 
                 <table class="table table-striped">
                     <tbody>
