@@ -22,5 +22,6 @@ urlpatterns = [
     path('all/', views.movies),
     path('now/<int:id>', views.show),
     path('up/<int:id>', views.up_show),
+    path('test/<int:id>', views.user_movies),
 ]
 

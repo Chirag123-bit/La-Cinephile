@@ -24,7 +24,7 @@ urlpatterns = [
     path('movies/', include('movies.urls')),
     path('hall/', include('halls.urls')),
     path('', include('movies.urls')),
-    path('account/', include('accounts.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
 
 if settings.DEBUG:

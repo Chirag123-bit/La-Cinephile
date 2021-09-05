@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+<title>{{movie.name}} | Now Showing At La Cinephile</title>
+
+{% endblock title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static '/css/common.css' %}" />
+<link rel="stylesheet" href="{% static '/css/book.css' %}" />
+{% endblock css_files%}
+
+{% block main_content %}
+
+<div class="movie-viewer container-fluid"
+    style="background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)), url({{movie.background.url}});">
+
+    <div class="container movie-details">
+        <div class="row justify-content-between movie">
+            <div class="com-md-6">
+                <img src="{{movie.poster.url}}" alt="{{movie.name}}" class="img-fluid height-limit">
+            </div>
+            <div class="com-md-2 text-white width-fourty">
+                <h1 class="movie-title">{{movie.name}}</h1>
+                <p class="msub-title">
+                    <h4 class="title-highlight">IMDB Rating: <br></h4>
+                    <p class="font-limit"><i class="fas fa-star text-warning"></i>{{movie.imdb}}/10 </p>
+                </p>
+
+                <p>
+                    <h4 class="title-highlight"> Cast:</h4> {{movie.actors}}
+                </p>
+                <p>
+                    <h4 class="title-highlight"> Directed By:</h4> {{movie.director}}
+                </p>
+                <div class="d-flex justify-content-between">
+                    <a href="#mtrailer-vid" class="button position-static  text-center" id="playvideo"><i
+                            class="fas fa-play"></i> Watch Trailer</a>
+                    <a href="#" class="button position-static  text-center"><i class="fas fa-ticket-alt"></i> Book
+                        Now</a>
+                </div>
+                <p>
+                    <hr class="back-color">
+                    <h3 class="title-highlight my-2"> Synopsis: </h3>
+                    <div class="text-content text-justify">
+                        {{movie.desc}}
+                    </div>
+                </p>
+
+            </div>
+        </div>
+
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <td class="col-md-6">Movie Name: </td>
+                    <td id="mname" class="col-md-6"></td>
+                </tr>
+                <tr>
+                    <td class="col-md-6">Hall Name: </td>
+                    <td id="hname" class="col-md-6"></td>
+                </tr>
+                <tr>
+                    <td>Date: </td>
+                    <td id="mdate"></td>
+                </tr>
+                <tr>
+                    <td>Time: </td>
+                    <td id="mtime"></td>
+                </tr>
+                <tr>
+                    <td>Selected Seats: </td>
+                    <td id="mseats"></td>
+                </tr>
+                <tr>
+                    <td>Price: </td>
+                    <td id="total"></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+<script src="{% static '/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
+{% endblock main_content %}

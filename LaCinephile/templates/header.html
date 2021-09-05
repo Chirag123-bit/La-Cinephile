@@ -27,19 +27,19 @@
                                 {{request.user.first_name}}
                             </button>
                             <div class="dropdown-menu drop-blur bg-transparent" aria-labelledby="dropdownMenu2">
-                                <button class="dropdown-item text-white" type="button">Dashboard</button>
+                                <button class="dropdown-item text-white" type="button"><a href="/accounts/dashboard">Dashboard</a></button>
                                 <button class="dropdown-item text-white" type="button">Profile</button>
                                 <button class="dropdown-item text-white" type="button">Something else here</button>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-white" href="/account/logout">Logout</a>
+                                <a class="dropdown-item text-white" href="/accounts/logout">Logout</a>
                             </div>
                         </div>
                     </li>
                 </ul>
                 {% else %}
                 <ul class="navbar-nav btns-section">
-                    <li class="nav-item"><a href="/account/register" class="nav-link text-uppercase font-weight-bold"><button type="button" class="btn btn-outline-primary"><i class="fas fa-user-plus"></i>Register</button></a></li>
-                    <li class="nav-item"><a href="/account/login" class="nav-link text-uppercase font-weight-bold"><button type="button" class="btn btn-outline-success"><i class="fas fa-sign-in-alt"></i>Login</button></a></li>
+                    <li class="nav-item"><a href="/accounts/register" class="nav-link text-uppercase font-weight-bold"><button type="button" class="btn btn-outline-primary"><i class="fas fa-user-plus"></i>Register</button></a></li>
+                    <li class="nav-item"><a href="/accounts/login" class="nav-link text-uppercase font-weight-bold"><button type="button" class="btn btn-outline-success"><i class="fas fa-sign-in-alt"></i>Login</button></a></li>
                 </ul>
                 {% endif %}
             </div>

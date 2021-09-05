@@ -2,16 +2,83 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block title %}
-<title>Login</title>
-{% endblock%}
+<title>Register to La CinePhile</title>
+
+{% endblock title %}
 
 {% block css_files %}
-    <link rel="stylesheet" href="{% static '/css/common.css' %}" />
-    <link rel="stylesheet" href="{% static '/css/reservation.css' %}" />
+<link rel="stylesheet" href="{% static '/css/fontwaesome.all.min.css' %}" />
+<link rel="stylesheet" href="{% static '/css/dashboard.css' %}" />
+<link rel="stylesheet" href="{% static '/css/common.css' %}" />
+<link rel="stylesheet" href="{% static '/css/home.css' %}" />
+
 {% endblock css_files%}
 
 {% block main_content %}
 
+<div class="user-dashboard"
+    style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url({% static '/images/dashboard-back.jpg' %});">
+
+    <div class="py-5 dashboard-container">
+        <div class="row py-5 container justify-content-between m-auto">
+            <div class="card mt-2 col-md-5 text-center border border-danger">
+                <h2 class="mx-2 text-danger">Money Spent</h1>
+                    <p class="mt-3 text-white" id="spent">Rs.400</p>
+            </div>
+            <div class="card mt-2 col-md-5 text-center border border-success">
+                <h2 class="mx-2 text-success">Money Saved</h1>
+                    <p class="mt-3 text-white" id="saved">Rs.100</p>
+            </div>
+        </div>
+        <div class="row py-5 container justify-content-between m-auto">
+            <div class="card mt-2 col-md-5 text-center border border-primary">
+                <h2 class="mx-2 text-primary">Movies Watched</h1>
+                    <p class="mt-3 text-white" id="watched">5</p>
+            </div>
+            <div class="card mt-2 col-md-5 text-center border border-warning">
+                <h2 class="mx-2 text-warning">Seats Booked</h1>
+                    <p class="mt-3 text-white" id="booked">10</p>
+            </div>
+        </div>
+    </div>
+    <div class="user-booked-movies container">
+        <h1 class="text-white text-center">My Bookings</h1>
+        <div class="movie-cards d-flex flex-wrap justify-content-evenly comtainer-sm">
+            {% for movie in movies %}
+            <div class="card">
+                <div class="img8x">
+                    <img src="/media/{{movie.poster}}" class="img-fluid" alt='{{movie.name}}'>
+                </div>
+                <div class="content">
+                    <div class="content8x d-flex flex-column align-items-md-center">
+                        <h3 class="mb-0">{{movie.name}}</h3>
+                        <div class="sub-title"><i class="fas fa-star title-highlight"></i>{{movie.imdb}}/10 </p>
+                        </div>
+                        <p>
+                            {{movie.summary}}
+                        </p>
+                        <br>
+                        <a href="/movies/now/{{movie.id}}" class="button text-center my-0">Learn More</a>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</div>
 
 
 {% endblock main_content %}
+
+{% block js_files %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src={% static '/js/book.js' %}> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+    integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static '/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
+{% endblock js_files %}

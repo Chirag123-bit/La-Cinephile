@@ -7,10 +7,11 @@ from django.http import JsonResponse
 from halls.models import Movie_Hall
 import datetime
 from tickets.models import Categories
-import json 
 
+from accounts.auth import unauthenticated_user, user_only
+from django.contrib.auth.decorators import  login_required
 
-
+@user_only
 def prices(request):
     hall_cat = Category.objects.all()
     ticket_cat = ticket.objects.all()
@@ -21,7 +22,7 @@ def prices(request):
     }
     return render(request, 'halls/price.html',context)
 
-
+@login_required
 def book(request):
     mh = Movie_Hall.objects.all()
     if request.method == "POST":
@@ -54,11 +55,13 @@ def book(request):
 
 
 
-
+@user_only
 def movie_json(request):
     movies = list(Now_Showing.objects.values())
     return JsonResponse({'data':movies})
 
+
+@user_only
 def hall_json(request, *args, **kwargs):
     selected_movie = kwargs.get('movie')
     obj_model = Movie_Hall.objects.values('hall_id', 'hall__name', 'hall__category__name', 'hall__category__price').filter(movie__id=selected_movie)
@@ -74,6 +77,7 @@ def hall_json(request, *args, **kwargs):
     return JsonResponse({'data':resp})
 
 
+@user_only
 def date_json(request, *args, **kwargs):
     mselection = kwargs.get('mid')
     hselection = kwargs.get('hid')
@@ -89,12 +93,14 @@ def date_json(request, *args, **kwargs):
     return JsonResponse({'data':resp})
 
 
+@user_only
 def time_json(request, *args, **kwargs):
     mselection = kwargs.get('mid')
     hselection = kwargs.get('hid')
     day = kwargs.get('date')
-
+    
     obj_model = Movie_Hall.objects.values('id', 'time', 'booked').filter(movie__id=mselection, hall__id=hselection, date=day)
+    print(obj_model)
     resp=[]
 
     for i in obj_model:
@@ -105,6 +111,7 @@ def time_json(request, *args, **kwargs):
         resp.append(di)
     return JsonResponse({'data':resp})
 
+@user_only
 def seats_json(request, *args, **kwargs):
     mh_id = kwargs.get("id")
     obj_model = Ticket.objects.values('seats').filter(movie__id=mh_id)
@@ -117,10 +124,11 @@ def seats_json(request, *args, **kwargs):
     return JsonResponse({'data':resp})
 
 
+
+@user_only
 def dis_price_json(request, *args, **kwargs):
 
     field = Movie_Hall.objects.get(id=kwargs.get('hmid'))
-
     price = field.hall.category.price
     time = field.time
     day = datetime.datetime.strptime(str(field.date), '%Y-%M-%d').strftime('%A')
