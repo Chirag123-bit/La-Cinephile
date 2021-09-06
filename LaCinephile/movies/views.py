@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from .models import Now_Showing, Up_Comming
 from accounts.auth import user_only
-from halls.models import Ticket
+from halls.models import Movie_Hall, Ticket
 from django.db.models import Count
-
+from django.contrib.auth.decorators import  login_required
 
 @user_only
 def home(request):
@@ -46,26 +46,22 @@ def up_show(request, id):
     }
     return render(request, 'movies/up_comming.html', context)
 
-
+@login_required
 @user_only
 def user_movies(request, id):
 
-    movies = Ticket.objects.filter(user__id = id).values('movie__movie__id').distinct()
-    mv = Now_Showing.objects.all().values()
-
-    temp = []
-    for i in movies:
-        temp.append(i["movie__movie__id"])
-
+    movies = Ticket.objects.filter(user__id = id).values('movie__id').distinct()
+    
     res=[]
-    for i in mv:
-        if i['id'] in temp:
-            res.append(i)
-
+    for i in movies:
+        id = i['movie__id']
+        mv = Movie_Hall.objects.filter(id=id)
+        res.append(mv)
     context = {
-        'movies':res,
+        'movies':mv,
         'activate_movies':"active"
     }
+    print(res)
 
     return render(request,'accounts/dashboard.html',context)
 

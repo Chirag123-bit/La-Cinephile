@@ -1,7 +1,8 @@
-import re
+from django.contrib.auth.models import User
+from .models import Profile, Profile
 from django.contrib.auth import forms, logout, login, authenticate
 from django.shortcuts import redirect, render
-from .forms import UserForm
+from .forms import ProfileForm, UserForm
 from django.contrib import messages
 from .forms import LoginForm
 from .auth import unauthenticated_user, user_only
@@ -14,7 +15,9 @@ def register(request):
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            Profile.objects.create(User=user, username=user.username)
+            messages.add_message(request, messages.SUCCESS, "User Registered Successfully. Please Login to continue")
             return redirect('/')
         else:
             messages.add_message(request, messages.ERROR,"User Registration Failed!")
@@ -37,10 +40,10 @@ def user_login(request):
             if user is not None:
                 if user.is_staff:
                     login(request, user)
-                    return redirect('/account/register')
+                    return redirect('/accounts/register')
                 elif not user.is_staff:
                     login(request, user)
-                    return redirect('/account/dashboard')
+                    return redirect('/accounts/dashboard/{{user.id}}')
             else:
                 messages.add_message(request, messages.ERROR, 'Invalid Username or Password')
                 return render(request, 'accounts/login.html', {'form_login':form})
@@ -53,9 +56,24 @@ def user_login(request):
 @login_required
 def logout_user(request):
     logout(request)
-    return redirect('/account/login')
+    return redirect('/accounts/login')
+
 
 @login_required
-@user_only
-def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+
+def user_profile(request):
+    profile = request.user.profile
+    form = ProfileForm(instance=profile)
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.SUCCESS(request, "Account Updated Successfully")
+            return redirect('/profile')
+    context = {'form':form}
+    return render (request, 'accounts/profile.html', context)
+
+
+
+
+

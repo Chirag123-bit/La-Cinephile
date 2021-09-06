@@ -1,4 +1,3 @@
-
 :root {
   --clr-neutral-900: hsl(207, 19%, 9%);
   --clr-neutral-100: hsl(0, 0%, 100%);
@@ -8,6 +7,7 @@
 .title-highlight {
   color: #fe7900;
 }
+
 * {
   scroll-behavior: smooth;
   /* transition: all 0.5s; */
@@ -21,7 +21,7 @@
   background-color: var(--clr-accent-400) !important;
   padding: 0.5em 1.25em !important;
   border-radius: 1rem !important;
-  position: absolute ;
+  position: absolute;
   bottom: 0 !important;
   width: max-content !important;
 }
@@ -29,4 +29,11 @@
 .button:hover,
 .button:focus {
   background-color: #ffffff !important;
+}
+
+.link-unstyled,
+.link-unstyled:link,
+.link-unstyled:hover {
+  color: inherit;
+  text-decoration: inherit;
 }

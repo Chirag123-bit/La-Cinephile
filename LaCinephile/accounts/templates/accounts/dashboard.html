@@ -47,18 +47,18 @@
             {% for movie in movies %}
             <div class="card">
                 <div class="img8x">
-                    <img src="/media/{{movie.poster}}" class="img-fluid" alt='{{movie.name}}'>
+                    <img src="/media/{{movie.movie.poster}}" class="img-fluid" alt='{{movie.name}}'>
                 </div>
                 <div class="content">
                     <div class="content8x d-flex flex-column align-items-md-center">
-                        <h3 class="mb-0">{{movie.name}}</h3>
-                        <div class="sub-title"><i class="fas fa-star title-highlight"></i>{{movie.imdb}}/10 </p>
+                        <h3 class="mb-0">{{movie.movie.name}}</h3>
+                        <div class="sub-title"><i class="fas fa-star title-highlight"></i>{{movie.movie.imdb}}/10 </p>
                         </div>
                         <p>
-                            {{movie.summary}}
+                            {{movie.movie.summary}}
                         </p>
                         <br>
-                        <a href="/movies/now/{{movie.id}}" class="button text-center my-0">Learn More</a>
+                        <a href="/tickets/detail/{{request.user.id}}/{{movie.id}}" class="button text-center my-0">View Details</a>
                     </div>
 
                 </div>

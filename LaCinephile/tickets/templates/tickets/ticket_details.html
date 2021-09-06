@@ -2,88 +2,203 @@
 {% load static %}
 
 {% block title %}
-<title>{{movie.name}} | Now Showing At La Cinephile</title>
+<title>Book your seats Now!</title>
 
 {% endblock title %}
 
 {% block css_files %}
 <link rel="stylesheet" href="{% static '/css/common.css' %}" />
-<link rel="stylesheet" href="{% static '/css/book.css' %}" />
+<link rel="stylesheet" href="{% static '/css/reservation.css' %}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock css_files%}
 
 {% block main_content %}
 
-<div class="movie-viewer container-fluid"
-    style="background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)), url({{movie.background.url}});">
+<small id="movie_id_holder" style="display:none"> {{movies.movie.id}} </small>
+<div class="booking-pannel d-flex flex-column align-items-center justify-content-center py-5"
+    style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({% static '/images/book-back.jpg' %});">
+    <div class="movie-container py-5 d-flex ">
 
-    <div class="container movie-details">
-        <div class="row justify-content-between movie">
-            <div class="com-md-6">
-                <img src="{{movie.poster.url}}" alt="{{movie.name}}" class="img-fluid height-limit">
-            </div>
-            <div class="com-md-2 text-white width-fourty">
-                <h1 class="movie-title">{{movie.name}}</h1>
-                <p class="msub-title">
-                    <h4 class="title-highlight">IMDB Rating: <br></h4>
-                    <p class="font-limit"><i class="fas fa-star text-warning"></i>{{movie.imdb}}/10 </p>
-                </p>
-
-                <p>
-                    <h4 class="title-highlight"> Cast:</h4> {{movie.actors}}
-                </p>
-                <p>
-                    <h4 class="title-highlight"> Directed By:</h4> {{movie.director}}
-                </p>
-                <div class="d-flex justify-content-between">
-                    <a href="#mtrailer-vid" class="button position-static  text-center" id="playvideo"><i
-                            class="fas fa-play"></i> Watch Trailer</a>
-                    <a href="#" class="button position-static  text-center"><i class="fas fa-ticket-alt"></i> Book
-                        Now</a>
-                </div>
-                <p>
-                    <hr class="back-color">
-                    <h3 class="title-highlight my-2"> Synopsis: </h3>
-                    <div class="text-content text-justify">
-                        {{movie.desc}}
-                    </div>
-                </p>
-
-            </div>
+        <div class="mv-selector">
+            <label class="text-white" for="movie">Selected movie:</label>
+            <select id="movie" class="mx-2 p-1" disabled>
+                <option selected id="dis">{{movies.movie.movie.name}}</option>
+            </select>
         </div>
 
-        <table class="table table-striped">
-            <tbody>
-                <tr>
-                    <td class="col-md-6">Movie Name: </td>
-                    <td id="mname" class="col-md-6"></td>
-                </tr>
-                <tr>
-                    <td class="col-md-6">Hall Name: </td>
-                    <td id="hname" class="col-md-6"></td>
-                </tr>
-                <tr>
-                    <td>Date: </td>
-                    <td id="mdate"></td>
-                </tr>
-                <tr>
-                    <td>Time: </td>
-                    <td id="mtime"></td>
-                </tr>
-                <tr>
-                    <td>Selected Seats: </td>
-                    <td id="mseats"></td>
-                </tr>
-                <tr>
-                    <td>Price: </td>
-                    <td id="total"></td>
-                </tr>
+        <div class="mv-selector">
+            <label class="text-white" for="hall">Selected Hall:</label>
+            <select id="hall" disabled class="mx-2 p-1">
+                <option selected id="dis2" class="disabled">{{movies.movie.hall.name}}</option>
+            </select>
+        </div>
 
-            </tbody>
-        </table>
+
+        <div class="mv-selector">
+            <label class="text-white" for="hall">Selected Day:</label>
+            <select id="date" disabled class="mx-2 p-1">
+                <option selected id="dis3" class="">{{movies.movie.date}}</option>
+            </select>
+        </div>
+
+        <div class="mv-selector">
+            <label class="text-white" for="time">Selected Time:</label>
+            <select id="time" disabled class="mx-2 p-1" ;>
+                <option selected id="dis4" class="">{{movies.movie.time}}</option>
+            </select>
+        </div>
 
     </div>
 
+
+    <div class="container d-flex flex-wrap justify-content-around row">
+
+        <div id="hall-rep" class="col-md-3 d-flex flex-column align-items-center">
+            <div class="selector-info">
+                <ul class="showcase">
+                    <li>
+                        <div class="seat"></div>
+                        <small>N/A</small>
+                    </li>
+
+                    <li>
+                        <div class="seat selected"></div>
+                        <small>Selected</small>
+                    </li>
+
+                    <li>
+                        <div class="seat occupied"></div>
+                        <small>Occupied</small>
+                    </li>
+                </ul>
+            </div>
+            <div class="screen"></div>
+            <div class="seats">
+                <div class="row">
+                    <div class="seat" id="a1"></div>
+                    <div class="seat" id="a2"></div>
+                    <div class="seat" id="a3"></div>
+                    <div class="seat" id="a4"></div>
+                    <div class="seat" id="a5"></div>
+                    <div class="seat" id="a6"></div>
+                    <div class="seat" id="a7"></div>
+                    <div class="seat" id="a8"></div>
+                </div>
+                <div class="row">
+                    <div class="seat" id="b1"></div>
+                    <div class="seat" id="b2"></div>
+                    <div class="seat" id="b3"></div>
+                    <div class="seat " id="b4"></div>
+                    <div class="seat " id="b5"></div>
+                    <div class="seat" id="b6"></div>
+                    <div class="seat" id="b7"></div>
+                    <div class="seat" id="b8"></div>
+                </div>
+
+                <div class="row">
+                    <div class="seat" id="c1"></div>
+                    <div class="seat" id="c2"></div>
+                    <div class="seat" id="c3"></div>
+                    <div class="seat" id="c4"></div>
+                    <div class="seat" id="c5"></div>
+                    <div class="seat" id="c6"></div>
+                    <div class="seat " id="c7"></div>
+                    <div class="seat " id="c8"></div>
+                </div>
+
+                <div class="row">
+                    <div class="seat" id="d1"></div>
+                    <div class="seat" id="d2"></div>
+                    <div class="seat" id="d3"></div>
+                    <div class="seat" id="d4"></div>
+                    <div class="seat" id="d5"></div>
+                    <div class="seat" id="d6"></div>
+                    <div class="seat" id="d7"></div>
+                    <div class="seat" id="d8"></div>
+                </div>
+
+                <div class="row">
+                    <div class="seat" id="e1"></div>
+                    <div class="seat" id="e2"></div>
+                    <div class="seat" id="e3"></div>
+                    <div class="seat " id="e4"></div>
+                    <div class="seat " id="e5"></div>
+                    <div class="seat" id="e6"></div>
+                    <div class="seat" id="e7"></div>
+                    <div class="seat" id="e8"></div>
+                </div>
+
+                <div class="row">
+                    <div class="seat" id="f1"></div>
+                    <div class="seat" id="f2"></div>
+                    <div class="seat" id="f3"></div>
+                    <div class="seat" id="f4"></div>
+                    <div class="seat " id="f5"></div>
+                    <div class="seat " id="f6"></div>
+                    <div class="seat " id="f7"></div>
+                    <div class="seat" id="f8"></div>
+                </div>
+            </div>
+        </div>
+        <div id="movie-book-details" class="col-md-6">
+
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td class="col-md-6">Movie Name: </td>
+                        <td id="mname" class="col-md-6">{{movies.movie.movie.name}}</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-6">Hall Name: </td>
+                        <td id="hname" class="col-md-6">{{movies.movie.hall.name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Date: </td>
+                        <td id="mdate">{{movies.movie.date}}</td>
+                    </tr>
+                    <tr>
+                        <td>Time: </td>
+                        <td id="mtime">{{movies.movie.time}}</td>
+                    </tr>
+                    <tr>
+                        <td>Selected Seats: </td>
+                        <td id="mseats"></td>
+                    </tr>
+                    <tr>
+                        <td>Price: </td>
+                        <td id="total"></td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <form class="form-group row" action="" method="POST">
+                {% csrf_token %}
+                <input type="text" class="form-control-plaintext" id="mid" name="mid" value="" style="display:none">
+                <input type="text" class="form-control-plaintext" id="seat_selected" name="seat_selected" value=""
+                    style="display:none">
+                <input type="text" class="form-control-plaintext" id="discountId" name="discountId" value=""
+                    style="display:none">
+                <button type="submit" class="btn btn-outline-success">Book</button>
+            </form>
+        </div>
+    </div>
 </div>
 
-<script src="{% static '/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
+</div>
+
+</div>
+
+
 {% endblock main_content %}
+
+{% block js_files %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src={% static '/js/ticket_detail.js' %}> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+    integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static '/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
+{% endblock js_files %}

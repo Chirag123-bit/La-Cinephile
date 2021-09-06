@@ -27,7 +27,7 @@
                                 {{request.user.first_name}}
                             </button>
                             <div class="dropdown-menu drop-blur bg-transparent" aria-labelledby="dropdownMenu2">
-                                <button class="dropdown-item text-white" type="button"><a href="/accounts/dashboard">Dashboard</a></button>
+                                <button class="dropdown-item text-white" type="button"><a href="/accounts/dashboard/{{request.user.id}}" class="link-unstyled ">Dashboard</a></button>
                                 <button class="dropdown-item text-white" type="button">Profile</button>
                                 <button class="dropdown-item text-white" type="button">Something else here</button>
                                 <div class="dropdown-divider"></div>
