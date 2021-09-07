@@ -48,8 +48,8 @@ def up_show(request, id):
 
 @login_required
 @user_only
-def user_movies(request, id):
-
+def user_movies(request):
+    id = request.user.id
     movies = Ticket.objects.filter(user__id = id).values('movie__id').distinct()
     
     res=[]

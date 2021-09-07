@@ -6,8 +6,93 @@
 {% endblock%}
 
 {% block main_content %}
+<div class="main-content">
+    <link rel="stylesheet" href="{% static '/css/profile.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/common.css' %}" />
 
 
+    <div class="user-info py-5 "
+        style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url({% static '/images/user-back.jpg' %});">
 
+        <div class="container emp-profile registration-container border border-warning">
 
-{% endblock main_content %}
+            <div class="row py-5">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="{{form.profile_pic.value.url}}" alt="User Image" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h5>
+                            {{request.user.profile.firstname }} <span> {{request.user.profile.lastname}} </span>
+                        </h5>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active text-white" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                    aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tab-content profile-tab" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                    aria-labelledby="home-tab">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="text-white">User Id</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{request.user.profile.username}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="text-white">First Name</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{request.user.profile.firstname}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="text-white">Last Name</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{request.user.profile.lastname}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="text-white">Email</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{request.user.profile.email}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="text-white">Phone</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{request.user.profile.phone}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button class="profile-edit-btn"> <a href="/accounts/update_profile/" class="text-white"> Edit Profile </a> </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {% endblock main_content %}
+    {% block js_files %}
+    <script src="{% static '/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
+    {% endblock js_files %}

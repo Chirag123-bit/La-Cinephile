@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from halls.models import Ticket
-from movies.models import Now_Showing
 
 def detail(request, uid, mid):
     movies = Ticket.objects.filter(user__id = uid, movie__id=mid)

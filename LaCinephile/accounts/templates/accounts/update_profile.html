@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+<title>Update Profile</title>
+
+{% endblock title %}
+
+{% block main_content %}
+<link rel="stylesheet" href="{% static '/css/common.css' %}" />
+<style>
+    .registration-container{
+        background-size:cover;
+        background-attachment:fixed;
+    }
+    form label{
+        color:#fff;
+    }
+    .form-row{
+        justify-content:center;
+    }
+    .blur-back{
+        backdrop-filter:blur(3px);
+    }
+    .form-text{
+        color:wheat !important;
+    }
+    #div_id_profile_pic div{
+        color:orange;
+    }
+</style>
+<div class="registration-container py-5" style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url({% static '/images/register-back.jpg' %});">
+    <div class="container py-5 my-5 blur-back border border-warning">
+        {% include 'accounts/message.html' %}
+        <h1 class="h1 text-warning text-center">Registration Form </h1>
+    <form  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-sm-6 col-md-5">
+                {{form.firstname | as_crispy_field}}
+            </div>
+            <div class="form-group col-sm-6 col-md-5">
+                {{form.lastname | as_crispy_field}}
+            </div>
+        </div>  
+        
+        <div class="form-row">
+            <div class="form-group col-sm-6 col-md-5">
+                {{form.district | as_crispy_field}}
+            </div>
+            <div class="form-group col-sm-6 col-md-5">
+                {{form.city | as_crispy_field}}
+            </div>
+        </div>
+
+         <div class="form-row">
+            <div class="form-group col-md-10">
+                {{form.phone | as_crispy_field}}
+            </div>
+            <div class="form-group col-md-10">
+                {{form.profile_pic | as_crispy_field}}
+            </div>
+        </div>
+
+
+        <div class="btn-comtainer d-flex justify-content-center">
+        <button type="submit" class="btn btn-warning btn-lg"> Update Profile </button>
+        </div>
+    </form>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block js_files %}
+    <script src="{% static '/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
+{% endblock js_files %}
