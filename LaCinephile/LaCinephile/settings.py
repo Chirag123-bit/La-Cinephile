@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'halls.apps.HallsConfig',
     'tickets.apps.TicketsConfig',
+    'admins.apps.AdminsConfig',
     'crispy_forms',
     'rest_framework',
 ]

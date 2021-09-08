@@ -1,0 +1,86 @@
+{% extends 'layout-admin.html' %}
+{% load static %}
+
+{% block title %}
+<title>Prices</title>
+
+{% endblock title %}
+
+{% block css_files %}
+
+{% endblock css_files %}
+
+{% block main_content %}
+<style>
+    table.table td h2 a {
+        color: #333;
+        font-size: 1rem;
+        text-decoration: none;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body booking_card">
+                <div class="table-responsive">
+                    {% include 'accounts/message.html' %}
+                    <table class="datatable table table-stripped table table-hover table-center mb-0">
+                        <thead>
+                            <tr>
+                                <th>Movie ID</th>
+                                <th class="text-center">Poster</th>
+                                <th class="text-center">Background Image</th>
+                                <th class="text-center" colspan="2">Name</th>
+                                <th class="text-center">Trailer</th>
+                                <th class="text-center" colspan="2">Actors</th>
+                                <th class="text-center">Director</th>
+                                <th class="text-center">IMDB Rating</th>
+                                <th class="text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in movies %}
+                            <tr>
+                                <td class="align-middle">{{i.id}}</td>
+                                <td>
+                                    <img src="{{i.poster.url}}" alt="Movie Wallpaper" width="200" height="200">
+                                </td>
+                                <td>
+                                    <img src="{{i.background.url}}" alt="Movie Wallpaper" width="360" height="200">
+                                </td>
+
+                                <td class="align-middle" colspan="2"> {{i.name}}</td>
+                                <td class="align-middle">{{i.trailer}}</td>
+
+                                <td class="align-middle text-justify" colspan="2">{{i.actors}}</td>
+                                <td class="align-middle text-center">{{i.director}}</td>
+                                <td class="align-middle text-center">{{i.imdb}}</td>
+
+
+                                <td class="text-center align-middle">
+                                    <div class="dropdown dropdown-action"> <a href="#"
+                                            class="action-icon dropdown-toggle" data-toggle="dropdown"
+                                            aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-down">
+                                            <a class="dropdown-item" href="/admins/update_movie/{{i.id}}"><i
+                                                    class="fas fa-pencil-alt m-r-5"></i> Edit</a>
+                                            <a class="dropdown-item" href="/admins/delete_movie/{{i.id}}"><i
+                                                    class="fas fa-trash-alt m-r-5"></i>Delete</a>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+</script>
+{% endblock main_content %}

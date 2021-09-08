@@ -33,7 +33,7 @@ Day_CHOICES = (
 class Hall(models.Model):
     name = models.CharField(max_length=30)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    movies = models.ManyToManyField(Now_Showing, through='Movie_Hall')
+    movies = models.ManyToManyField(Now_Showing, through='Movie_Hall', blank=True)
 
     def __str__(self):
         return self.name
@@ -42,7 +42,7 @@ class Hall(models.Model):
 class Movie_Hall(models.Model):
     movie = models.ForeignKey(Now_Showing, related_name="movie", on_delete=models.CASCADE)
     hall = models.ForeignKey(Hall, related_name="hall", on_delete=models.CASCADE)
-    time = models.CharField(max_length=100, choices=Time_CHOICES, default="7PM - 10PM'")
+    time = models.CharField(max_length=100, choices=Time_CHOICES, default="7PM - 10PM")
     date = models.DateField( default=datetime.date.today)
     discount = models.BooleanField(default=True)
     booked = models.ManyToManyField(User, through="Ticket")
@@ -50,8 +50,15 @@ class Movie_Hall(models.Model):
     def __str__(self):
         return self.movie.name
 
+ticket_choices = (
+    ("Active", "Active"),
+    ("Canceled", "Canceled"),
+    ("Expired","Expired")
+)
+
 class Ticket(models.Model):
     user = models.ForeignKey(User, related_name='booking_user', on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie_Hall, related_name='booked_movie', on_delete=models.CASCADE)
     seats = models.CharField(max_length=2, null=True)
     discount = models.ForeignKey(Categories, related_name='discount_given', on_delete=models.CASCADE)
+    status = models.CharField(max_length=100, choices=ticket_choices, default=1)

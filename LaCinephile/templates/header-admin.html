@@ -1,0 +1,39 @@
+{% load static %}
+{% block css_files %}
+{% endblock css_files%}
+
+<style>
+.counter.counter-lg {
+    top: -24px !important;
+}
+
+</style>
+<div class="header d-flex justify-content-between">
+    <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i
+            class="fa fa-bars mx-2"></i><small class="text-uppercase font-weight-bold">Toggle</small></button>
+    <div class="header-left">
+        <h2 class="logo text-dark"> La CinePhile </h2>
+    </div>
+    <ul class="nav user-menu">
+        <li class="nav-item dropdown noti-dropdown">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <i class="fas fa-bell"><span
+                        class="badge badge-pill text-danger">3</span> </i> </a>
+
+        </li>
+        <li class="nav-item">
+            <div class="dropdown">
+                <button class="btn dropdown-toggle text-dark" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{request.user.first_name}} {{request.user.last_name}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button class="dropdown-item " type="button"><a href="/accounts/dashboard/" class="link-unstyled ">Dashboard</a></button>
+                    <button class="dropdown-item " type="button"><a href="/accounts/profile/" class="link-unstyled ">Profile </a></button>
+                    <button class="dropdown-item " type="button"><a href="/accounts/password/" class="link-unstyled">Settings</a></button>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item " href="/accounts/logout">Logout</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>

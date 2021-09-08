@@ -26,6 +26,7 @@ urlpatterns = [
     path('', include('movies.urls')),
     path('accounts/', include('accounts.urls')),
     path('tickets/', include('tickets.urls')),
+    path('admins/', include('admins.urls')),
 ]
 
 if settings.DEBUG:

@@ -15,3 +15,4 @@ def detail(request, uid, mid):
     }
 
     return render(request,'tickets/ticket_details.html',context)
+
