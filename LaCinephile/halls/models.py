@@ -45,20 +45,33 @@ class Movie_Hall(models.Model):
     time = models.CharField(max_length=100, choices=Time_CHOICES, default="7PM - 10PM")
     date = models.DateField( default=datetime.date.today)
     discount = models.BooleanField(default=True)
-    booked = models.ManyToManyField(User, through="Ticket")
+    booked = models.ManyToManyField(User, through="Ticket", blank=True)
 
     def __str__(self):
         return self.movie.name
 
 ticket_choices = (
-    ("Active", "Active"),
+    ("Purchased", "Purchased"),
     ("Canceled", "Canceled"),
-    ("Expired","Expired")
+    ("Booked","Booked")
 )
 
-class Ticket(models.Model):
-    user = models.ForeignKey(User, related_name='booking_user', on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie_Hall, related_name='booked_movie', on_delete=models.CASCADE)
+class TicketTemplate(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie_Hall, on_delete=models.CASCADE)
+    discount = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    status = models.CharField(max_length=100, choices=ticket_choices, default="Booked")
+
+    class Meta:
+        abstract = True
+
+class Ticket(TicketTemplate):
     seats = models.CharField(max_length=2, null=True)
-    discount = models.ForeignKey(Categories, related_name='discount_given', on_delete=models.CASCADE)
-    status = models.CharField(max_length=100, choices=ticket_choices, default=1)
+
+    def __str__(self):
+        return self.movie.movie.name
+
+class Purchase(TicketTemplate):
+    seats = models.CharField(max_length=100, null=True)
+    price = models.IntegerField()
+    payment_completed = models.BooleanField(default=False)

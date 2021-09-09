@@ -1,8 +1,5 @@
-from django.db.models import fields
-from .models import Hall, Category
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
-from django import forms
+
+from .models import Hall, Category, Movie_Hall
 from django.forms import ModelForm
 
 class HallForm(ModelForm):
@@ -13,4 +10,9 @@ class HallForm(ModelForm):
 class CategoryForm(ModelForm):
     class Meta:
         model = Category
+        fields = "__all__"
+
+class MovieHallForm(ModelForm):
+    class Meta:
+        model = Movie_Hall
         fields = "__all__"

@@ -1,15 +1,18 @@
 from django.shortcuts import redirect, render
-from .models import Category
+from .models import Category, Purchase
 from tickets.models import Categories as ticket
 from movies.models import Now_Showing 
 from halls.models import Ticket
 from django.http import JsonResponse
+from django.views.generic import View
 from halls.models import Movie_Hall
 import datetime
 from tickets.models import Categories
+from django.urls import reverse
 
 from accounts.auth import unauthenticated_user, user_only
 from django.contrib.auth.decorators import  login_required
+import requests
 
 @user_only
 def prices(request):
@@ -31,20 +34,34 @@ def book(request):
         movie = data.get('mid')
         seats = data.get('seat_selected')
         discount = data.get('discountId')
-
-        print(seats)
+         
 
         mv = Movie_Hall.objects.filter(id=int(movie))[0]
         dis = Categories.objects.filter(id=int(discount))[0]
 
+        count = round(len(seats)/3)
+
+        total = (count*int(data.get('inprice')))
         ticket = Ticket(user=user, movie=mv, seats=seats, discount=dis)
-        if ticket:
+        if "book" in request.POST:
+            status = "Booked"
             i=0
             while(i<len(seats)):
-                ticket = Ticket(user=user, movie=mv, seats=seats[i:i+2], discount=dis)
+                ticket = Ticket(user=user, movie=mv, seats=seats[i:i+2], discount=dis, status=status)
                 ticket.save()
                 i+=3
-            return redirect("/")
+        else:
+            status = 'Purchased'
+            i=0
+            while(i<len(seats)):
+                ticket = Ticket(user=user, movie=mv, seats=seats[i:i+2], discount=dis, status=status)
+                ticket.save()
+                i+=3
+            purchase = Purchase(user=user, movie=mv, seats=seats, discount=dis, price = total, status=status)
+            purchase.save()
+
+            return redirect(reverse('halls:khaltirequest')+"?o_id="+str(purchase.id))
+        return redirect("/")
 
     context={
         'activate_book':'active',
@@ -100,7 +117,6 @@ def time_json(request, *args, **kwargs):
     day = kwargs.get('date')
     
     obj_model = Movie_Hall.objects.values('id', 'time', 'booked').filter(movie__id=mselection, hall__id=hselection, date=day)
-    print(obj_model)
     resp=[]
 
     for i in obj_model:
@@ -157,3 +173,50 @@ def dis_price_json(request, *args, **kwargs):
 
 
 
+
+class KhaltiRequestView(View):
+    def get(self, request, *args, **kwargs):
+        id = int(request.GET.get("o_id"))
+        detail = Purchase.objects.get(id=id)
+
+        context={
+            "order":detail
+        }
+
+        return render(request, 'tickets/khaltirequest.html', context)
+
+
+class KhaltiVerifyView(View):
+    def get(self, request, *args, **kwargs):
+        token = request.GET.get("token")
+        amount = request.GET.get("amount")
+        o_id = int(request.GET.get("order_id"))
+
+        url = "https://khalti.com/api/v2/payment/verify/"
+        payload = {
+        "token": token,
+        "amount": amount
+        }
+        headers = {
+        "Authorization": "KEY test_secret_key_251242f46ea74d79b6e1fb3f4fd86bef"
+        }
+
+        order_obj = Purchase.objects.get(id=o_id)
+
+        response = requests.post(url, payload, headers = headers)
+        resp_dict = response.json()
+        if resp_dict.get("idx"):
+            success = True
+            order_obj.payment_completed = True
+            order_obj.status = "Purchased"
+            order_obj.save()
+    
+        else:
+            success = False
+        
+        print(order_obj)
+
+        data = {
+            "success":success
+        }
+        return JsonResponse(data)

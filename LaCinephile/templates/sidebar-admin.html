@@ -66,7 +66,7 @@
 
 
 <div class="vertical-nav bg-white" id="sidebar">
-  <div class="py-4 px-3 mb-4 bg-light">
+  <div class="py-2 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
       <img loading="lazy" src="{{request.user.profile.profile_pic.url}}" alt="Admin Profile Pricture" width="80"
         height="80" class="mr-3 rounded-circle img-thumbnail shadow-sm">
@@ -77,94 +77,94 @@
     </div>
   </div>
 
-  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Dashboard</p>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+      <div id="sidebar-menu" class="sidebar-menu">
 
-  <ul class="nav flex-column bg-white mb-0">
-    <li class="nav-item">
-      <a href="/admins/dashboard" class="nav-link text-dark bg-light">
-        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
-        home
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/admins/show_user" class="nav-link text-dark">
-        <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-        User Section
-      </a>
-    </li>
-  </ul>
+        <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Dashboard</p>
 
-
-
-  <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Movies</p>
-  <ul class="nav flex-column bg-white mb-0">
-    <li class="nav-item">
-      <a href="/admins/show_movies" class="nav-link text-dark">
-        <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-        Now Showing
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/admins/up_movies" class="nav-link text-dark">
-        <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-        Up Comming
-      </a>
-    </li>
-  </ul>
+        <ul class="nav flex-column bg-white mb-0">
+          <li class="nav-item">
+            <a href="/admins/dashboard" class="nav-link text-dark bg-light">
+              <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+              home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admins/show_user" class="nav-link text-dark">
+              <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+              User Section
+            </a>
+          </li>
+        </ul>
 
 
-  <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Halls</p>
-  <ul class="nav flex-column bg-white mb-0">
-    <li class="nav-item">
-      <a href="/admins/show_hall" class="nav-link text-dark">
-        <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
-        Halls
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/admins/hall_category" class="nav-link text-dark">
-        <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-        Hall Category
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/admins/up_movies" class="nav-link text-dark">
-        <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-        Movie Hall Allocation
-      </a>
-    </li>
-  </ul>
 
-  <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
+        <p class="text-gray font-weight-bold text-uppercase px-3 small py-2 mb-0">Movies</p>
+        <ul class="nav flex-column bg-white mb-0">
+          <li class="nav-item">
+            <a href="/admins/show_movies" class="nav-link text-dark">
+              <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+              Now Showing
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admins/up_movies" class="nav-link text-dark">
+              <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+              Up Comming
+            </a>
+          </li>
+        </ul>
 
-  <ul class="nav flex-column bg-white mb-0">
-    <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
-        <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>
-        area charts
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
-        <i class="fa fa-bar-chart mr-3 text-primary fa-fw"></i>
-        bar charts
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
-        <i class="fa fa-pie-chart mr-3 text-primary fa-fw"></i>
-        pie charts
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
-        <i class="fa fa-line-chart mr-3 text-primary fa-fw"></i>
-        line charts
-      </a>
-    </li>
-  </ul>
+
+        <p class="text-gray font-weight-bold text-uppercase px-3 small py-2 mb-0">Halls</p>
+        <ul class="nav flex-column bg-white mb-0">
+          <li class="nav-item">
+            <a href="/admins/show_hall" class="nav-link text-dark">
+              <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+              Halls
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admins/hall_category" class="nav-link text-dark">
+              <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+              Hall Category
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admins/movie_hall" class="nav-link text-dark">
+              <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+              Movie Hall Allocation
+            </a>
+          </li>
+        </ul>
+
+        <p class="text-gray font-weight-bold text-uppercase px-3 small py-2 mb-0">Tickets</p>
+
+        <ul class="nav flex-column bg-white mb-0">
+          <li class="nav-item">
+            <a href="/admins/show_ticket" class="nav-link text-dark">
+              <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>
+              Tickets
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admins/ticket_cat" class="nav-link text-dark">
+              <i class="fa fa-bar-chart mr-3 text-primary fa-fw"></i>
+             Ticket Category
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/admins/show_payments" class="nav-link text-dark">
+              <i class="fa fa-pie-chart mr-3 text-primary fa-fw"></i>
+              Payments
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
-
 
 <script>
   $(function () {

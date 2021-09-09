@@ -26,4 +26,21 @@ urlpatterns = [
     path('update_hallCategory/<int:hallCat_id>', views.update_hall_cat),
     path('delete_hallCategory/<int:hallCat_id>', views.delete_hall_cat),
 
+    path('movie_hall/', views.movie_hall),
+    path('update_movie_hall/<int:mh_id>', views.update_movie_hall),
+    path('delete_movie_hall/<int:hallCat_id>', views.delete_movie_hall),
+
+    path('show_ticket/', views.show_ticket),
+    path('purchase/<int:tic_id>', views.purchase),
+    path('reserve/<int:tic_id>', views.reserve),
+    path('cancle/<int:tic_id>', views.cancle),
+    
+    path('ticket_cat/', views.ticket_cat),
+    path('update_tcat/<int:tc_id>', views.update_ticket_cat),
+    path('delete_tcat<int:tc_id>', views.delete_ticket_cat),
+    
+    path('show_payments/', views.payments),
+    # path('update_tcat/<int:tc_id>', views.update_ticket_cat),
+    # path('delete_tcat<int:tc_id>', views.delete_ticket_cat),
+
 ]

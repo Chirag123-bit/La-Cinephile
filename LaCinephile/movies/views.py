@@ -61,7 +61,6 @@ def user_movies(request):
         'movies':mv,
         'activate_movies':"active"
     }
-    print(res)
 
     return render(request,'accounts/dashboard.html',context)
 

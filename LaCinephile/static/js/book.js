@@ -24,13 +24,16 @@ var mid = document.getElementById('mid')
 var seat_selected = document.getElementById('seat_selected')
 var discountId = document.getElementById('discountId')
 
+const inprice = document.getElementById('inprice')
+var selectedSeatCount = 0
+
 var selectedSeats = []
 
 function updateSelectedCount() {
     const selectedSeats = document.querySelectorAll('.row .seat.selected')
-    const selectedSeatCount = selectedSeats.length;
+    selectedSeatCount = selectedSeats.length;
 
-    total.innerText = selectedSeatCount * ticketPrice;
+    total.innerText = (selectedSeatCount * ticketPrice) - ticketPrice;
 }
 
 hallRep.addEventListener('click', (e) => {
@@ -43,6 +46,7 @@ hallRep.addEventListener('click', (e) => {
             e.target.classList.add('selected')
             selectedSeats.push(e.target.id)
         }
+
     }
 
     mseats.innerText = selectedSeats
@@ -219,6 +223,7 @@ time.addEventListener('change', e => {
             priceData.map(item => {
                 ticketPrice = item.price;
                 discountId.setAttribute('value', item.cat);
+                inprice.setAttribute('value', ticketPrice);
                 populateSeats(id);
             })
 

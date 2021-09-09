@@ -12,4 +12,7 @@ urlpatterns = [
     path('price/<int:hmid>', views.dis_price_json, name="price"),
     path('seats/<int:id>', views.seats_json, name="Reserved"),
 
+    path('khalti-request/', views.KhaltiRequestView.as_view(), name="khaltirequest"),
+    path('khalti-verify/', views.KhaltiVerifyView.as_view(), name="khaltiverify"),
+
 ]

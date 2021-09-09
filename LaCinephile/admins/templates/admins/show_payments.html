@@ -1,0 +1,70 @@
+{% extends 'layout-admin.html' %}
+{% load static %}
+
+{% block title %}
+<title>Halls At LaCinePhile</title>
+
+{% endblock title %}
+
+{% block css_files %}
+
+{% endblock css_files %}
+
+{% block main_content %}
+<style>
+    table.table td h2 a {
+        color: #333;
+        font-size: 1rem;
+        text-decoration: none;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body booking_card">
+                <div class="table-responsive">
+                    {% include 'accounts/message.html' %}
+                    <table class="datatable table table-stripped table table-hover table-center mb-0">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Hall ID</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Movie</th>
+                                <th class="text-center">Seats Booked</th>
+                                <th class="text-center">Amount</th>
+                                <th class="text-center">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in purchases %}
+                            <tr>
+
+                                <td class="align-middle text-center" >{{i.id}}</td>
+                                <td class="align-middle text-center">{{i.user.first_name}} <span> {{i.user.last_name}}  </td>
+                                <td class="align-middle text-center">{{i.movie.movie.name}}</td>
+                                <td class="align-middle text-center">{{i.seats}}</td>
+                                <td class="align-middle text-center">{{i.price}}</td>
+                                <td class="align-middle text-center">
+                                {% if i.status == "Purchased" %}
+                                    <span class="badge badge-pill bg-success inv-badge">{{i.status}}</span>
+                                {% elif i.status == "Canceled" %}
+                                    <span class="badge badge-pill bg-danger inv-badge">{{i.status}}</span>
+                                {% else %}
+                                    <span class="badge badge-pill bg-warning inv-badge">Pending</span>
+                                {% endif %}
+                                </td>
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+</script>
+{% endblock main_content %}

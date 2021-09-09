@@ -2,12 +2,17 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import  login_required
 from django.contrib.auth.models import User
 from movies.models import Now_Showing, Up_Comming
-from halls.models import  Category, Hall, Ticket
+from halls.models import  Category, Hall, Movie_Hall, Ticket
 from django.contrib import messages
 import json
 from accounts.forms import ProfileForm
 from movies.forms import NowShowingForm, UpCommingForm
-from halls.forms import HallForm,CategoryForm
+from halls.models import Purchase
+from halls.forms import HallForm,CategoryForm, MovieHallForm
+from tickets.models import Categories
+from tickets.form import CategoriesForm
+
+
 @login_required
 def dashboard(request):
     users = User.objects.all()
@@ -238,3 +243,106 @@ def delete_hall_cat(request,hallCat_id):
     return redirect('/admins/hall_category')
 
 
+
+@login_required
+def movie_hall(request):
+    mh = Movie_Hall.objects.all().order_by('-id')
+    context={
+        'cat':mh
+    }
+    return render(request, 'admins/movie_hall.html',context)
+
+    
+@login_required
+def update_movie_hall(request,mh_id):
+    mh = Movie_Hall.objects.get(id=mh_id)
+    form = MovieHallForm(instance=mh)
+    if request.method == "POST":
+        form = MovieHallForm(request.POST, instance=mh)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "Movie/Hall Details Updated Successfully")
+            return redirect('/admins/movie_hall')
+
+    context = {'form':form}
+    return render (request, 'admins/edit_moviehall.html', context)
+
+@login_required
+def delete_movie_hall(request,mh_id):
+    mh = Movie_Hall.objects.get(id=mh_id)
+    mh.delete()
+    messages.add_message(request, messages.SUCCESS, 'Movie/Hall Deleted')
+    return redirect('/admins/movie_hall')
+
+
+@login_required
+def show_ticket(request):
+    tickets = Ticket.objects.all().order_by('-id')
+    context={
+        'ticket':tickets
+    }
+    return render(request, 'admins/show_ticket.html',context)
+
+    
+@login_required
+def purchase(request,tic_id):
+    ticket = Ticket.objects.get(id=tic_id)
+    ticket.status = "Purchased"
+    ticket.save()
+    messages.add_message(request, messages.SUCCESS, 'Ticket Marked as Purchased')
+    return redirect('/admins/show_ticket')
+
+@login_required
+def reserve(request,tic_id):
+    ticket = Ticket.objects.get(id=tic_id)
+    ticket.status = "Booked"
+    ticket.save()
+    messages.add_message(request, messages.SUCCESS, 'Ticket Marked as Reserved')
+    return redirect('/admins/show_ticket')
+
+@login_required
+def cancle(request,tic_id):
+    ticket = Ticket.objects.get(id=tic_id)
+    ticket.status = "Canceled"
+    ticket.save()
+    messages.add_message(request, messages.SUCCESS, 'Ticket Marked as Reserved')
+    return redirect('/admins/show_ticket')
+
+
+@login_required
+def ticket_cat(request):
+    ticket_cat = Categories.objects.all().order_by('-id')
+    context={
+        'tic':ticket_cat
+    }
+    return render(request, 'admins/ticket_category.html',context)
+
+    
+@login_required
+def update_ticket_cat(request,tc_id):
+    mh = Categories.objects.get(id=tc_id)
+    form = CategoriesForm(instance=mh)
+    if request.method == "POST":
+        form = CategoriesForm(request.POST, instance=mh)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "Category Details Updated Successfully")
+            return redirect('/admins/ticket_cat')
+
+    context = {'form':form}
+    return render (request, 'admins/edit_ticket_cat.html', context)
+
+@login_required
+def delete_ticket_cat(request,tc_id):
+    mh = Categories.objects.get(id=tc_id)
+    mh.delete()
+    messages.add_message(request, messages.SUCCESS, 'Ticket Category Deleted')
+    return redirect('/admins/ticket_cat')
+
+@login_required
+def payments(request):
+    purchase = Purchase.objects.all().order_by('-id')
+    context={
+        'purchases':purchase
+    }
+    return render(request, 'admins/show_payments.html',context)

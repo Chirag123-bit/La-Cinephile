@@ -1,0 +1,83 @@
+{% extends 'layout-admin.html' %}
+{% load static %}
+
+{% block title %}
+<title>Tickets</title>
+
+{% endblock title %}
+
+{% block css_files %}
+
+{% endblock css_files %}
+
+{% block main_content %}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body booking_card">
+                <div class="table-responsive">
+                    {% include 'accounts/message.html' %}
+                    <div class="table-responsive">
+                        <table class="table table-hover table-center">
+                            <thead>
+                                <tr>
+                                    <th>Booking ID</th>
+                                    <th>Name</th>
+                                    <th>Email Address</th>
+                                    <th>Phone Number</th>
+                                    <th class="text-center">Hall Type</th>
+                                    <th class="text-right"> Seat Number</th>
+                                    <th class="text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in ticket %}
+                                <tr>
+                                    <td class="text-nowrap">
+                                        <div>{{i.id}}</div>
+                                    </td>
+                                    <td class="text-nowrap">{{i.user.first_name}} <span> {{i.user.last_name}} </span>
+                                    </td>
+                                    <td> {{i.user.email}}</td>
+                                    <td>{{i.user.profile.phone}}</td>
+                                    <td class="text-center">{{i.movie.hall.name}} <span>
+                                            ({{i.movie.hall.category.name}}) </span></td>
+                                    <td class="text-center">
+                                        <div>{{i.seats}}</div>
+                                    </td>
+                                    <td class="text-center">
+                                        {% if i.status == "Booked" %}
+                                        <button type="button" class="btn btn-warning dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Booked
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="/admins/cancle/{{i.id}}">Cancle Ticket</a>
+                                            <a class="dropdown-item" href="/admins/purchase/{{i.id}}">Mark as Paid</a>
+                                        </div>
+                                        {% elif  i.status == "Canceled" %}
+                                        <button type="button" class="btn btn-danger dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Canceled
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="/admins/reserve/{{i.id}}">Reserve Ticket</a>
+                                            <a class="dropdown-item" href="/admins/purchase/{{i.id}}">Mark as Paid</a>
+                                        </div>
+                                        {% else %}
+                                        <button type="button" class="btn btn-success">
+                                            Purchased
+                                        </button>
+                                        {% endif  %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}

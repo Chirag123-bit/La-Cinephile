@@ -12,3 +12,7 @@ class Categories(models.Model):
         return self.name
 
 
+
+    
+
+
