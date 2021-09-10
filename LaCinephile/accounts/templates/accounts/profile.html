@@ -15,7 +15,7 @@
         style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url({% static '/images/user-back.jpg' %});">
 
         <div class="container emp-profile registration-container border border-warning">
-
+            {% include 'accounts/message.html' %}
             <div class="row py-5">
                 <div class="col-md-4">
                     <div class="profile-img">
@@ -41,7 +41,7 @@
                                     aria-labelledby="home-tab">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label class="text-white">User Id</label>
+                                            <label class="text-white">User Name</label>
                                         </div>
                                         <div class="col-md-6">
                                             <p>{{request.user.profile.username}}</p>

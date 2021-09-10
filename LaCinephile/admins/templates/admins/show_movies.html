@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-<title>Prices</title>
+<title>Now Showing</title>
 
 {% endblock title %}
 
@@ -24,6 +24,7 @@
             <div class="card-body booking_card">
                 <div class="table-responsive">
                     {% include 'accounts/message.html' %}
+                    <div class="button-holder d-flex justify-content-end"> <button type="button" class="btn btn-warning" style="width:max-content"><a href="/admins/add_now_showing" class="link-unstyled"> Add Movie</a></button> </div>
                     <table class="datatable table table-stripped table table-hover table-center mb-0">
                         <thead>
                             <tr>

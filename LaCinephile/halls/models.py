@@ -32,7 +32,7 @@ Day_CHOICES = (
 
 class Hall(models.Model):
     name = models.CharField(max_length=30)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.SET_DEFAULT, default=1)
     movies = models.ManyToManyField(Now_Showing, through='Movie_Hall', blank=True)
 
     def __str__(self):
@@ -48,7 +48,7 @@ class Movie_Hall(models.Model):
     booked = models.ManyToManyField(User, through="Ticket", blank=True)
 
     def __str__(self):
-        return self.movie.name
+        return self.movie.name + " In " + self.hall.name +" ( " + str(self.date) + " " + str(self.time) + " )"
 
 ticket_choices = (
     ("Purchased", "Purchased"),

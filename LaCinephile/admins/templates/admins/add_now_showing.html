@@ -1,0 +1,95 @@
+{% extends 'layout-admin.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+<title>Add Now-Showing Movies</title>
+
+{% endblock title %}
+
+{% block main_content %}
+<link rel="stylesheet" href="{% static '/css/common.css' %}" />
+<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}" />
+<style>
+    .registration-container{
+        background-size:cover;
+        background-attachment:fixed;
+    }
+    form label{
+        color:orange;
+    }
+    .form-row{
+        justify-content:center;
+    }
+    .blur-back{
+        backdrop-filter:blur(3px);
+    }
+    .form-text{
+        color:gray !important;
+    }
+    #div_id_profile_pic div{
+        color:orange;
+    }
+</style>
+<div class="registration-container py-5" >
+    <div class="container py-5 my-5  border border-warning">
+        {% include 'accounts/message.html' %}
+        <h1 class="h1 text-warning text-center">Add Now Showing </h1>
+        <form  method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+        <div class="form-row">
+            <div class="form-group col-sm-12 col-md-10">
+                {{form.name | as_crispy_field}}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-12 col-md-10">
+                {{form.poster | as_crispy_field}}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-12 col-md-10">
+                {{form.background | as_crispy_field}}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-12 col-md-10">
+                {{form.trailer | as_crispy_field}}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-12 col-md-10">
+                {{form.summary | as_crispy_field}}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-12 col-md-10">
+                {{form.desc | as_crispy_field}}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-6 col-md-5">
+                {{form.actors | as_crispy_field}}
+            </div>
+            <div class="form-group col-sm-6 col-md-5">
+                {{form.director | as_crispy_field}}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-12 col-md-10">
+                {{form.imdb | as_crispy_field}}
+            </div>
+        </div>
+
+
+        <div class="btn-comtainer d-flex justify-content-center">
+        <button type="submit" class="btn btn-warning btn-lg"> Add Movie </button>
+        </div>
+     </form>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block js_files %}
+    <script src="{% static '/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
+{% endblock js_files %}

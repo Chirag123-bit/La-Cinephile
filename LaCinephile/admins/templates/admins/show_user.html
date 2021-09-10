@@ -20,8 +20,10 @@
 </style>
 <div class="row">
     <div class="col-sm-12">
+        
         <div class="card card-table">
-            <div class="card-body booking_card">
+            <div class="card-body booking_card d-flex flex-column">
+               <div class="button-holder d-flex justify-content-end"> <button type="button" class="btn btn-warning" style="width:max-content"><a href="/admins/create_user" class="link-unstyled">Add Users</a></button> </div>
                 <div class="table-responsive">
                     {% include 'accounts/message.html' %}
                     <table class="datatable table table-stripped table table-hover table-center mb-0">
@@ -42,10 +44,10 @@
                                 <td class="align-middle">{{i.id}}</td>
                                 <td>
                                     <h2 class="table-avatar">
-                                        <a href="profile.html" class="avatar avatar-sm mr-2"><img
+                                        <a class="avatar avatar-sm mr-2" href="/admins/update/{{i.id}}"><img
                                                 class="avatar-img rounded-circle img-fluid"
                                                 src="{{i.profile.profile_pic.url}}" alt="User Image" width="80" height="80"></a>
-                                        <a href="profile.html">{{i.first_name}} <span>{{i.last_name}}</span></a>
+                                        <a href="/admins/update/{{i.id}}">{{i.first_name}} <span>{{i.last_name}}</span></a>
                                     </h2>
                                 </td>
    
@@ -82,17 +84,6 @@
     </div>
 </div>
 </div>
-{% comment %} <div id="delete_asset" class="modal fade delete-modal" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-center"> <img src="assets/img/sent.png" alt="" width="50" height="46">
-                <h3 class="delete_class">Are you sure want to delete this Asset?</h3>
-                <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                    <button type="submit" class="btn btn-danger"><a href="/admins/remove/{{i.id}}" class="link-unstyled">Delete</a></button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> {% endcomment %}
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 {% endblock main_content %}

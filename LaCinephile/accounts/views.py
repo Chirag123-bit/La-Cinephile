@@ -16,7 +16,7 @@ def register(request):
         form = UserForm(request.POST)
         if form.is_valid():
             user = form.save()
-            Profile.objects.create(user=user, username=user.username, email = user.email)
+            Profile.objects.create(user=user, username=user.username, email = user.email, firstname = user.first_name, lastname = user.last_name)
             messages.add_message(request, messages.SUCCESS, "User Registered Successfully. Please Login to continue")
             return redirect('/')
         else:

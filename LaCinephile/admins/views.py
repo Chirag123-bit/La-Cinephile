@@ -5,12 +5,15 @@ from movies.models import Now_Showing, Up_Comming
 from halls.models import  Category, Hall, Movie_Hall, Ticket
 from django.contrib import messages
 import json
-from accounts.forms import ProfileForm
+from accounts.forms import ProfileForm,UserForm
 from movies.forms import NowShowingForm, UpCommingForm
 from halls.models import Purchase
 from halls.forms import HallForm,CategoryForm, MovieHallForm
 from tickets.models import Categories
-from tickets.form import CategoriesForm
+from tickets.form import CategoriesForm, TicketForm
+from accounts.models import Profile
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 
 @login_required
@@ -35,8 +38,6 @@ def dashboard(request):
             canc_data[1] +=1
         else:
             canc_data[2]+=1
-
-    print(canc_data)
 
     for i in tickets:
         if i.movie.hall.category.name == "GOLD":
@@ -70,6 +71,14 @@ def show_user(request):
     return render(request, 'admins/show_user.html',context)
 
 @login_required
+def show_admin(request):
+    users = User.objects.all().filter(is_staff=1).order_by('-id')
+    context={
+        'user':users,
+    }
+    return render(request, 'admins/show_admin.html',context)
+
+@login_required
 def promote_user(request,user_id):
     user = User.objects.get(id=user_id)
     user.is_staff=True
@@ -78,11 +87,26 @@ def promote_user(request,user_id):
     return redirect('/admins/show_user')
 
 @login_required
+def demote_user(request,user_id):
+    user = User.objects.get(id=user_id)
+    user.is_staff=False
+    user.save()
+    messages.add_message(request, messages.SUCCESS, 'Admin Demoted to user')
+    return redirect('/admins/show_user')
+
+@login_required
 def delete_user(request,user_id):
     user = User.objects.get(id=user_id)
     user.delete()
     messages.add_message(request, messages.SUCCESS, 'User Deleted')
     return redirect('/admins/show_user')
+
+@login_required
+def delete_admin(request,user_id):
+    user = User.objects.get(id=user_id)
+    user.delete()
+    messages.add_message(request, messages.SUCCESS, 'Admin Deleted')
+    return redirect('/admins/show_admin')
 
 @login_required
 def update_user(request,user_id):
@@ -203,8 +227,8 @@ def update_hall(request,hall_id):
     return render (request, 'admins/edit_hall.html', context)
 
 @login_required
-def delete_hall(request,movie_id):
-    movie = Hall.objects.get(id=movie_id)
+def delete_hall(request,hall_id):
+    movie = Hall.objects.get(id=hall_id)
     movie.delete()
     messages.add_message(request, messages.SUCCESS, 'Hall Deleted')
     return redirect('/admins/show_hall')
@@ -346,3 +370,194 @@ def payments(request):
         'purchases':purchase
     }
     return render(request, 'admins/show_payments.html',context)
+
+
+@login_required
+def create_User(request):
+    form = UserForm()
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            Profile.objects.create(user=user, username=user.username, email = user.email, firstname = user.first_name, lastname = user.last_name)
+            messages.add_message(request, messages.SUCCESS, "User Registered Successfully!")
+            print("a")
+            return redirect('/admins/show_user')
+
+        else:
+            messages.add_message(request, messages.ERROR,"User Registration Failed!")
+            return render(request, 'admins/add_user.html', {'form':form})
+        
+    context={
+        'form':form
+    }
+    return render(request, "admins/add_user.html", context)
+
+
+
+
+@login_required
+def create_Ticket(request):
+    form = TicketForm()
+    if request.method == "POST":
+        form = TicketForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "Ticket Booked Successfully!")
+            return redirect('/admins/show_ticket')
+
+        else:
+            messages.add_message(request, messages.ERROR,"Ticket Booking Failed!")
+            return render(request, 'admins/show_ticket.html', {'form':form})
+        
+    context={
+        'form':form
+    }
+    return render(request, "admins/add_tickets.html", context)
+
+@login_required
+def create_Category(request):
+    form = CategoriesForm()
+    if request.method == "POST":
+        form = CategoriesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "Category Created Successfully!")
+            return redirect('/admins/ticket_cat')
+
+        else:
+            messages.add_message(request, messages.ERROR,"Category Creation Failed!")
+            return render(request, 'admins/ticket_cat.html', {'form':form})
+        
+    context={
+        'form':form
+    }
+    return render(request, "admins/add_ticket_category.html", context)
+
+@login_required
+def add_hall(request):
+    form = HallForm()
+    if request.method == "POST":
+        form = HallForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "Category Created Successfully!")
+            return redirect('/admins/show_hall')
+
+        else:
+            messages.add_message(request, messages.ERROR,"Category Creation Failed!")
+            return render(request, 'admins/show_hall.html', {'form':form})
+        
+    context={
+        'form':form
+    }
+    return render(request, "admins/add_hall.html", context)
+
+@login_required
+def add_hallCat(request):
+    form = CategoryForm()
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "Category Created Successfully!")
+            return redirect('/admins/hall_category')
+
+        else:
+            messages.add_message(request, messages.ERROR,"Category Creation Failed!")
+            return render(request, 'admins/hall_category.html', {'form':form})
+        
+    context={
+        'form':form
+    }
+    return render(request, "admins/add_hall_cat.html", context)
+
+@login_required
+def add_nowShowing(request):
+    form = NowShowingForm()
+    if request.method == "POST":
+        form = NowShowingForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "Movie Added  Successfully!")
+            return redirect('/admins/show_movies')
+
+        else:
+            messages.add_message(request, messages.ERROR,"Movie Addition Failed!")
+            return render(request, 'admins/add_now_showing.html', {'form':form})
+        
+    context={
+        'form':form
+    }
+    return render(request, "admins/add_now_showing.html", context)
+
+@login_required
+def add_upComming(request):
+    form = UpCommingForm()
+    if request.method == "POST":
+        form = UpCommingForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "Movie Added  Successfully!")
+            return redirect('/admins/up_movies')
+
+        else:
+            messages.add_message(request, messages.ERROR,"Movie Addition Failed!")
+            return render(request, 'admins/add_up_comming.html', {'form':form})
+        
+    context={
+        'form':form
+    }
+    return render(request, "admins/add_up_comming.html", context)
+
+
+
+@login_required
+def admin_profile(request):
+    profile = request.user.profile
+    form = ProfileForm(instance=profile)
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.SUCCESS(request, "Account Updated Successfully")
+            return redirect('admins/dashboard')
+    context = {'form':form}
+    return render (request, 'admins/profile.html', context)
+
+
+@login_required
+def update_profile(request):
+    profile = request.user.profile
+    form = ProfileForm(instance=profile)
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "User Details Updated Successfully")
+            return redirect('/admins/profile/')
+        else:
+            messages.add_message(request, messages.ERROR,"User Update Failed!")
+            return render(request, 'admins/update_profile.html', {'form':form})
+        
+    context={
+        'form':ProfileForm(instance=profile)
+    }
+    return render(request, "admins/update_profile.html", context)
+
+@login_required
+def change_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(data=request.POST, user = request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('/admins/profile')
+        else:
+            messages.add_message(request, messages.ERROR,"Something Went Wrong!")
+            return render(request, 'admins/change_password.html', {'form':form})
+
+    else:
+        form = PasswordChangeForm(user=request.user)
+        context = {'form':form}
+        return render(request, 'admins/change_password.html', context)
