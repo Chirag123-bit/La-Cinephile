@@ -3,8 +3,8 @@ from . import views
 
 urlpatterns = [
     
-    path('prices/', views.prices),
-    path('book/', views.book),
+    path('prices/', views.prices, name="show_prices"),
+    path('book/', views.book, name="book_tickets"),
     path('test/', views.movie_json, name="test"),
     path('test-hall/<int:movie>', views.hall_json, name="test-hall"),
     path('day/<int:mid>/<int:hid>', views.date_json, name="day"),

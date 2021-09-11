@@ -24,7 +24,7 @@ def admin_only(view_function):
 def user_only(view_function):
     def wrapper_function(request, *args, **kwargs):
         if request.user.is_staff:
-            return redirect('/admin')
+            return redirect('/admins/dashboard')
         else:
             return view_function(request, *args, **kwargs)
 

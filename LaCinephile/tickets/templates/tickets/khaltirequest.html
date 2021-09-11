@@ -1,57 +1,160 @@
-<html>
-<head>
-    <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
+{% extends 'layout.html' %}
+{% load static %}
 
-    <h3> Your Order Amounts is: Rs. {{order.price}} <h3>
-    <button id="payment-button">Pay with Khalti</button>
+{% block title %}
+<title>Final Order Details</title>
 
-    <script>
-        var config = {
-            // replace the publicKey with yours
-            "publicKey": "test_public_key_a382e4e78a15456f894b8b9a0d73109c",
-            "productIdentity": "order_{{order_id}}",
-            "productName": "order_{{order_id}}",
-            "productUrl": "http://localhost:8000",
-            "paymentPreference": [
-                "KHALTI",
-                "EBANKING",
-                "MOBILE_BANKING",
-                "CONNECT_IPS",
-                "SCT",
-                ],
-            "eventHandler": {
-                onSuccess (payload) {
-                    // hit merchant api for initiating verfication
-                    axios.get('/hall/khalti-verify/',{
-                        params:{
-                            'token':payload.token,
-                            'amount':payload.amount,
-                            'order_id':"{{order.id}}"
-                        }
-                    }).then(function(resp){
-                        console.log(resp.data)
-                    })
-                    console.log(payload);
-                },
-                onError (error) {
-                    console.log(error);
-                },
-                onClose () {
-                    console.log('widget is closing');
-                }
+{% endblock title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static '/css/common.css' %}" />
+<style>
+    .checkout {
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .blur-back {
+        backdrop-filter: blur(3px);
+    }
+
+    form label {
+        color: #fff;
+    }
+
+    .form-row {
+        justify-content: center;
+    }
+
+    .form-text {
+        color: wheat !important;
+    }
+</style>
+{% endblock css_files%}
+
+{% block main_content %}
+<div class="checkout py-5"
+    style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({% static '/images/checkout-back.jpg' %});">
+    <div id="movie-book-details" class="col-md-6 py-5 mx-auto">
+        <center>
+            <h3 style='color:orange'> Final Order Detail </h3>
+        </center>
+        <table class="table table-striped py-5 mx-auto mt-5 blur-back border border-warning">
+            <tbody>
+                <tr>
+                    <td class="col-md-6 text-warning">Movie Name: </td>
+                    <td id="mname" class="col-md-6 text-white">{{order.movie.movie.name}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-6 text-warning">Hall Name: </td>
+                    <td id="hname" class="col-md-6 text-white">{{order.movie.hall.name}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-6 text-warning">Date: </td>
+                    <td id="mdate" class=" text-white">{{order.movie.date}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-6 text-warning">Time: </td>
+                    <td id="mtime" class="text-white">{{order.movie.time}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-6 text-warning">Selected Seats: </td>
+                    <td id="mseats" class=" text-white">{{order.seats}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-6 text-warning">Sub Total: </td>
+                    <td id="stotal" class=" text-white">{{order.movie.hall.category.price}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-6 text-warning">Discount: </td>
+                    <td id="dis" class=" text-white">{{order.discount.discount}}</td>
+                </tr>
+                <tr>
+                    <td class="col-md-6 text-warning">Final Price: </td>
+                    <td id="total" class=" text-white"></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div class="d-flex flex-column align-items-center">
+            <h4 class="text-white"> Your Order Amounts is: Rs. {{order.price}} </h4>
+            <button id="payment-button" class="btn btn-warning">Pay with Khalti</button>
+        </div>
+
+    </div>
+</div>
+
+{% endblock main_content%}
+
+{% block js_files %}
+<script>
+    var seatCount = document.getElementById("mseats")
+    var count = (seatCount.innerText).length / 3
+    if (count < 1) {
+        count = 1
+    }
+
+
+    var stotal = document.getElementById("stotal")
+    var stotal_price = (stotal.innerText) * count
+    stotal.innerHTML = "Rs. " + stotal_price
+
+    var dis = document.getElementById("dis")
+    var dis_price = (dis.innerText) * count
+    dis.innerHTML = "Rs. " + dis_price
+
+    var total = document.getElementById("total")
+    var amount = stotal_price - dis_price
+    total.innerHTML = "Rs. " + amount
+</script>
+<script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    var config = {
+        // replace the publicKey with yours
+        "publicKey": "test_public_key_a382e4e78a15456f894b8b9a0d73109c",
+        "productIdentity": "order_{{order_id}}",
+        "productName": "order_{{order_id}}",
+        "productUrl": "http://localhost:8000",
+        "paymentPreference": [
+            "KHALTI",
+            "EBANKING",
+            "MOBILE_BANKING",
+            "CONNECT_IPS",
+            "SCT",
+        ],
+        "eventHandler": {
+            onSuccess(payload) {
+                // hit merchant api for initiating verfication
+                axios.get('/hall/khalti-verify/', {
+                    params: {
+                        'token': payload.token,
+                        'amount': payload.amount,
+                        'order_id': "{{order.id}}"
+                    }
+                }).then(function (resp) {
+                    console.log(resp.data)
+                })
+                console.log(payload);
+            },
+            onError(error) {
+                console.log(error);
+            },
+            onClose() {
+                console.log('widget is closing');
             }
-        };
-
-        var checkout = new KhaltiCheckout(config);
-        var btn = document.getElementById("payment-button");
-        btn.onclick = function () {
-            // minimum transaction amount must be 10, i.e 1000 in paisa.
-            checkout.show({amount: {{order.price}}*100});
         }
-    </script>
-    <!-- Paste this code anywhere in you body tag -->
-</body>
-</html>
+    };
+
+    var checkout = new KhaltiCheckout(config);
+    var btn = document.getElementById("payment-button");
+    btn.onclick = function () {
+        // minimum transaction amount must be 10, i.e 1000 in paisa.
+        checkout.show({amount: {{order.price}}*100});
+        setTimeout(3000);
+        {% comment %} window.location.href = "http://127.0.0.1:8000/accounts/dashboard/"; {% endcomment %}
+    }
+</script>
+{% endblock js_files %}

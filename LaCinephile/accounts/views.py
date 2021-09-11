@@ -39,10 +39,10 @@ def user_login(request):
             if user is not None:
                 if user.is_staff:
                     login(request, user)
-                    return redirect('/accounts/register')
+                    return redirect('/admins/dashboard')
                 elif not user.is_staff:
                     login(request, user)
-                    return redirect('/accounts/dashboard/')
+                    return redirect('/')
             else:
                 messages.add_message(request, messages.ERROR, 'Invalid Username or Password')
                 return render(request, 'accounts/login.html', {'form_login':form})

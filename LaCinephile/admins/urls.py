@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     
-    path('dashboard/', views.dashboard),
+    path('dashboard/', views.dashboard, name="admin_dashboard"),
     path('show_user/', views.show_user),
     path('show_admin/', views.show_admin),
 
@@ -54,7 +54,7 @@ urlpatterns = [
     path('add_now_showing/', views.add_nowShowing),
     path('add_up_comming/', views.add_upComming),
 
-    path('profile/', views.admin_profile),
+    path('profile/', views.admin_profile, name="show_admin_profile"),
     path('update_profile/', views.update_profile),
     path('password/', views.change_password),
 

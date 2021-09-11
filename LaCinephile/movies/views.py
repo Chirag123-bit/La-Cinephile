@@ -53,6 +53,7 @@ def user_movies(request):
     movies = Ticket.objects.filter(user__id = id).values('movie__id').distinct()
     
     res=[]
+    mv={}
     for i in movies:
         id = i['movie__id']
         mv = Movie_Hall.objects.filter(id=id)

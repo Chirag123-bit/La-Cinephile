@@ -14,8 +14,9 @@ from tickets.form import CategoriesForm, TicketForm
 from accounts.models import Profile
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from accounts.auth import admin_only
 
-
+@admin_only
 @login_required
 def dashboard(request):
     users = User.objects.all()
@@ -62,6 +63,7 @@ def dashboard(request):
 
     return render(request, 'admins/dashboard.html',context)
 
+@admin_only
 @login_required
 def show_user(request):
     users = User.objects.all().filter(is_staff=0).order_by('-id')
@@ -70,6 +72,7 @@ def show_user(request):
     }
     return render(request, 'admins/show_user.html',context)
 
+@admin_only
 @login_required
 def show_admin(request):
     users = User.objects.all().filter(is_staff=1).order_by('-id')
@@ -78,6 +81,7 @@ def show_admin(request):
     }
     return render(request, 'admins/show_admin.html',context)
 
+@admin_only
 @login_required
 def promote_user(request,user_id):
     user = User.objects.get(id=user_id)
@@ -86,6 +90,7 @@ def promote_user(request,user_id):
     messages.add_message(request, messages.SUCCESS, 'User promoted to admin')
     return redirect('/admins/show_user')
 
+@admin_only
 @login_required
 def demote_user(request,user_id):
     user = User.objects.get(id=user_id)
@@ -94,6 +99,7 @@ def demote_user(request,user_id):
     messages.add_message(request, messages.SUCCESS, 'Admin Demoted to user')
     return redirect('/admins/show_user')
 
+@admin_only
 @login_required
 def delete_user(request,user_id):
     user = User.objects.get(id=user_id)
@@ -101,6 +107,7 @@ def delete_user(request,user_id):
     messages.add_message(request, messages.SUCCESS, 'User Deleted')
     return redirect('/admins/show_user')
 
+@admin_only
 @login_required
 def delete_admin(request,user_id):
     user = User.objects.get(id=user_id)
@@ -108,6 +115,7 @@ def delete_admin(request,user_id):
     messages.add_message(request, messages.SUCCESS, 'Admin Deleted')
     return redirect('/admins/show_admin')
 
+@admin_only
 @login_required
 def update_user(request,user_id):
     user = User.objects.get(id=user_id)
@@ -123,6 +131,7 @@ def update_user(request,user_id):
     return render (request, 'admins/edit_user.html', context)
     
 
+@admin_only
 @login_required
 def deactivate(request,user_id):
     user = User.objects.get(id=user_id)
@@ -131,6 +140,7 @@ def deactivate(request,user_id):
     messages.add_message(request, messages.SUCCESS, 'User Account Deactivated')
     return redirect('/admins/show_user')
 
+@admin_only
 @login_required
 def activate(request,user_id):
     user = User.objects.get(id=user_id)
@@ -140,6 +150,7 @@ def activate(request,user_id):
     return redirect('/admins/show_user')
 
 
+@admin_only
 @login_required
 def show_movie(request):
     movies = Now_Showing.objects.all().order_by('-id')
@@ -148,6 +159,7 @@ def show_movie(request):
     }
     return render(request, 'admins/show_movies.html',context)
 
+@admin_only
 @login_required
 def update_movie(request,movie_id):
     movie = Now_Showing.objects.get(id=movie_id)
@@ -161,6 +173,7 @@ def update_movie(request,movie_id):
     context = {'form':form}
     return render (request, 'admins/edit_movie.html', context)
 
+@admin_only
 @login_required
 def delete_movie(request,movie_id):
     movie = Now_Showing.objects.get(id=movie_id)
@@ -169,6 +182,7 @@ def delete_movie(request,movie_id):
     return redirect('/admins/show_movies')
 
 
+@admin_only
 @login_required
 def up_movie(request):
     movies = Up_Comming.objects.all()
@@ -177,6 +191,7 @@ def up_movie(request):
     }
     return render(request, 'admins/up_movies.html',context)
 
+@admin_only
 @login_required
 def update_upmovie(request,movie_id):
     movie = Up_Comming.objects.get(id=movie_id)
@@ -191,6 +206,7 @@ def update_upmovie(request,movie_id):
     return render (request, 'admins/edit_upmovie.html', context)
 
 
+@admin_only
 @login_required
 def delete_upmovie(request,movie_id):
     movie = Up_Comming.objects.get(id=movie_id)
@@ -201,7 +217,7 @@ def delete_upmovie(request,movie_id):
 
 
 
-
+@admin_only
 @login_required
 def show_hall(request):
     hall = Hall.objects.all().order_by('-id')
@@ -210,7 +226,8 @@ def show_hall(request):
     }
     return render(request, 'admins/show_hall.html',context)
 
-    
+
+@admin_only   
 @login_required
 def update_hall(request,hall_id):
     hall = Hall.objects.get(id=hall_id)
@@ -226,6 +243,7 @@ def update_hall(request,hall_id):
     context = {'form':form}
     return render (request, 'admins/edit_hall.html', context)
 
+@admin_only
 @login_required
 def delete_hall(request,hall_id):
     movie = Hall.objects.get(id=hall_id)
@@ -234,7 +252,7 @@ def delete_hall(request,hall_id):
     return redirect('/admins/show_hall')
 
 
-
+@admin_only
 @login_required
 def hall_category(request):
     cat = Category.objects.all().order_by('-id')
@@ -243,7 +261,7 @@ def hall_category(request):
     }
     return render(request, 'admins/hall_category.html',context)
 
-    
+@admin_only   
 @login_required
 def update_hall_cat(request,hallCat_id):
     hall = Category.objects.get(id=hallCat_id)
@@ -259,6 +277,7 @@ def update_hall_cat(request,hallCat_id):
     context = {'form':form}
     return render (request, 'admins/edit_hallCategory.html', context)
 
+@admin_only
 @login_required
 def delete_hall_cat(request,hallCat_id):
     movie = Category.objects.get(id=hallCat_id)
@@ -267,7 +286,7 @@ def delete_hall_cat(request,hallCat_id):
     return redirect('/admins/hall_category')
 
 
-
+@admin_only
 @login_required
 def movie_hall(request):
     mh = Movie_Hall.objects.all().order_by('-id')
@@ -276,7 +295,7 @@ def movie_hall(request):
     }
     return render(request, 'admins/movie_hall.html',context)
 
-    
+@admin_only   
 @login_required
 def update_movie_hall(request,mh_id):
     mh = Movie_Hall.objects.get(id=mh_id)
@@ -291,6 +310,7 @@ def update_movie_hall(request,mh_id):
     context = {'form':form}
     return render (request, 'admins/edit_moviehall.html', context)
 
+@admin_only
 @login_required
 def delete_movie_hall(request,mh_id):
     mh = Movie_Hall.objects.get(id=mh_id)
@@ -299,6 +319,7 @@ def delete_movie_hall(request,mh_id):
     return redirect('/admins/movie_hall')
 
 
+@admin_only
 @login_required
 def show_ticket(request):
     tickets = Ticket.objects.all().order_by('-id')
@@ -307,7 +328,8 @@ def show_ticket(request):
     }
     return render(request, 'admins/show_ticket.html',context)
 
-    
+
+@admin_only    
 @login_required
 def purchase(request,tic_id):
     ticket = Ticket.objects.get(id=tic_id)
@@ -316,6 +338,8 @@ def purchase(request,tic_id):
     messages.add_message(request, messages.SUCCESS, 'Ticket Marked as Purchased')
     return redirect('/admins/show_ticket')
 
+
+@admin_only
 @login_required
 def reserve(request,tic_id):
     ticket = Ticket.objects.get(id=tic_id)
@@ -324,6 +348,8 @@ def reserve(request,tic_id):
     messages.add_message(request, messages.SUCCESS, 'Ticket Marked as Reserved')
     return redirect('/admins/show_ticket')
 
+
+@admin_only
 @login_required
 def cancle(request,tic_id):
     ticket = Ticket.objects.get(id=tic_id)
@@ -332,7 +358,7 @@ def cancle(request,tic_id):
     messages.add_message(request, messages.SUCCESS, 'Ticket Marked as Reserved')
     return redirect('/admins/show_ticket')
 
-
+@admin_only
 @login_required
 def ticket_cat(request):
     ticket_cat = Categories.objects.all().order_by('-id')
@@ -341,7 +367,7 @@ def ticket_cat(request):
     }
     return render(request, 'admins/ticket_category.html',context)
 
-    
+@admin_only    
 @login_required
 def update_ticket_cat(request,tc_id):
     mh = Categories.objects.get(id=tc_id)
@@ -356,6 +382,7 @@ def update_ticket_cat(request,tc_id):
     context = {'form':form}
     return render (request, 'admins/edit_ticket_cat.html', context)
 
+@admin_only
 @login_required
 def delete_ticket_cat(request,tc_id):
     mh = Categories.objects.get(id=tc_id)
@@ -363,6 +390,7 @@ def delete_ticket_cat(request,tc_id):
     messages.add_message(request, messages.SUCCESS, 'Ticket Category Deleted')
     return redirect('/admins/ticket_cat')
 
+@admin_only
 @login_required
 def payments(request):
     purchase = Purchase.objects.all().order_by('-id')
@@ -371,7 +399,7 @@ def payments(request):
     }
     return render(request, 'admins/show_payments.html',context)
 
-
+@admin_only
 @login_required
 def create_User(request):
     form = UserForm()
@@ -395,7 +423,7 @@ def create_User(request):
 
 
 
-
+@admin_only
 @login_required
 def create_Ticket(request):
     form = TicketForm()
@@ -415,6 +443,7 @@ def create_Ticket(request):
     }
     return render(request, "admins/add_tickets.html", context)
 
+@admin_only
 @login_required
 def create_Category(request):
     form = CategoriesForm()
@@ -434,6 +463,8 @@ def create_Category(request):
     }
     return render(request, "admins/add_ticket_category.html", context)
 
+
+@admin_only
 @login_required
 def add_hall(request):
     form = HallForm()
@@ -453,6 +484,8 @@ def add_hall(request):
     }
     return render(request, "admins/add_hall.html", context)
 
+
+@admin_only
 @login_required
 def add_hallCat(request):
     form = CategoryForm()
@@ -472,6 +505,8 @@ def add_hallCat(request):
     }
     return render(request, "admins/add_hall_cat.html", context)
 
+
+@admin_only
 @login_required
 def add_nowShowing(request):
     form = NowShowingForm()
@@ -491,6 +526,8 @@ def add_nowShowing(request):
     }
     return render(request, "admins/add_now_showing.html", context)
 
+
+@admin_only
 @login_required
 def add_upComming(request):
     form = UpCommingForm()
@@ -512,6 +549,8 @@ def add_upComming(request):
 
 
 
+
+@admin_only
 @login_required
 def admin_profile(request):
     profile = request.user.profile
@@ -526,6 +565,8 @@ def admin_profile(request):
     return render (request, 'admins/profile.html', context)
 
 
+
+@admin_only
 @login_required
 def update_profile(request):
     profile = request.user.profile
@@ -545,6 +586,8 @@ def update_profile(request):
     }
     return render(request, "admins/update_profile.html", context)
 
+
+@admin_only
 @login_required
 def change_password(request):
     if request.method == "POST":
