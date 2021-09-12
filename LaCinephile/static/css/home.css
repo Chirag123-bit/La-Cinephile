@@ -96,6 +96,7 @@
   padding: 8rem !important;
   overflow: hidden;
   background-attachment: fixed;
+  background-size: cover;
 }
 
 .welcome-section::after {
@@ -262,4 +263,32 @@ a.effect-underline:hover:after {
 .movie-blur {
   background-attachment: fixed !important;
   background-size: cover !important;
+}
+
+
+@media (max-width: 945px) {
+
+  .welcome-section h1,
+  .welcome-section p {
+    margin: 2rem;
+  }
+
+  .message p {
+    text-align: center !important;
+  }
+}
+
+@media (max-width: 660px) {
+
+  .welcome-section,
+  .get-started,
+  .carausel-text {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .welcome-section {
+    margin-right: 0;
+    padding-bottom: 1rem;
+  }
 }

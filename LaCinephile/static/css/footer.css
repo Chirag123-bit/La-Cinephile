@@ -31,7 +31,9 @@ footer {
   background-color: #000000;
   padding: 2rem;
 }
+
 @media screen and (max-width: 1200px) {
+
   .logo-desc,
   .social-media,
   .page-links,
@@ -40,7 +42,9 @@ footer {
     margin: 1rem;
   }
 }
+
 @media screen and (max-width: 992px) {
+
   .logo-desc,
   .social-media,
   .page-links,
@@ -51,19 +55,35 @@ footer {
 }
 
 @media screen and (max-width: 850px) {
+
   .page-links ul,
   .contact-us,
   .contact-text h6 {
     line-height: 2rem;
   }
-  .upper-footer {
-    flex-direction: column;
-  }
+
+
+
   .logo-desc,
   .social-media,
   .page-links,
   .recent-posts,
   .contact-us {
     margin: 0.5rem;
+  }
+
+  .logo-desc {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 440px) {
+
+  .recent-posts {
+    display: none !important;
+  }
+
+  .upper-footer {
+    flex-direction: column;
   }
 }
