@@ -153,8 +153,6 @@
     btn.onclick = function () {
         // minimum transaction amount must be 10, i.e 1000 in paisa.
         checkout.show({amount: {{order.price}}*100});
-        setTimeout(3000);
-        {% comment %} window.location.href = "http://127.0.0.1:8000/accounts/dashboard/"; {% endcomment %}
     }
 </script>
 {% endblock js_files %}

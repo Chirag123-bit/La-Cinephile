@@ -6,7 +6,7 @@ from movies.views import user_movies
 
 urlpatterns = [
     path('register/',views.register, name="register_user"),
-    path('login/', views.user_login),
+    path('login/', views.user_login, name="login_user"),
     path('logout/', views.logout_user),
     path('dashboard/', user_movies),
     path('profile/', views.user_profile),
