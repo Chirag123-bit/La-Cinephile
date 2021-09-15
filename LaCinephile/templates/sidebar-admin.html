@@ -9,6 +9,11 @@
     left: 0;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.4s;
+    background-color: #ff4e00;
+    background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
+    color:white;
+
+
   }
 
   .page-content {
@@ -39,6 +44,7 @@
     text-transform: capitalize;
   }
 
+
   .nav-link:hover {
     background: #f3f2f2;
   }
@@ -61,17 +67,20 @@
       margin-left: 17rem;
       width: calc(100% - 17rem);
     }
+    .active{
+      background-color:gray;
+    }
   }
 </style>
 
 
-<div class="vertical-nav bg-white" id="sidebar">
+<div class="vertical-nav" id="sidebar">
   <div class="py-2 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
       <img loading="lazy" src="{{request.user.profile.profile_pic.url}}" alt="Admin Profile Pricture" width="80"
         height="80" class="mr-3 rounded-circle img-thumbnail shadow-sm">
       <div class="media-body">
-        <h4 class="m-0">{{request.user.first_name}} </h4>
+        <h4 class="m-0 text-dark">{{request.user.first_name}} </h4>
         <p class="font-weight-normal text-muted mb-0">Admin</p>
       </div>
     </div>
@@ -81,23 +90,23 @@
     <div class="sidebar-inner slimscroll">
       <div id="sidebar-menu" class="sidebar-menu">
 
-        <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Dashboard</p>
+        <p class="font-weight-bold text-uppercase px-3 small pb-4 mb-0">Dashboard</p>
 
         <ul class="nav flex-column bg-white mb-0">
-          <li class="nav-item">
+          <li class="nav-item {{activate_home}}">
             <a href="/admins/dashboard" class="nav-link text-dark bg-light">
               <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
               home
             </a>
           </li>
-          <li class="nav-item">
-            <a href="/admins/show_user" class="nav-link text-dark">
+          <li class="nav-item {{activate_user}}">
+            <a href="/admins/show_user" class="nav-link text-dark ">
               <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
               User Section
             </a>
           </li>
-          <li class="nav-item">
-            <a href="/admins/show_admin" class="nav-link text-dark">
+          <li class="nav-item {{activate_admin}}">
+            <a href="/admins/show_admin" class="nav-link text-dark ">
               <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
               Admin Section
             </a>
@@ -106,15 +115,15 @@
 
 
 
-        <p class="text-gray font-weight-bold text-uppercase px-3 small py-2 mb-0">Movies</p>
+        <p class="font-weight-bold text-uppercase px-3 small py-2 mb-0">Movies</p>
         <ul class="nav flex-column bg-white mb-0">
-          <li class="nav-item">
+          <li class="nav-item  {{activate_now}}">
             <a href="/admins/show_movies" class="nav-link text-dark">
               <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
               Now Showing
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item  {{activate_up}}">
             <a href="/admins/up_movies" class="nav-link text-dark">
               <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
               Up Comming
@@ -123,21 +132,21 @@
         </ul>
 
 
-        <p class="text-gray font-weight-bold text-uppercase px-3 small py-2 mb-0">Halls</p>
+        <p class="font-weight-bold text-uppercase px-3 small py-2 mb-0">Halls</p>
         <ul class="nav flex-column bg-white mb-0">
-          <li class="nav-item">
+          <li class="nav-item {{activate_hall}}">
             <a href="/admins/show_hall" class="nav-link text-dark">
               <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
               Halls
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{activate_hall_cat}}">
             <a href="/admins/hall_category" class="nav-link text-dark">
               <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
               Hall Category
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item  {{activate_hall_all}}">
             <a href="/admins/movie_hall" class="nav-link text-dark">
               <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
               Movie Hall Allocation
@@ -145,22 +154,22 @@
           </li>
         </ul>
 
-        <p class="text-gray font-weight-bold text-uppercase px-3 small py-2 mb-0">Tickets</p>
+        <p class=" font-weight-bold text-uppercase px-3 small py-2 mb-0">Tickets</p>
 
         <ul class="nav flex-column bg-white mb-0">
-          <li class="nav-item">
+          <li class="nav-item {{activate_ticket}}">
             <a href="/admins/show_ticket" class="nav-link text-dark">
               <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>
               Tickets
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item  {{activate_ticket_cat}}">
             <a href="/admins/ticket_cat" class="nav-link text-dark">
               <i class="fa fa-bar-chart mr-3 text-primary fa-fw"></i>
              Ticket Category
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item {{activate_purchase}}">
             <a href="/admins/show_payments" class="nav-link text-dark">
               <i class="fa fa-pie-chart mr-3 text-primary fa-fw"></i>
               Payments

@@ -58,6 +58,7 @@ def dashboard(request):
         'data':json.dumps(data),
         'canc_data': json.dumps(canc_data),
         'ticket':ticket,
+        'activate_home':'active'
     }
    
 
@@ -69,6 +70,7 @@ def show_user(request):
     users = User.objects.all().filter(is_staff=0).order_by('-id')
     context={
         'user':users,
+        'activate_user':'active'
     }
     return render(request, 'admins/show_user.html',context)
 
@@ -78,6 +80,7 @@ def show_admin(request):
     users = User.objects.all().filter(is_staff=1).order_by('-id')
     context={
         'user':users,
+        'activate_admin':'active'
     }
     return render(request, 'admins/show_admin.html',context)
 
@@ -156,6 +159,7 @@ def show_movie(request):
     movies = Now_Showing.objects.all().order_by('-id')
     context={
         'movies':movies,
+        'activate_now':'active'
     }
     return render(request, 'admins/show_movies.html',context)
 
@@ -170,7 +174,7 @@ def update_movie(request,movie_id):
             form.save()
             messages.add_message(request, messages.SUCCESS, "Movie Updated Successfully")
             return redirect('/admins/show_movies')
-    context = {'form':form}
+    context = {'form':form,'activate_now':'active'}
     return render (request, 'admins/edit_movie.html', context)
 
 @admin_only
@@ -188,6 +192,7 @@ def up_movie(request):
     movies = Up_Comming.objects.all()
     context={
         'movies':movies,
+        'activate_up':'active'
     }
     return render(request, 'admins/up_movies.html',context)
 
@@ -223,6 +228,7 @@ def show_hall(request):
     hall = Hall.objects.all().order_by('-id')
     context={
         'hall':hall,
+        'activate_hall':'active'
     }
     return render(request, 'admins/show_hall.html',context)
 
@@ -240,7 +246,7 @@ def update_hall(request,hall_id):
             messages.add_message(request, messages.SUCCESS, "Hall Details Updated Successfully")
             return redirect('/admins/show_hall')
 
-    context = {'form':form}
+    context = {'form':form,'activate_hall':'active'}
     return render (request, 'admins/edit_hall.html', context)
 
 @admin_only
@@ -258,6 +264,7 @@ def hall_category(request):
     cat = Category.objects.all().order_by('-id')
     context={
         'cat':cat,
+        'activate_hall_cat':'active'
     }
     return render(request, 'admins/hall_category.html',context)
 
@@ -274,7 +281,7 @@ def update_hall_cat(request,hallCat_id):
             messages.add_message(request, messages.SUCCESS, "Category Details Updated Successfully")
             return redirect('/admins/hall_category')
 
-    context = {'form':form}
+    context = {'form':form,'activate_hall_cat':'active'}
     return render (request, 'admins/edit_hallCategory.html', context)
 
 @admin_only
@@ -291,7 +298,8 @@ def delete_hall_cat(request,hallCat_id):
 def movie_hall(request):
     mh = Movie_Hall.objects.all().order_by('-id')
     context={
-        'cat':mh
+        'cat':mh,
+        'activate_hall_all':'active'
     }
     return render(request, 'admins/movie_hall.html',context)
 
@@ -307,7 +315,7 @@ def update_movie_hall(request,mh_id):
             messages.add_message(request, messages.SUCCESS, "Movie/Hall Details Updated Successfully")
             return redirect('/admins/movie_hall')
 
-    context = {'form':form}
+    context = {'form':form,'activate_hall_all':'active'}
     return render (request, 'admins/edit_moviehall.html', context)
 
 @admin_only
@@ -324,7 +332,8 @@ def delete_movie_hall(request,mh_id):
 def show_ticket(request):
     tickets = Ticket.objects.all().order_by('-id')
     context={
-        'ticket':tickets
+        'ticket':tickets,
+        'activate_ticket':'active',
     }
     return render(request, 'admins/show_ticket.html',context)
 
@@ -363,7 +372,8 @@ def cancle(request,tic_id):
 def ticket_cat(request):
     ticket_cat = Categories.objects.all().order_by('-id')
     context={
-        'tic':ticket_cat
+        'tic':ticket_cat,
+        'activate_ticket_cat':'active',
     }
     return render(request, 'admins/ticket_category.html',context)
 
@@ -379,7 +389,7 @@ def update_ticket_cat(request,tc_id):
             messages.add_message(request, messages.SUCCESS, "Category Details Updated Successfully")
             return redirect('/admins/ticket_cat')
 
-    context = {'form':form}
+    context = {'form':form,'activate_ticket_cat':'active'}
     return render (request, 'admins/edit_ticket_cat.html', context)
 
 @admin_only
@@ -395,7 +405,8 @@ def delete_ticket_cat(request,tc_id):
 def payments(request):
     purchase = Purchase.objects.all().order_by('-id')
     context={
-        'purchases':purchase
+        'purchases':purchase,
+        'activate_purchase':'active',
     }
     return render(request, 'admins/show_payments.html',context)
 

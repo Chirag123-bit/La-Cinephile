@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-<title>Halls At LaCinePhile</title>
+<title>Payment History</title>
 
 {% endblock title %}
 
@@ -43,7 +43,7 @@
                                 <td class="align-middle text-center">{{i.user.first_name}} <span> {{i.user.last_name}}  </td>
                                 <td class="align-middle text-center">{{i.movie.movie.name}}</td>
                                 <td class="align-middle text-center">{{i.seats}}</td>
-                                <td class="align-middle text-center">{{i.price}}</td>
+                                <td class="align-middle text-center">Rs. {{i.price}}</td>
                                 <td class="align-middle text-center">
                                 {% if i.status == "Purchased" %}
                                     <span class="badge badge-pill bg-success inv-badge">{{i.status}}</span>
