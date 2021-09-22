@@ -58,13 +58,15 @@ def user_movies(request):
     movies = Ticket.objects.filter(user__id = id).values('movie__id').all().distinct()
     
     i = 1
-    id = movies[0]['movie__id']
-    res = Movie_Hall.objects.filter(id=id)
+    res={}
+    if(len(movies)>0):
+        id = movies[0]['movie__id']
+        res = Movie_Hall.objects.filter(id=id)
 
-    while(i<len(movies)):
-        id = movies[i]['movie__id']
-        res |= Movie_Hall.objects.filter(id=id)
-        i+=1
+        while(i<len(movies)):
+            id = movies[i]['movie__id']
+            res |= Movie_Hall.objects.filter(id=id)
+            i+=1
 
     context = {
         'movies':res,
