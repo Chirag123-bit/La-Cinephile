@@ -18,7 +18,7 @@
 
 <small id="movie_id_holder" style="display:none"> {{movies.movie.id}} </small>
 <div class="booking-pannel d-flex flex-column align-items-center justify-content-center py-5"
-    style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({% static '/images/book-back.jpg' %});">
+    style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(/media/{{movies.movie.movie.background}});">
     <div class="movie-container py-5 d-flex ">
 
         <div class="mv-selector">
@@ -166,10 +166,21 @@
                         <td>Selected Seats: </td>
                         <td id="mseats"></td>
                     </tr>
+                    {% if purchase %}
+                    <tr>
+                        <td>Status: </td>
+                        <td id="total" class="text-success">Purchased</td>
+                    </tr>
                     <tr>
                         <td>Price: </td>
-                        <td id="total"></td>
+                        <td id="total">{{price}}</td>
                     </tr>
+                    {% else %}
+                    <tr>
+                        <td>Price: </td>
+                        <td id="total">{{price}}</td>
+                    </tr>
+                    {% endif %}
 
                 </tbody>
             </table>
@@ -180,7 +191,21 @@
                     style="display:none">
                 <input type="text" class="form-control-plaintext" id="discountId" name="discountId" value=""
                     style="display:none">
-                <button type="submit" class="btn btn-outline-success">Book</button>
+                {% if not purchase %}
+                <div class="btn-group d-flex justify-content-between w-100">
+                    <button type="submit" class="btn btn-danger">Cancle Booking</button>
+                    <button type="submit" class="btn btn-success">Purchase</button>
+                </div>
+                {% else %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Congratulations!</strong> You have already paid for your tickets.
+                    <br>
+                    <small> Note: Once purchased, tickets are non-refundable </small>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
             </form>
         </div>
     </div>

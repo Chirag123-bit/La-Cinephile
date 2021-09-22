@@ -24,7 +24,9 @@
             <div class="card-body booking_card">
                 <div class="table-responsive">
                     {% include 'accounts/message.html' %}
-                    <div class="button-holder d-flex justify-content-end"> <button type="button" class="btn btn-warning" style="width:max-content"><a href="/admins/add_now_showing" class="link-unstyled"> Add Movie</a></button> </div>
+                    <div class="button-holder d-flex justify-content-end"> <button type="button" class="btn btn-warning"
+                            style="width:max-content"><a href="/admins/add_now_showing" class="link-unstyled"> Add
+                                Movie</a></button> </div>
                     <table class="datatable table table-stripped table table-hover table-center mb-0">
                         <thead>
                             <tr>
@@ -65,7 +67,7 @@
                                         <div class="dropdown-menu dropdown-menu-down">
                                             <a class="dropdown-item" href="/admins/update_movie/{{i.id}}"><i
                                                     class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-                                            <a class="dropdown-item" href="/admins/delete_movie/{{i.id}}"><i
+                                            <a class="dropdown-item" onclick=delete_movie({{i.id}}) data-toggle="modal" data-target="#delete_movie"><i
                                                     class="fas fa-trash-alt m-r-5"></i>Delete</a>
 
                                         </div>
@@ -80,8 +82,28 @@
         </div>
     </div>
 </div>
+<div id="delete_movie" class="modal fade delete-modal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h3>Are you sure want to delete this movie?</h3>
+                <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                    <button type="submit" class="btn btn-danger"><a class="link-unstyled" href="#" id="delete-link">
+                            Delete</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+</script>
+<script type="text/javascript">
+
+    function delete_movie(id) {
+        document.getElementById("delete-link").setAttribute("href", "/admins/delete_movie/" + id)
+    }
+
 </script>
 {% endblock main_content %}

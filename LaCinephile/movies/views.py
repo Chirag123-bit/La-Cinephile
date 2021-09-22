@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import  login_required
 
 @user_only
 def home(request):
+    """Renders the home page for now showing movies"""
     movies = Now_Showing.objects.all()
     context = {
         'movies':movies,
@@ -17,6 +18,7 @@ def home(request):
 
 @user_only
 def movies(request):
+    """Renders the movie page with now showing and up-comming movies"""
     movies = Now_Showing.objects.all()
     umovies = Up_Comming.objects.all()
     context = {
@@ -29,6 +31,7 @@ def movies(request):
 
 @user_only
 def show(request, id):
+    """Renders the movie page with now showing movies"""
     movie = Now_Showing.objects.get(id=id)
     context = {
         'movie' : movie,
@@ -39,6 +42,7 @@ def show(request, id):
 
 @user_only
 def up_show(request, id):
+    """Renders the movie page with Up-comming movies"""
     movie = Up_Comming.objects.get(id=id)
     context = {
         'movie' : movie,
@@ -49,17 +53,21 @@ def up_show(request, id):
 @login_required
 @user_only
 def user_movies(request):
+    """Renders the dashboard page with user-purchased/booked movies"""
     id = request.user.id
-    movies = Ticket.objects.filter(user__id = id).values('movie__id').distinct()
+    movies = Ticket.objects.filter(user__id = id).values('movie__id').all().distinct()
     
-    res=[]
-    mv={}
-    for i in movies:
-        id = i['movie__id']
-        mv = Movie_Hall.objects.filter(id=id)
-        res.append(mv)
+    i = 1
+    id = movies[0]['movie__id']
+    res = Movie_Hall.objects.filter(id=id)
+
+    while(i<len(movies)):
+        id = movies[i]['movie__id']
+        res |= Movie_Hall.objects.filter(id=id)
+        i+=1
+
     context = {
-        'movies':mv,
+        'movies':res,
         'activate_movies':"active"
     }
 

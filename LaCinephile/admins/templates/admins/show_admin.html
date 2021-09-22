@@ -13,17 +13,19 @@
 {% block main_content %}
 <style>
     table.table td h2 a {
-    color: #333;
-    font-size: 1rem;
-    text-decoration: none;
+        color: #333;
+        font-size: 1rem;
+        text-decoration: none;
     }
 </style>
 <div class="row">
     <div class="col-sm-12">
-        
+
         <div class="card card-table">
             <div class="card-body booking_card d-flex flex-column">
-               <div class="button-holder d-flex justify-content-end"> <button type="button" class="btn btn-warning" style="width:max-content"><a href="/admins/create_user" class="link-unstyled">Add Users</a></button> </div>
+                <div class="button-holder d-flex justify-content-end"> <button type="button" class="btn btn-warning"
+                        style="width:max-content"><a href="/admins/create_user" class="link-unstyled">Add
+                            Users</a></button> </div>
                 <div class="table-responsive">
                     {% include 'accounts/message.html' %}
                     <table class="datatable table table-stripped table table-hover table-center mb-0">
@@ -32,7 +34,7 @@
                                 <th>User ID</th>
                                 <th class="text-center">Name</th>
                                 <th class="text-center">Email Address</th>
-                                <th  class="text-center">Phone Number</th>
+                                <th class="text-center">Phone Number</th>
                                 <th class="text-center">Date Created</th>
                                 <th>Active Status</th>
                                 <th class="text-right">Actions</th>
@@ -46,20 +48,26 @@
                                     <h2 class="table-avatar">
                                         <a class="avatar avatar-sm mr-2" href="/admins/update/{{i.id}}"><img
                                                 class="avatar-img rounded-circle img-fluid"
-                                                src="{{i.profile.profile_pic.url}}" alt="User Image" width="80" height="80"></a>
-                                        <a href="/admins/update/{{i.id}}">{{i.first_name}} <span>{{i.last_name}}</span></a>
+                                                src="{{i.profile.profile_pic.url}}" alt="User Image" width="80"
+                                                height="80"></a>
+                                        <a href="/admins/update/{{i.id}}">{{i.first_name}}
+                                            <span>{{i.last_name}}</span></a>
                                     </h2>
                                 </td>
-   
+
                                 <td class="align-middle"> {{i.email}}</td>
                                 <td class="align-middle">{{i.profile.phone}}</td>
                                 <td class="align-middle">{{i.date_joined}}</td>
                                 <td class="align-middle text-center">
-                                {% if i.is_active %}
-                                    <div class="actions"> <a href="/admins/deactivate/{{i.id}}" class="btn btn-sm bg-success text-white mr-2">Active</a> </div>
-                                {% else %}
-                                    <div class="actions"> <a href="/admins/activate/{{i.id}}" class="btn btn-sm bg-danger text-white mr-2">Inactive</a> </div>
-                                {% endif %}
+                                    {% if i.is_active %}
+                                    <div class="actions"> <a
+                                            class="btn btn-sm bg-success text-white mr-2" data-toggle="modal"
+                                            data-target="#deactivate_admin" onclick=deactivate({{i.id}})>Active</a> </div>
+                                    {% else %}
+                                    <div class="actions"> <a
+                                            class="btn btn-sm bg-danger text-white mr-2" data-toggle="modal"
+                                            data-target="#activate_user" onclick=activate({{i.id}})>Inactive</a> </div>
+                                    {% endif %}
                                 </td>
 
                                 <td class="text-center align-middle">
@@ -67,10 +75,20 @@
                                             class="action-icon dropdown-toggle" data-toggle="dropdown"
                                             aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
                                         <div class="dropdown-menu dropdown-menu-down">
-                                            <a class="dropdown-item" href="/admins/update/{{i.id}}"><i class="fas fa-pencil-alt m-r-5"></i> Edit</a> 
-                                            <a class="dropdown-item" href="/admins/demote/{{i.id}}"> <i class="fas fa-angle-double-up"></i>Demote</a> 
-                                            <a class="dropdown-item" href="/admins/remove_admin/{{i.id}}"><i class="fas fa-trash-alt m-r-5"></i>Delete</a> 
-                                                
+                                            <a class="dropdown-item" href="/admins/update/{{i.id}}"><i
+                                                    class="fas fa-pencil-alt m-r-5"></i> Edit</a>
+
+                                            <a class="dropdown-item" data-toggle="modal" data-target="#demote_admin"
+                                                id="btn_demote" onclick=demote({{i.id}}) href="#"> <i
+                                                    class="fas fa-angle-double-up"></i>Demote</a>
+
+                                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                                data-target="#delete_admin" id="btn_delete" onclick=delete_admin({{i.id}})><i
+                                                    class="fas fa-trash-alt m-r-5"> </i>Delete</a>
+
+                                            
+                                            
+
                                         </div>
                                     </div>
                                 </td>
@@ -82,7 +100,81 @@
             </div>
         </div>
     </div>
+    <div id="delete_admin" class="modal fade delete-modal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <h3>Are you sure want to delete this admin?</h3>
+                    <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                        <button type="submit" class="btn btn-danger" ><a class="link-unstyled"
+                                href="#" id="delete-link"> Delete</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="demote_admin" class="modal fade delete-modal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <h3>Are you sure want to demote this Admin?</h3>
+                    <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                        <button type="submit" class="btn btn-warning"><a class="link-unstyled" href="#"
+                                id="demote-link"> Demote</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="activate_user" class="modal fade activate-modal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <h3>Are you sure want to Activate this Account?</h3>
+                    <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                        <button type="submit" class="btn btn-success"><a class="link-unstyled" href="#"
+                                id="activate-link"> Activate</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="deactivate_admin" class="modal fade deactivate-modal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <h3>Are you sure want to Deactivate this Admin Account?</h3>
+                    <div class="m-t-20"> <a href="#" class="btn btn-white"
+                            data-dismiss="modal">Close</a>
+                        <button type="submit" class="btn btn-danger"><a class="link-unstyled" href="#"
+                                id="deactivate-link"> Deactivate</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+</script>
+<script type="text/javascript">
+    function demote(id) {
+        document.getElementById("demote-link").setAttribute("href", "/admins/demote/" + id)
+    }
+
+    function delete_admin(id) {
+        document.getElementById("delete-link").setAttribute("href", "/admins/remove_admin/" + id)
+    }
+
+    function activate(id) {
+        document.getElementById("activate-link").setAttribute("href", "/admins/activate/" + id)
+    }
+
+    function deactivate(id) {
+        var link = document.getElementById("deactivate-link")
+        console.log(link)
+        link.setAttribute("href", "/admins/deactivate/" + id)
+    }
+</script>
 {% endblock main_content %}

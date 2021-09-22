@@ -60,11 +60,13 @@
                                 <td class="align-middle">{{i.date_joined}}</td>
                                 <td class="align-middle text-center">
                                     {% if i.is_active %}
-                                    <div class="actions"> <a href="/admins/deactivate/{{i.id}}"
-                                            class="btn btn-sm bg-success text-white mr-2">Active</a> </div>
+                                    <div class="actions"> <a
+                                            class="btn btn-sm bg-success text-white mr-2" data-toggle="modal"
+                                            data-target="#deactivate_user" onclick=deactivate({{i.id}}) href="#">Active</a> </div>
                                     {% else %}
-                                    <div class="actions"> <a href="/admins/activate/{{i.id}}"
-                                            class="btn btn-sm bg-danger text-white mr-2">Inactive</a> </div>
+                                    <div class="actions"> <a
+                                            class="btn btn-sm bg-danger text-white mr-2" data-toggle="modal"
+                                            data-target="#activate_user" onclick=activate({{i.id}}) href="#">Inactive</a> </div>
                                     {% endif %}
                                 </td>
 
@@ -75,12 +77,12 @@
                                         <div class="dropdown-menu dropdown-menu-down">
                                             <a class="dropdown-item" href="/admins/update/{{i.id}}"><i
                                                     class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-                                            <a class="dropdown-item" href="/admins/promote/{{i.id}}" data-toggle="modal"
-                                                data-target="#promote_user"> <i
+                                            <a class="dropdown-item" data-toggle="modal" data-target="#promote_user"
+                                                id="btn_promote" onclick=promote({{i.id}}) href="#"> <i
                                                     class="fas fa-angle-double-up"></i>Promote</a>
-                                            <a class="dropdown-item" href="/admins/remove/{{i.id}}" data-toggle="modal"
-                                                data-target="#delete_user"><i
-                                                    class="fas fa-trash-alt m-r-5"></i>Delete</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                                data-target="#delete_user" id="btn_delete" onclick=delete_user({{i.id}})><i
+                                                    class="fas fa-trash-alt m-r-5"> </i>Delete</a>
 
                                         </div>
                                     </div>
@@ -96,7 +98,8 @@
                                     <h3>Are you sure want to delete this User?</h3>
                                     <div class="m-t-20"> <a href="#" class="btn btn-white"
                                             data-dismiss="modal">Close</a>
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-danger" ><a class="link-unstyled" href="#"
+                                                id="delete-link"> Delete</a></button>
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +112,37 @@
                                     <h3>Are you sure want to promote this User?</h3>
                                     <div class="m-t-20"> <a href="#" class="btn btn-white"
                                             data-dismiss="modal">Close</a>
-                                        <button type="submit" class="btn btn-warning">Promote</button>
+                                        <button type="submit" class="btn btn-warning"><a class="link-unstyled" href="#"
+                                                id="promote-link"> Promote</a></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="activate_user" class="modal fade activate-modal" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body text-center">
+                                    <h3>Are you sure want to Activate this User Account?</h3>
+                                    <div class="m-t-20"> <a href="#" class="btn btn-white"
+                                            data-dismiss="modal">Close</a>
+                                        <button type="submit" class="btn btn-success"><a class="link-unstyled" href="#"
+                                                id="activate-link"> Activate</a></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="deactivate_user" class="modal fade deactivate-modal" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body text-center">
+                                    <h3>Are you sure want to Deactivate this User Account?</h3>
+                                    <div class="m-t-20"> <a href="#" class="btn btn-white"
+                                            data-dismiss="modal">Close</a>
+                                        <button type="submit" class="btn btn-danger">
+                                            <a class="link-unstyled" href="#" id="deactivate-link"> Deactivate</a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -124,5 +157,24 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+</script>
+
+<script type="text/javascript">
+    function promote(id) {
+        document.getElementById("promote-link").setAttribute("href", "/admins/promote/" + id)
+    }
+    function delete_user(id) {
+        document.getElementById("delete-link").setAttribute("href", "/admins/delete_user/" + id)
+    }
+
+    function activate(id) {
+        document.getElementById("activate-link").setAttribute("href", "/admins/activate/" + id)
+    }
+
+    function deactivate(id) {
+        let link = document.getElementById("deactivate-link")
+        link.setAttribute("href", "/admins/deactivate/" + id)
+        console.log(link)
+    }
 </script>
 {% endblock main_content %}
