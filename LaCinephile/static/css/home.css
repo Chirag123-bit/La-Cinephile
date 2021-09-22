@@ -93,10 +93,11 @@
 }
 
 .welcome-section {
-  padding: 8rem !important;
+  padding: 18rem 8rem !important;
   overflow: hidden;
   background-attachment: fixed;
   background-size: cover;
+  background-position: center;
 }
 
 .welcome-section::after {
@@ -249,9 +250,8 @@ a.effect-underline:hover:after {
 }
 
 .get-started {
-  padding: 8rem !important;
+  padding: 16rem 8rem !important;
   overflow: hidden;
-  background-position: center;
   background-attachment: fixed;
 }
 

@@ -17,32 +17,32 @@
 {% block main_content %}
 
 <div class="user-dashboard"
-    style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url({% static '/images/dashboard-back.jpg' %});">
+    style="background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url({% static '/images/dashboard-back.jpg' %});">
 
     <div class="py-5 dashboard-container">
         <div class="row py-5 container justify-content-between m-auto">
             <div class="card mt-2 col-md-5 text-center border border-danger">
-                <h2 class="mx-2 text-danger">Money Spent</h1>
-                    <p class="mt-3 text-white" id="spent">Rs.400</p>
+                <h2 class="mx-2 text-white">Money <span class="text-danger"> Spent</span></h1>
+                    <p class="mt-3 text-white text-danger h3" id="spent">Rs.400</p>
             </div>
             <div class="card mt-2 col-md-5 text-center border border-success">
-                <h2 class="mx-2 text-success">Money Saved</h1>
-                    <p class="mt-3 text-white" id="saved">Rs.100</p>
+                <h2 class="mx-2 text-white">Money <span class="text-info"> Saved</span></h1>
+                    <p class="mt-3 text-info h3" id="saved">Rs.100</p>
             </div>
         </div>
         <div class="row py-5 container justify-content-between m-auto">
             <div class="card mt-2 col-md-5 text-center border border-primary">
-                <h2 class="mx-2 text-primary">Movies Watched</h1>
-                    <p class="mt-3 text-white" id="watched">5</p>
+                <h2 class="mx-2 text-white">Movies <span class="text-dark"> Watched</span></h1>
+                    <p class="mt-3 text-dark h3" id="watched">5</p>
             </div>
             <div class="card mt-2 col-md-5 text-center border border-warning">
-                <h2 class="mx-2 text-warning">Seats Booked</h1>
-                    <p class="mt-3 text-white" id="booked">10</p>
+                <h2 class="mx-2 text-white">Seats <span class="text-warning"> Booked</span></h1>
+                    <p class="mt-3 text-warning h3" id="booked">10</p>
             </div>
         </div>
     </div>
     <div class="user-booked-movies container">
-        <h1 class="text-white text-center">My Bookings</h1>
+        <h1 class="text-white text-center">My <span class="title-highlight">Bookings</span></h1>
         <div class="movie-cards d-flex flex-wrap justify-content-evenly comtainer-sm">
             {% for movie in movies %}
             <div class="card">
