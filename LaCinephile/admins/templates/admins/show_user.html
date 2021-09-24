@@ -164,7 +164,7 @@
         document.getElementById("promote-link").setAttribute("href", "/admins/promote/" + id)
     }
     function delete_user(id) {
-        document.getElementById("delete-link").setAttribute("href", "/admins/delete_user/" + id)
+        document.getElementById("delete-link").setAttribute("href", "/admins/remove/" + id)
     }
 
     function activate(id) {
@@ -174,7 +174,7 @@
     function deactivate(id) {
         let link = document.getElementById("deactivate-link")
         link.setAttribute("href", "/admins/deactivate/" + id)
-        console.log(link)
+        
     }
 </script>
 {% endblock main_content %}
