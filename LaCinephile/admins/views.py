@@ -16,6 +16,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from accounts.auth import admin_only
 
+
 @admin_only
 @login_required
 def dashboard(request):
@@ -67,7 +68,11 @@ def dashboard(request):
 @admin_only
 @login_required
 def show_user(request):
-    users = User.objects.all().filter(is_staff=0).order_by('-id')
+    if 'q' in request.GET:
+        q=request.GET['q']
+        users = User.objects.filter(first_name__icontains=q).filter(is_staff=0)
+    else:
+        users = User.objects.all().filter(is_staff=0).order_by('-id')
     context={
         'user':users,
         'activate_user':'active'
@@ -77,7 +82,11 @@ def show_user(request):
 @admin_only
 @login_required
 def show_admin(request):
-    users = User.objects.all().filter(is_staff=1).order_by('-id')
+    if 'q' in request.GET:
+        q=request.GET['q']
+        users = User.objects.filter(first_name__icontains=q).filter(is_staff=1)
+    else:
+        users = User.objects.all().filter(is_staff=1).order_by('-id')
     context={
         'user':users,
         'activate_admin':'active'
@@ -156,7 +165,12 @@ def activate(request,user_id):
 @admin_only
 @login_required
 def show_movie(request):
-    movies = Now_Showing.objects.all().order_by('-id')
+    """Function to display all movies from database"""
+    if 'q' in request.GET:
+        q=request.GET['q']
+        movies = Now_Showing.objects.filter(name__icontains=q)
+    else:
+        movies = Now_Showing.objects.all().order_by('-id')
     context={
         'movies':movies,
         'activate_now':'active'
@@ -189,7 +203,11 @@ def delete_movie(request,movie_id):
 @admin_only
 @login_required
 def up_movie(request):
-    movies = Up_Comming.objects.all()
+    if 'q' in request.GET:
+        q=request.GET['q']
+        movies = Up_Comming.objects.filter(name__icontains=q)
+    else:
+        movies = Up_Comming.objects.all()
     context={
         'movies':movies,
         'activate_up':'active'
@@ -330,7 +348,11 @@ def delete_movie_hall(request,mh_id):
 @admin_only
 @login_required
 def show_ticket(request):
-    tickets = Ticket.objects.all().order_by('-id')
+    if 'q' in request.GET:
+        q=request.GET['q']
+        tickets = Ticket.objects.filter(user__first_name__icontains=q)
+    else:
+        tickets = Ticket.objects.all().order_by('-id')
     context={
         'ticket':tickets,
         'activate_ticket':'active',
@@ -364,7 +386,7 @@ def cancle(request,tic_id):
     ticket = Ticket.objects.get(id=tic_id)
     ticket.status = "Canceled"
     ticket.save()
-    messages.add_message(request, messages.SUCCESS, 'Ticket Marked as Reserved')
+    messages.add_message(request, messages.SUCCESS, 'Ticket Marked as Cancelled')
     return redirect('/admins/show_ticket')
 
 @admin_only
@@ -403,12 +425,17 @@ def delete_ticket_cat(request,tc_id):
 @admin_only
 @login_required
 def payments(request):
-    purchase = Purchase.objects.all().order_by('-id')
+    if 'q' in request.GET:
+        q=request.GET['q']
+        purchase = Purchase.objects.filter(user__first_name__icontains=q)
+    else:
+        purchase = Purchase.objects.all().order_by('-id')
     context={
         'purchases':purchase,
         'activate_purchase':'active',
     }
     return render(request, 'admins/show_payments.html',context)
+
 
 @admin_only
 @login_required
@@ -494,6 +521,26 @@ def add_hall(request):
         'form':form
     }
     return render(request, "admins/add_hall.html", context)
+
+@admin_only
+@login_required
+def add_movie_hall(request):
+    form = MovieHallForm()
+    if request.method == "POST":
+        form = MovieHallForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "Show time added Successfully!")
+            return redirect('/admins/movie_hall')
+
+        else:
+            messages.add_message(request, messages.ERROR,"Failed to add show time!")
+            return render(request, 'admins/movie_hall.html', {'form':form})
+        
+    context={
+        'form':form
+    }
+    return render(request, "admins/add_movie_hall.html", context)
 
 
 @admin_only

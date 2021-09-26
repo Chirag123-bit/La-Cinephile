@@ -32,6 +32,7 @@ urlpatterns = [
 
     path('movie_hall/', views.movie_hall),
     path('update_movie_hall/<int:mh_id>', views.update_movie_hall),
+    path('add_movie_hall', views.add_movie_hall),
     path('delete_movie_hall/<int:hallCat_id>', views.delete_movie_hall),
 
     path('show_ticket/', views.show_ticket),

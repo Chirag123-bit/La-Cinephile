@@ -26,6 +26,17 @@
                 <div class="button-holder d-flex justify-content-end"> <button type="button" class="btn btn-warning"
                         style="width:max-content"><a href="/admins/create_user" class="link-unstyled">Add
                             Users</a></button> </div>
+                <div class="row">
+                    <div class="col-md-5 offset-3">
+                        <form>
+                            <div class="input-group">
+                                <input name="q" type="text" placeholder="Search" class="form-control" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary"> Search </button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     {% include 'accounts/message.html' %}
                     <table class="datatable table table-stripped table table-hover table-center mb-0">
@@ -60,13 +71,13 @@
                                 <td class="align-middle">{{i.date_joined}}</td>
                                 <td class="align-middle text-center">
                                     {% if i.is_active %}
-                                    <div class="actions"> <a
-                                            class="btn btn-sm bg-success text-white mr-2" data-toggle="modal"
-                                            data-target="#deactivate_admin" onclick=deactivate({{i.id}})>Active</a> </div>
+                                    <div class="actions"> <a class="btn btn-sm bg-success text-white mr-2"
+                                            data-toggle="modal" data-target="#deactivate_admin"
+                                            onclick=deactivate({{i.id}})>Active</a> </div>
                                     {% else %}
-                                    <div class="actions"> <a
-                                            class="btn btn-sm bg-danger text-white mr-2" data-toggle="modal"
-                                            data-target="#activate_user" onclick=activate({{i.id}})>Inactive</a> </div>
+                                    <div class="actions"> <a class="btn btn-sm bg-danger text-white mr-2"
+                                            data-toggle="modal" data-target="#activate_user"
+                                            onclick=activate({{i.id}})>Inactive</a> </div>
                                     {% endif %}
                                 </td>
 
@@ -83,11 +94,12 @@
                                                     class="fas fa-angle-double-up"></i>Demote</a>
 
                                             <a class="dropdown-item" href="#" data-toggle="modal"
-                                                data-target="#delete_admin" id="btn_delete" onclick=delete_admin({{i.id}})><i
-                                                    class="fas fa-trash-alt m-r-5"> </i>Delete</a>
+                                                data-target="#delete_admin" id="btn_delete"
+                                                onclick=delete_admin({{i.id}})><i class="fas fa-trash-alt m-r-5">
+                                                </i>Delete</a>
 
-                                            
-                                            
+
+
 
                                         </div>
                                     </div>
@@ -106,8 +118,8 @@
                 <div class="modal-body text-center">
                     <h3>Are you sure want to delete this admin?</h3>
                     <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                        <button type="submit" class="btn btn-danger" ><a class="link-unstyled"
-                                href="#" id="delete-link"> Delete</a></button>
+                        <button type="submit" class="btn btn-danger"><a class="link-unstyled" href="#" id="delete-link">
+                                Delete</a></button>
                     </div>
                 </div>
             </div>
@@ -144,8 +156,7 @@
             <div class="modal-content">
                 <div class="modal-body text-center">
                     <h3>Are you sure want to Deactivate this Admin Account?</h3>
-                    <div class="m-t-20"> <a href="#" class="btn btn-white"
-                            data-dismiss="modal">Close</a>
+                    <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
                         <button type="submit" class="btn btn-danger"><a class="link-unstyled" href="#"
                                 id="deactivate-link"> Deactivate</a></button>
                     </div>

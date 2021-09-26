@@ -7,7 +7,6 @@
 {% endblock title %}
 
 {% block css_files %}
-
 {% endblock css_files %}
 
 {% block main_content %}
@@ -17,8 +16,21 @@
             <div class="card-body booking_card">
                 <div class="table-responsive">
                     {% include 'accounts/message.html' %}
-                    <div class="button-holder d-flex justify-content-end"> <button type="button" class="btn btn-warning" style="width:max-content"><a href="/admins/create_ticket" class="link-unstyled">Create Tickets</a></button> </div>
+                    <div class="button-holder d-flex justify-content-end"> <button type="button" class="btn btn-warning"
+                            style="width:max-content"><a href="/admins/create_ticket" class="link-unstyled">Create
+                                Tickets</a></button> </div>
                     <div class="table-responsive">
+                        <div class="row">
+                            <div class="col-md-5 offset-3">
+                                <form>
+                                    <div class="input-group">
+                                        <input name="q" type="text" placeholder="Search" class="form-control" />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary"> Search </button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
                         <table class="table table-hover table-center">
                             <thead>
                                 <tr>
@@ -81,4 +93,7 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+</script>
 {% endblock main_content %}

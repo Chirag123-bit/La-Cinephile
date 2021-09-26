@@ -92,8 +92,13 @@
   opacity: 0;
 }
 
+.welcome-cine {
+  padding-bottom: 8rem;
+  margin-right: 0;
+}
+
 .welcome-section {
-  padding: 18rem 8rem !important;
+  padding: 8rem 8rem 13rem 8rem !important;
   overflow: hidden;
   background-attachment: fixed;
   background-size: cover;
@@ -278,9 +283,23 @@ a.effect-underline:hover:after {
   }
 }
 
+@media (max-width: 790px) {
+
+  .get-started {
+    padding: 8rem !important
+  }
+
+  .carausel-text p {
+    width: 100%;
+  }
+
+  .carausel-text {
+    padding: 5rem 8rem !important;
+  }
+}
+
 @media (max-width: 660px) {
 
-  .welcome-section,
   .get-started,
   .carausel-text {
     padding-left: 1rem !important;
@@ -289,6 +308,50 @@ a.effect-underline:hover:after {
 
   .welcome-section {
     margin-right: 0;
-    padding-bottom: 1rem;
+    padding: 1rem 0rem !important;
+    padding-top: 3rem !important;
   }
+
+  .welcome-cine {
+    padding: 3rem 0;
+  }
+
+  .welcome-cine h1 {
+    font-size: 3rem;
+  }
+
+  .welcome-cine h1,
+  .welcome-text h1 {
+    margin: 1rem;
+  }
+
+  .welcome-text p {
+    margin: 0;
+    text-align: justify;
+    padding: 2rem 0;
+    font-size: 1rem;
+  }
+
+  .welcome-text h1 {
+    font-size: 2rem;
+  }
+
+  .get-started {
+    padding: 4rem 0 !important;
+  }
+
+  #btn-holder {
+    max-width: 50%;
+    text-align: center;
+
+  }
+
+  .vcard-content h2 {
+    margin: auto !important;
+  }
+
+  .wrap .text-section {
+    margin: 1.5rem 0;
+  }
+
 }

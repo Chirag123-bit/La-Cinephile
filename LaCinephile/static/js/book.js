@@ -1,39 +1,40 @@
-const movie = document.getElementById('movie');
-const dis = document.getElementById("dis");
-const hall = document.getElementById('hall');
-const date = document.getElementById("date");
-const time = document.getElementById("time");
+const movie = document.getElementById('movie'); // Stores "Movie" element's id
+const dis = document.getElementById("dis"); // Stores "dis" element's id
+const hall = document.getElementById('hall'); // Stores "hall" element's id
+const date = document.getElementById("date"); // Stores "date" element's id
+const time = document.getElementById("time"); // Stores "time" element's id
 var selectedMovie;
 var selectedHall;
 var selectedDate;
 
-const hallRep = document.getElementById("hall-rep")
-const seats = document.querySelectorAll(".row seat:not(.occupied)")
-const count = document.getElementById('count')
-const total = document.getElementById('total');
+const hallRep = document.getElementById("hall-rep") // Stores "Hall representive" element's id
+const seats = document.querySelectorAll(".row seat:not(.occupied)") // Stores "unoccupied" element's id
+const count = document.getElementById('count') // Stores "seat count" element's id
+const total = document.getElementById('total'); // Stores "total" element's id
 let ticketPrice = 0
 
 
-const mLabel = document.getElementById('mname');
-const hLabel = document.getElementById('hname');
-const mdate = document.getElementById('mdate');
-const mtime = document.getElementById('mtime');
-const mseats = document.getElementById('mseats');
+const mLabel = document.getElementById('mname'); // Stores selected movie's id
+const hLabel = document.getElementById('hname'); // Stores selected hall's id
+const mdate = document.getElementById('mdate'); // Stores selected movie-hall's id
+const mtime = document.getElementById('mtime'); // Stores selected movie-hall's time
+const mseats = document.getElementById('mseats'); // Stores selected movie-hall's seats
 
 var mid = document.getElementById('mid')
 var seat_selected = document.getElementById('seat_selected')
 var discountId = document.getElementById('discountId')
 
 const inprice = document.getElementById('inprice')
-var selectedSeatCount = 0
+var selectedSeatCount = 0 ///seat counts
 
-var selectedSeats = []
+var selectedSeats = [] //array to store selected seats
 
 function updateSelectedCount() {
+    // function to calculate total price of selected seats
     const selectedSeats = document.querySelectorAll('.row .seat.selected')
     selectedSeatCount = selectedSeats.length;
 
-    total.innerText = (selectedSeatCount * ticketPrice) - ticketPrice;
+    total.innerText = (selectedSeatCount * ticketPrice) - ticketPrice; //extra ticket's cost is deducted to correct the price
 }
 
 hallRep.addEventListener('click', (e) => {

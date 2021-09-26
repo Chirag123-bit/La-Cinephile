@@ -4,10 +4,11 @@ from django.db import models
 from movies.models import Now_Showing
 from django.contrib.auth.models import User
 import datetime
+from django.core import validators
 
 # Create your models here.
 class Category(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, validators=[validators.MinLengthValidator(1)])
     price = models.FloatField()
     color_code = models.CharField(max_length=7)
 
@@ -75,3 +76,7 @@ class Purchase(TicketTemplate):
     seats = models.CharField(max_length=100, null=True)
     price = models.IntegerField()
     payment_completed = models.BooleanField(default=False)
+
+
+
+

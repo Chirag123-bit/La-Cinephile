@@ -27,6 +27,7 @@ def prices(request):
 
 @login_required
 def book(request):
+    """Function for booking/purchasing a movie"""
     mh = Movie_Hall.objects.all()
     if request.method == "POST":
         data = request.POST
@@ -36,21 +37,22 @@ def book(request):
         discount = data.get('discountId')
          
 
-        mv = Movie_Hall.objects.filter(id=int(movie))[0]
-        dis = Categories.objects.filter(id=int(discount))[0]
+        mv = Movie_Hall.objects.filter(id=int(movie))[0] #Gets corresponding movie-time
+        dis = Categories.objects.filter(id=int(discount))[0] #Gets hall category for discount
 
-        count = round(len(seats)/3)
+        count = round(len(seats)/3) #Gets total numbers of seats selected by user
+        #accounts for commas(,) length of seat(Eg: A1, B1)::: hence no.of seats is given by length/3 
 
         total = (count*int(data.get('inprice')))
         ticket = Ticket(user=user, movie=mv, seats=seats, discount=dis)
-        if "book" in request.POST:
+        if "book" in request.POST: #For Booking
             status = "Booked"
             i=0
             while(i<len(seats)):
                 ticket = Ticket(user=user, movie=mv, seats=seats[i:i+2], discount=dis, status=status)
                 ticket.save()
                 i+=3
-        else:
+        else: #For Purchasing
             status = 'Purchased'
             i=0
             while(i<len(seats)):
@@ -80,6 +82,7 @@ def movie_json(request):
 
 @user_only
 def hall_json(request, *args, **kwargs):
+    """Function for returning JSON data of hall based on selected movie"""
     selected_movie = kwargs.get('movie')
     obj_model = Movie_Hall.objects.values('hall_id', 'hall__name', 'hall__category__name', 'hall__category__price').filter(movie__id=selected_movie)
     resp=[]
@@ -187,6 +190,7 @@ class KhaltiRequestView(View):
 
 
 class KhaltiVerifyView(View):
+    """Class-based function for verifying Payment"""
     def get(self, request, *args, **kwargs):
         token = request.GET.get("token")
         amount = request.GET.get("amount")

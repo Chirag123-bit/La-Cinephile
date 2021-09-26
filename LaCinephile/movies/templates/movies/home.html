@@ -15,6 +15,11 @@
 <section class="welcome-section"
   style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({% static 'images/free-guy.webp'%})"
   id="home">
+  <div class="welcome-cine container d-flex flex-column m-0 mb-md-5">
+    <h1 class="text-white decorated-text text-center">
+      Welcome to <span class="title-highlight">La CinePhile!</span>
+    </h1>
+  </div>
   <div class="welcome-text container d-flex flex-column m-0">
     <h1 class="text-white decorated-text text-center">
       We’re Open and <span class="title-highlight">Safer & Cleaner</span>
@@ -117,17 +122,16 @@
 
 
 <div class="movies-card-section" id="top-section">
-  <section class="top-movies-section">
-
+  <section class="top-movies-section" style="background: url({% static 'images/blur-unsplashed.jpg' %}) no-repeat;">
+    <div class="text-section text-center m-4">
+      <h1 class="text-white">Top movies in <span class="title-highlight">theatres</span></h1>
+      <div class="subtitle">
+        <p class="text-white">at La Cinephile & Theatre</p>
+      </div>
+    </div>
     <div class="movies-carausel">
-      <div class="wrap d-flex flex-column align-items-md-center movie-blur"
-        style="background: url({% static 'images/blur-unsplashed.jpg' %}) no-repeat;">
-        <div class="text-section text-center m-4">
-          <h1 class="text-white">Top movies in <span class="title-highlight">theatres</span></h1>
-          <div class="subtitle">
-            <p class="text-white">at La Cinephile & Theatre</p>
-          </div>
-        </div>
+      <div class="wrap d-flex flex-column align-items-md-center movie-blur">
+
         <div class="slider">
 
           {% for movie in movies %}
@@ -141,18 +145,15 @@
           {% endfor %}
 
         </div>
-
+        <div id="btn-holder">
           <a href="#" class="button mb-4 text-center" id="upcomming-button" onclick="getId()">Learn More</a>
-
+        </div>
       </div>
 
 
     </div>
 </div>
 </section>
-
-
-
 {% endblock main_content %}
 
 {% block js_files%}

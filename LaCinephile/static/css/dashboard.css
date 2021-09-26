@@ -28,6 +28,12 @@
     align-items: center;
 }
 
+#sec-1 {
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
 .movie-cards .card .content {
     position: absolute;
     bottom: -250px;

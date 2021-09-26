@@ -23,9 +23,23 @@
 
         <div class="card card-table">
             <div class="card-body booking_card d-flex flex-column">
-                <div class="button-holder d-flex justify-content-end"> <button type="button" class="btn btn-warning"
-                        style="width:max-content"><a href="/admins/create_user" class="link-unstyled">Add
-                            Users</a></button> </div>
+                <div class="button-holder d-flex justify-content-end">
+                    <button type="button" class="btn btn-warning" style="width:max-content"><a
+                            href="/admins/create_user" class="link-unstyled">Add
+                            Users</a>
+                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-md-5 offset-3">
+                        <form>
+                            <div class="input-group">
+                                <input name="q" type="text" placeholder="Search" class="form-control" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary"> Search </button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     {% include 'accounts/message.html' %}
                     <table class="datatable table table-stripped table table-hover table-center mb-0">
@@ -60,13 +74,13 @@
                                 <td class="align-middle">{{i.date_joined}}</td>
                                 <td class="align-middle text-center">
                                     {% if i.is_active %}
-                                    <div class="actions"> <a
-                                            class="btn btn-sm bg-success text-white mr-2" data-toggle="modal"
-                                            data-target="#deactivate_user" onclick=deactivate({{i.id}}) href="#">Active</a> </div>
+                                    <div class="actions"> <a class="btn btn-sm bg-success text-white mr-2"
+                                            data-toggle="modal" data-target="#deactivate_user"
+                                            onclick=deactivate({{i.id}}) href="#">Active</a> </div>
                                     {% else %}
-                                    <div class="actions"> <a
-                                            class="btn btn-sm bg-danger text-white mr-2" data-toggle="modal"
-                                            data-target="#activate_user" onclick=activate({{i.id}}) href="#">Inactive</a> </div>
+                                    <div class="actions"> <a class="btn btn-sm bg-danger text-white mr-2"
+                                            data-toggle="modal" data-target="#activate_user" onclick=activate({{i.id}})
+                                            href="#">Inactive</a> </div>
                                     {% endif %}
                                 </td>
 
@@ -81,8 +95,9 @@
                                                 id="btn_promote" onclick=promote({{i.id}}) href="#"> <i
                                                     class="fas fa-angle-double-up"></i>Promote</a>
                                             <a class="dropdown-item" href="#" data-toggle="modal"
-                                                data-target="#delete_user" id="btn_delete" onclick=delete_user({{i.id}})><i
-                                                    class="fas fa-trash-alt m-r-5"> </i>Delete</a>
+                                                data-target="#delete_user" id="btn_delete"
+                                                onclick=delete_user({{i.id}})><i class="fas fa-trash-alt m-r-5">
+                                                </i>Delete</a>
 
                                         </div>
                                     </div>
@@ -98,8 +113,9 @@
                                     <h3>Are you sure want to delete this User?</h3>
                                     <div class="m-t-20"> <a href="#" class="btn btn-white"
                                             data-dismiss="modal">Close</a>
-                                        <button type="submit" class="btn btn-danger" ><a class="link-unstyled" href="#"
-                                                id="delete-link"> Delete</a></button>
+                                        <button type="submit" class="btn btn-danger"><a class="link-unstyled" href="#"
+                                                id="delete-link">
+                                                Delete</a></button>
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +129,8 @@
                                     <div class="m-t-20"> <a href="#" class="btn btn-white"
                                             data-dismiss="modal">Close</a>
                                         <button type="submit" class="btn btn-warning"><a class="link-unstyled" href="#"
-                                                id="promote-link"> Promote</a></button>
+                                                id="promote-link">
+                                                Promote</a></button>
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +144,8 @@
                                     <div class="m-t-20"> <a href="#" class="btn btn-white"
                                             data-dismiss="modal">Close</a>
                                         <button type="submit" class="btn btn-success"><a class="link-unstyled" href="#"
-                                                id="activate-link"> Activate</a></button>
+                                                id="activate-link">
+                                                Activate</a></button>
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +159,8 @@
                                     <div class="m-t-20"> <a href="#" class="btn btn-white"
                                             data-dismiss="modal">Close</a>
                                         <button type="submit" class="btn btn-danger">
-                                            <a class="link-unstyled" href="#" id="deactivate-link"> Deactivate</a>
+                                            <a class="link-unstyled" href="#" id="deactivate-link">
+                                                Deactivate</a>
                                         </button>
                                     </div>
                                 </div>
@@ -163,6 +182,7 @@
     function promote(id) {
         document.getElementById("promote-link").setAttribute("href", "/admins/promote/" + id)
     }
+
     function delete_user(id) {
         document.getElementById("delete-link").setAttribute("href", "/admins/remove/" + id)
     }
@@ -174,7 +194,7 @@
     function deactivate(id) {
         let link = document.getElementById("deactivate-link")
         link.setAttribute("href", "/admins/deactivate/" + id)
-        
+
     }
 </script>
 {% endblock main_content %}

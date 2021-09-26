@@ -182,9 +182,11 @@
 
                 <input type="text" class="form-control-plaintext" id="inprice" name="inprice" value=""
                     style="display:none">
-                <div class="btn-group d-flex justify-content-space">
-                    <button type="submit" name="book" class="btn btn-outline-success">Book</button>
-                    <button type="submit" name="purchase" class="btn btn-outline-success">Purchase</button>
+                <div style="width: 100%;">
+                    <div class="d-flex justify-content-around">
+                        <button type="submit" name="book" class="btn btn-outline-warning">Book</button>
+                        <button type="submit" name="purchase" class="btn btn-outline-success">Purchase</button>
+                    </div>
                 </div>
             </form>
 
@@ -202,9 +204,9 @@
 {% block js_files %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="{% static '/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
 <script src={% static '/js/book.js' %}> </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
     integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="{% static '/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
 {% endblock js_files %}

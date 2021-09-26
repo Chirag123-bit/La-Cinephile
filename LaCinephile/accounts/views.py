@@ -11,6 +11,10 @@ from django.contrib.auth import update_session_auth_hash
 
 @unauthenticated_user
 def register(request):
+    """
+    Function to Update Profile table once the user is created
+    Profile is already created through trigger function during user creation
+    """
     form = UserForm()
     if request.method == "POST":
         form = UserForm(request.POST)
@@ -30,6 +34,7 @@ def register(request):
 
 @unauthenticated_user
 def user_login(request):
+    """Function to allow users to log in"""
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -54,6 +59,7 @@ def user_login(request):
 
 @login_required
 def logout_user(request):
+    """Function to allow user to logout"""
     logout(request)
     return redirect('/accounts/login')
 
@@ -94,6 +100,7 @@ def update_profile(request):
 @user_only
 @login_required
 def change_password(request):
+    """Function for changing user's password!"""
     if request.method == "POST":
         form = PasswordChangeForm(data=request.POST, user = request.user)
         if form.is_valid():

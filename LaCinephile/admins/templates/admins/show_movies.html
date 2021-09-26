@@ -28,6 +28,17 @@
                             style="width:max-content"><a href="/admins/add_now_showing" class="link-unstyled"> Add
                                 Movie</a></button> </div>
                     <table class="datatable table table-stripped table table-hover table-center mb-0">
+                        <div class="row">
+                            <div class="col-md-5 offset-3">
+                                <form>
+                                    <div class="input-group">
+                                        <input name="q" type="text" placeholder="Search" class="form-control" />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary"> Search </button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
                         <thead>
                             <tr>
                                 <th>Movie ID</th>
@@ -67,7 +78,8 @@
                                         <div class="dropdown-menu dropdown-menu-down">
                                             <a class="dropdown-item" href="/admins/update_movie/{{i.id}}"><i
                                                     class="fas fa-pencil-alt m-r-5"></i> Edit</a>
-                                            <a class="dropdown-item" onclick=delete_movie({{i.id}}) data-toggle="modal" data-target="#delete_movie"><i
+                                            <a class="dropdown-item" onclick=delete_movie({{i.id}}) data-toggle="modal"
+                                                data-target="#delete_movie"><i
                                                     class="fas fa-trash-alt m-r-5"></i>Delete</a>
 
                                         </div>
@@ -100,10 +112,8 @@
     integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
 </script>
 <script type="text/javascript">
-
     function delete_movie(id) {
         document.getElementById("delete-link").setAttribute("href", "/admins/delete_movie/" + id)
     }
-
 </script>
 {% endblock main_content %}

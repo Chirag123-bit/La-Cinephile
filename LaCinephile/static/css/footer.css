@@ -75,6 +75,10 @@ footer {
   .logo-desc {
     display: none !important;
   }
+
+  .lower-footer-contents {
+    padding: 0;
+  }
 }
 
 @media screen and (max-width: 440px) {

@@ -25,6 +25,17 @@
                 <div class="table-responsive">
                     {% include 'accounts/message.html' %}
                     <table class="datatable table table-stripped table table-hover table-center mb-0">
+                        <div class="row">
+                            <div class="col-md-5 offset-3">
+                                <form>
+                                    <div class="input-group">
+                                        <input name="q" type="text" placeholder="Search" class="form-control" />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary"> Search </button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
                         <thead>
                             <tr>
                                 <th class="text-center">Hall ID</th>
@@ -39,19 +50,20 @@
                             {% for i in purchases %}
                             <tr>
 
-                                <td class="align-middle text-center" >{{i.id}}</td>
-                                <td class="align-middle text-center">{{i.user.first_name}} <span> {{i.user.last_name}}  </td>
+                                <td class="align-middle text-center">{{i.id}}</td>
+                                <td class="align-middle text-center">{{i.user.first_name}} <span> {{i.user.last_name}}
+                                </td>
                                 <td class="align-middle text-center">{{i.movie.movie.name}}</td>
                                 <td class="align-middle text-center">{{i.seats}}</td>
                                 <td class="align-middle text-center">Rs. {{i.price}}</td>
                                 <td class="align-middle text-center">
-                                {% if i.status == "Purchased" %}
+                                    {% if i.status == "Purchased" %}
                                     <span class="badge badge-pill bg-success inv-badge">{{i.status}}</span>
-                                {% elif i.status == "Canceled" %}
+                                    {% elif i.status == "Canceled" %}
                                     <span class="badge badge-pill bg-danger inv-badge">{{i.status}}</span>
-                                {% else %}
+                                    {% else %}
                                     <span class="badge badge-pill bg-warning inv-badge">Pending</span>
-                                {% endif %}
+                                    {% endif %}
                                 </td>
 
                             </tr>
