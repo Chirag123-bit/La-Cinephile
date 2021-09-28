@@ -15,6 +15,7 @@ from accounts.models import Profile
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from accounts.auth import admin_only
+from django.core.paginator import EmptyPage, Paginator
 
 
 @admin_only
@@ -165,7 +166,7 @@ def activate(request,user_id):
 @admin_only
 @login_required
 def show_movie(request):
-    """Function to display all movies from database"""
+    """Function to display all movies from database for admin to view"""
     if 'q' in request.GET:
         q=request.GET['q']
         movies = Now_Showing.objects.filter(name__icontains=q)
@@ -353,8 +354,16 @@ def show_ticket(request):
         tickets = Ticket.objects.filter(user__first_name__icontains=q)
     else:
         tickets = Ticket.objects.all().order_by('-id')
+    p= Paginator(tickets,10)
+    page_num = request.GET.get("page",1)
+
+    try:
+        page = p.page(page_num)
+    except EmptyPage:
+        page = p.page(1)
+    
     context={
-        'ticket':tickets,
+        'ticket':page,
         'activate_ticket':'active',
     }
     return render(request, 'admins/show_ticket.html',context)
@@ -430,8 +439,15 @@ def payments(request):
         purchase = Purchase.objects.filter(user__first_name__icontains=q)
     else:
         purchase = Purchase.objects.all().order_by('-id')
+    p= Paginator(purchase,10)
+    page_num = request.GET.get("page",1)
+
+    try:
+        page = p.page(page_num)
+    except EmptyPage:
+        page = p.page(1)
     context={
-        'purchases':purchase,
+        'purchases':page,
         'activate_purchase':'active',
     }
     return render(request, 'admins/show_payments.html',context)
@@ -619,7 +635,7 @@ def admin_profile(request):
             form.save()
             messages.SUCCESS(request, "Account Updated Successfully")
             return redirect('admins/dashboard')
-    context = {'form':form}
+    context = {'form':form, "activate_home":"active"}
     return render (request, 'admins/profile.html', context)
 
 

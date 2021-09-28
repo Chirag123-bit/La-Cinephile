@@ -270,6 +270,10 @@ a.effect-underline:hover:after {
   background-size: cover !important;
 }
 
+#btn-holder {
+  width: 8% !important;
+}
+
 
 @media (max-width: 945px) {
 
@@ -341,8 +345,8 @@ a.effect-underline:hover:after {
   }
 
   #btn-holder {
-    max-width: 50%;
-    text-align: center;
+    width: 50% !important;
+    text-align: center !important;
 
   }
 

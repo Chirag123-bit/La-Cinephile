@@ -18,7 +18,7 @@
 
 <div class="booking-pannel d-flex flex-column align-items-center justify-content-center py-5"
     style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url({% static '/images/book-back.jpg' %});">
-    <div class="movie-container py-5 d-flex ">
+    <div class="movie-container py-5 d-flex " style="align-items: self-end;">
 
         <div class="mv-selector">
             <label class="text-white" for="movie">Pick a movie:</label>
@@ -184,12 +184,24 @@
                     style="display:none">
                 <div style="width: 100%;">
                     <div class="d-flex justify-content-around">
-                        <button type="submit" name="book" class="btn btn-outline-warning">Book</button>
+                        <button type="submit" name="book" class="btn btn-outline-warning" data-toggle="modal"
+                            data-target="#confirmation">Book</button>
                         <button type="submit" name="purchase" class="btn btn-outline-success">Purchase</button>
                     </div>
                 </div>
             </form>
 
+        </div>
+    </div>
+</div>
+<div id="confirmation" class="modal fade confirmation-modal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h3>Tickets Booked! Check your dashboard for more information</h3>
+                <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

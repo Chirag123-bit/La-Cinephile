@@ -4,6 +4,7 @@ from django.urls import path
 from . import views
 from movies.views import user_movies
 
+#Account's URL
 urlpatterns = [
     path('register/',views.register, name="register_user"),
     path('login/', views.user_login, name="login_user"),

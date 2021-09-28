@@ -16,7 +16,7 @@ Including another URLconf
 from django.urls import path
 from . import views
 
-
+#Movie's URLS
 urlpatterns = [
     path('', views.home),
     path('all/', views.movies, name="all_movies"),

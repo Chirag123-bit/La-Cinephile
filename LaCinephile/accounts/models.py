@@ -8,12 +8,12 @@ from django.db.models.signals import post_save
 
 class Profile(models.Model): #Model to create profile for users
     user = models.OneToOneField(User,null=True,on_delete=models.CASCADE)
-    firstname = models.CharField(max_length=50, validators=[validators.MinLengthValidator(2)])
-    lastname = models.CharField(max_length=50, validators=[validators.MinLengthValidator(2)])
-    email = models.EmailField(validators=[validate_email])
+    firstname = models.CharField(max_length=50)
+    lastname = models.CharField(max_length=50)
+    email = models.EmailField()
     phone = models.CharField(max_length=10)
-    district = models.CharField(max_length=30, default="Kathmandu", validators=[validators.MinLengthValidator(6)])
-    city = models.CharField(max_length=30, default="Sundarijal", validators=[validators.MinLengthValidator(3)])
+    district = models.CharField(max_length=30, default="Kathmandu")
+    city = models.CharField(max_length=30, default="Sundarijal")
     profile_pic = models.FileField(upload_to='profiles', default='sample_user.jpg')
     created_date = models.DateTimeField(auto_now_add=True)
 

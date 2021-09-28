@@ -13,7 +13,7 @@
 {% block main_content %}
 <div id="now-showing">
   <div class="now-showing-text p-5"
-    style="background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url({% static '/images/movie-text-back.jpg' %});">
+    style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url({% static '/images/movie-text-back.jpg' %});">
     <div class="inner-movie-text">
       <h1 class="title-highlight h1"> Movies At La Cinephile </h1>
       <p class="text-white"> Discover latest movies at La Cinephile. Now at unbelievable rate! Don't miss your chances
@@ -82,9 +82,9 @@
           </div>
           {% endfor %}
         </div>
-        <div style="width:60%; text-align: center;">
+        {% comment %} <div style="width:60%; text-align: center;"> {% endcomment %}
           <a href="up/" class="button mb-4 text-center" id="upcomming-button" onclick="getId2()">Learn More</a>
-        </div>
+        {% comment %} </div> {% endcomment %}
       </div>
     </div>
   </div>

@@ -1,8 +1,8 @@
 from django.urls import path
 from . import views
 
+#Hall's URL
 urlpatterns = [
-    
     path('prices/', views.prices, name="show_prices"),
     path('book/', views.book, name="book_tickets"),
     path('test/', views.movie_json, name="test"),

@@ -164,52 +164,80 @@
                     </tr>
                     <tr>
                         <td>Selected Seats: </td>
-                        <td id="mseats"></td>
+                        <td id="mseats">{{seats}}</td>
                     </tr>
-                    {% if purchase %}
+ 
                     <tr>
                         <td>Status: </td>
-                        <td id="total" class="text-success">Purchased</td>
+                        <td id="total" class="text-success">{{purchase}}</td>
                     </tr>
                     <tr>
                         <td>Price: </td>
-                        <td id="total">{{price}}</td>
+                        <td id="price">{{price}}</td>
                     </tr>
-                    {% else %}
-                    <tr>
-                        <td>Price: </td>
-                        <td id="total">{{price}}</td>
-                    </tr>
-                    {% endif %}
+
 
                 </tbody>
             </table>
             <form class="form-group row" action="" method="POST">
                 {% csrf_token %}
-                <input type="text" class="form-control-plaintext" id="mid" name="mid" value="" style="display:none">
-                <input type="text" class="form-control-plaintext" id="seat_selected" name="seat_selected" value=""
+                <input type="text" class="form-control-plaintext" id="mid" name="mid" value="{{mid}}"
                     style="display:none">
-                <input type="text" class="form-control-plaintext" id="discountId" name="discountId" value=""
+                <input type="text" class="form-control-plaintext" id="seat_selected" name="seat_selected"
+                    value="{{seats}}" style="display:none">
+                <input type="text" class="form-control-plaintext" id="tot_cost" name="seat_selected" value="{{price}}"
                     style="display:none">
-                {% if not purchase %}
-                <div class="btn-group d-flex justify-content-between w-100">
-                    <button type="submit" class="btn btn-danger">Cancle Booking</button>
-                    <button type="submit" class="btn btn-success">Purchase</button>
-                </div>
+                <input type="text" class="form-control-plaintext" id="discountId" name="discountId" value="{{did}}"
+                    style="display:none">
+                {% if purchase == "Purchased" %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Congratulations!</strong> You have booked your tickets.
+                        <br>
+                        <small> Note: Once you have paid for tickets, it is non refundable! </small>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% elif purchase == "Booked" %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Congratulations!</strong> You have already booked your tickets.
+                        <br>
+                        <small> Note: Please pay for your tickets through Khalti or from counter </small>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                     <div class="btn-group d-flex justify-content-between w-100">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancle_ticket" onclick=canc_ticket({{uid}},{{mid}})>Cancle Booking</button>
+                        <button type="submit" class="btn btn-success">Purchase</button>
+                    </div>
                 {% else %}
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Congratulations!</strong> You have already paid for your tickets.
-                    <br>
-                    <small> Note: Once purchased, tickets are non-refundable </small>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Info!</strong> You have already cancelled your tickets.
+                        <br>
+                        <small> Note: Please purchase the thockets again to retrive your ticket info </small>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 {% endif %}
             </form>
         </div>
     </div>
 </div>
+    <div id="cancle_ticket" class="modal fade delete-modal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <h3>Are you sure want to cancle your reservations?</h3>
+                    <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                        <button type="button" class="btn btn-danger"><a class="link-unstyled" href="#" id="delete-link">
+                                Cancle Reservations </a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
@@ -221,9 +249,16 @@
 {% block js_files %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    function canc_ticket(uid,mid) {
+        console.log("Called")
+            document.getElementById("delete-link").setAttribute("href", "/tickets/cancle_tickets/" + uid +"/"+mid)
+        }
+</script>
 <script src={% static '/js/ticket_detail.js' %}> </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
     integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{% static '/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
+
 {% endblock js_files %}

@@ -2,6 +2,7 @@ from tickets.models import Categories
 from django import forms 
 from halls.models import Ticket
 
+#Ticket's Form
 class TicketForm(forms.ModelForm):
     class Meta:
         model = Ticket

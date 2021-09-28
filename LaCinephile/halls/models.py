@@ -6,9 +6,8 @@ from django.contrib.auth.models import User
 import datetime
 from django.core import validators
 
-# Create your models here.
-class Category(models.Model):
-    name = models.CharField(max_length=50, validators=[validators.MinLengthValidator(1)])
+class Category(models.Model):#model to create hall category
+    name = models.CharField(max_length=50)
     price = models.FloatField()
     color_code = models.CharField(max_length=7)
 
@@ -58,7 +57,7 @@ ticket_choices = (
 )
 
 class TicketTemplate(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, db_index=True) #Indexing for user table
     movie = models.ForeignKey(Movie_Hall, on_delete=models.CASCADE)
     discount = models.ForeignKey(Categories, on_delete=models.CASCADE)
     status = models.CharField(max_length=100, choices=ticket_choices, default="Booked")

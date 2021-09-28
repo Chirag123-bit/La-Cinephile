@@ -9,6 +9,7 @@ from halls.models import Movie_Hall
 import datetime
 from tickets.models import Categories
 from django.urls import reverse
+from django.contrib import messages
 
 from accounts.auth import unauthenticated_user, user_only
 from django.contrib.auth.decorators import  login_required
@@ -35,6 +36,7 @@ def book(request):
         movie = data.get('mid')
         seats = data.get('seat_selected')
         discount = data.get('discountId')
+        print(user.id)
          
 
         mv = Movie_Hall.objects.filter(id=int(movie))[0] #Gets corresponding movie-time
@@ -50,8 +52,10 @@ def book(request):
             i=0
             while(i<len(seats)):
                 ticket = Ticket(user=user, movie=mv, seats=seats[i:i+2], discount=dis, status=status)
-                ticket.save()
                 i+=3
+                ticket.save()
+            messages.add_message(request, messages.SUCCESS, "Tickets Booked SuccessFully")
+            return redirect("/tickets/detail/"+str(user.id)+"/"+str(movie))
         else: #For Purchasing
             status = 'Purchased'
             i=0
@@ -63,7 +67,6 @@ def book(request):
             purchase.save()
 
             return redirect(reverse('halls:khaltirequest')+"?o_id="+str(purchase.id))
-        return redirect("/")
 
     context={
         'activate_book':'active',

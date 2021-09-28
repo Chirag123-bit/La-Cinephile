@@ -38,6 +38,7 @@ function updateSelectedCount() {
 }
 
 hallRep.addEventListener('click', (e) => {
+    //function to mark seats as selected whrn user clicks on it 
     if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
         if (e.target.classList.contains('selected')) {
             const index = selectedSeats.indexOf(e.target.id);
@@ -57,7 +58,7 @@ hallRep.addEventListener('click', (e) => {
 })
 
 
-$.ajax({
+$.ajax({ //ajax to return hall data
     type: 'GET', // Setting Method
     url: '/hall/test/', //url for json response
     success: function (response) { //In case of success
