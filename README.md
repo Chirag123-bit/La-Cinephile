@@ -32,12 +32,12 @@ Nielsen's heuristics for UI design.
   
 ## Screenshots
 
-![Home Page](Sceenshots/home.PNG)
-![Movie Page](Sceenshots/movies.PNG)
-![Pricing](Sceenshots/price.PNG)
-![Booking Page](Sceenshots/book.PNG)
-![Dashboard](Sceenshots/dashboard.PNG) 
-![User Profile](Sceenshots/proflie.PNG)
+![Home Page](screenshots/home.PNG)
+![Movie Page](screenshots/movies.PNG)
+![Pricing](screenshots/price.PNG)
+![Booking Page](screenshots/book.PNG)
+![Dashboard](screenshots/dashboard.PNG) 
+![User Profile](screenshots/profile.PNG)
 ## Authors
 
 - [@chiragsimkhada](https://github.com/Chirag123-bit)
