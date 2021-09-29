@@ -45,6 +45,7 @@ def detail(request, uid, mid):
 
 
 def cancle_tickets(request,mid, uid):
+    """Function to cancle user's seat bookings"""
     tic =  Ticket.objects.filter(user__id = uid, movie__id=mid)
     for i in tic:
         tick = Ticket.objects.get(id=i.id)

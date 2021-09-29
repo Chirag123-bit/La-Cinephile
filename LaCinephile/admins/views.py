@@ -21,20 +21,21 @@ from django.core.paginator import EmptyPage, Paginator
 @admin_only
 @login_required
 def dashboard(request):
+    """Function for retriving admin dashboard"""
     users = User.objects.all()
-    user_count = users.filter(is_staff=0).count()
-    admin_count = users.filter(is_staff=1).count()
-    movies_count = Now_Showing.objects.all().count()
+    user_count = users.filter(is_staff=0).count() #User count
+    admin_count = users.filter(is_staff=1).count()# Admin Count
+    movies_count = Now_Showing.objects.all().count()# All movie count
 
     ticket = Ticket.objects.all()
-    ticket_count = ticket.count()
+    ticket_count = ticket.count()# Akk ticket count
 
     tickets = Ticket.objects.all()
-    data=[0,0,0]
+    data=[0,0,0] #Empty initialized data array
 
     canceled = ticket.filter(status="Canceled")
-    canc_data = [0,0,0]
-    for i in canceled:
+    canc_data = [0,0,0] #Empty initialized data array
+    for i in canceled: # Categorize ticket data for displaying in admin panal
         if i.movie.hall.category.name == "GOLD":
             canc_data[0] += 1
         elif i.movie.hall.category.name == "PLATINUM":
@@ -42,7 +43,7 @@ def dashboard(request):
         else:
             canc_data[2]+=1
 
-    for i in tickets:
+    for i in tickets: # Categorize hall data for displaying in admin panal
         if i.movie.hall.category.name == "GOLD":
             data[0] += 1
         elif i.movie.hall.category.name == "PLATINUM":
@@ -50,8 +51,7 @@ def dashboard(request):
         else:
             data[2]+=1
 
-    ticket = ticket.order_by('-id')[:5] 
-    print(ticket)
+    ticket = ticket.order_by('-id')[:5] # Retrieve 5 recent tickets
     context={
         'user_count':user_count,
         'admin_count':admin_count,
@@ -69,6 +69,7 @@ def dashboard(request):
 @admin_only
 @login_required
 def show_user(request):
+    """Function to show all users in admin page"""
     if 'q' in request.GET:
         q=request.GET['q']
         users = User.objects.filter(first_name__icontains=q).filter(is_staff=0)
@@ -83,6 +84,7 @@ def show_user(request):
 @admin_only
 @login_required
 def show_admin(request):
+    """Function to view all admins/staff in admin page"""
     if 'q' in request.GET:
         q=request.GET['q']
         users = User.objects.filter(first_name__icontains=q).filter(is_staff=1)
@@ -97,6 +99,7 @@ def show_admin(request):
 @admin_only
 @login_required
 def promote_user(request,user_id):
+    """Function to promote users"""
     user = User.objects.get(id=user_id)
     user.is_staff=True
     user.save()
@@ -106,6 +109,7 @@ def promote_user(request,user_id):
 @admin_only
 @login_required
 def demote_user(request,user_id):
+    """Function to demote users"""
     user = User.objects.get(id=user_id)
     user.is_staff=False
     user.save()
@@ -115,6 +119,7 @@ def demote_user(request,user_id):
 @admin_only
 @login_required
 def delete_user(request,user_id):
+    """Function to delete users"""
     user = User.objects.get(id=user_id)
     user.delete()
     messages.add_message(request, messages.SUCCESS, 'User Deleted')
@@ -123,6 +128,7 @@ def delete_user(request,user_id):
 @admin_only
 @login_required
 def delete_admin(request,user_id):
+    """Function to delete admin"""
     user = User.objects.get(id=user_id)
     user.delete()
     messages.add_message(request, messages.SUCCESS, 'Admin Deleted')
@@ -131,6 +137,7 @@ def delete_admin(request,user_id):
 @admin_only
 @login_required
 def update_user(request,user_id):
+    """Function to update users"""
     user = User.objects.get(id=user_id)
     profile = user.profile
     form = ProfileForm(instance=profile)
@@ -147,6 +154,7 @@ def update_user(request,user_id):
 @admin_only
 @login_required
 def deactivate(request,user_id):
+    """Function to deactivate users"""
     user = User.objects.get(id=user_id)
     user.is_active = False
     user.save()
@@ -156,6 +164,7 @@ def deactivate(request,user_id):
 @admin_only
 @login_required
 def activate(request,user_id):
+    """Function to activate users"""
     user = User.objects.get(id=user_id)
     user.is_active = True
     user.save()
@@ -181,6 +190,7 @@ def show_movie(request):
 @admin_only
 @login_required
 def update_movie(request,movie_id):
+    """Function to update movie details"""
     movie = Now_Showing.objects.get(id=movie_id)
     form = NowShowingForm(instance=movie)
     if request.method == "POST":
@@ -195,6 +205,7 @@ def update_movie(request,movie_id):
 @admin_only
 @login_required
 def delete_movie(request,movie_id):
+    """Function to delete movies"""
     movie = Now_Showing.objects.get(id=movie_id)
     movie.delete()
     messages.add_message(request, messages.SUCCESS, 'Movie Deleted')
@@ -204,6 +215,7 @@ def delete_movie(request,movie_id):
 @admin_only
 @login_required
 def up_movie(request):
+    """Function to show up-comming movies"""
     if 'q' in request.GET:
         q=request.GET['q']
         movies = Up_Comming.objects.filter(name__icontains=q)
@@ -218,6 +230,7 @@ def up_movie(request):
 @admin_only
 @login_required
 def update_upmovie(request,movie_id):
+    """Function to update upcomming movies"""
     movie = Up_Comming.objects.get(id=movie_id)
     form = UpCommingForm(instance=movie)
     if request.method == "POST":
@@ -244,6 +257,7 @@ def delete_upmovie(request,movie_id):
 @admin_only
 @login_required
 def show_hall(request):
+    """Function to show halls"""
     hall = Hall.objects.all().order_by('-id')
     context={
         'hall':hall,
@@ -255,6 +269,7 @@ def show_hall(request):
 @admin_only   
 @login_required
 def update_hall(request,hall_id):
+    """Function to update halls"""
     hall = Hall.objects.get(id=hall_id)
     form = HallForm(instance=hall)
     if request.method == "POST":
@@ -271,6 +286,7 @@ def update_hall(request,hall_id):
 @admin_only
 @login_required
 def delete_hall(request,hall_id):
+    """Function to delete halls"""
     movie = Hall.objects.get(id=hall_id)
     movie.delete()
     messages.add_message(request, messages.SUCCESS, 'Hall Deleted')
@@ -280,6 +296,7 @@ def delete_hall(request,hall_id):
 @admin_only
 @login_required
 def hall_category(request):
+    """Function to show hall categories"""
     cat = Category.objects.all().order_by('-id')
     context={
         'cat':cat,
@@ -290,6 +307,7 @@ def hall_category(request):
 @admin_only   
 @login_required
 def update_hall_cat(request,hallCat_id):
+    """Function to update hall category"""
     hall = Category.objects.get(id=hallCat_id)
     form = CategoryForm(instance=hall)
     if request.method == "POST":
@@ -306,6 +324,7 @@ def update_hall_cat(request,hallCat_id):
 @admin_only
 @login_required
 def delete_hall_cat(request,hallCat_id):
+    """Function to delete hall category"""
     movie = Category.objects.get(id=hallCat_id)
     movie.delete()
     messages.add_message(request, messages.SUCCESS, 'Hall Deleted')
@@ -315,6 +334,7 @@ def delete_hall_cat(request,hallCat_id):
 @admin_only
 @login_required
 def movie_hall(request):
+    """Function to show movie halls"""
     mh = Movie_Hall.objects.all().order_by('-id')
     context={
         'cat':mh,
@@ -456,6 +476,7 @@ def payments(request):
 @admin_only
 @login_required
 def create_User(request):
+    """Function to create users"""
     form = UserForm()
     if request.method == "POST":
         form = UserForm(request.POST)
@@ -480,6 +501,7 @@ def create_User(request):
 @admin_only
 @login_required
 def create_Ticket(request):
+    """Function to create tickets"""
     form = TicketForm()
     if request.method == "POST":
         form = TicketForm(request.POST)
@@ -643,6 +665,7 @@ def admin_profile(request):
 @admin_only
 @login_required
 def update_profile(request):
+    """Function to update user profiles"""
     profile = request.user.profile
     form = ProfileForm(instance=profile)
     if request.method == "POST":
@@ -664,6 +687,7 @@ def update_profile(request):
 @admin_only
 @login_required
 def change_password(request):
+    """Function to change password"""
     if request.method == "POST":
         form = PasswordChangeForm(data=request.POST, user = request.user)
         if form.is_valid():

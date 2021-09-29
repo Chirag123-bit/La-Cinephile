@@ -17,6 +17,7 @@ import requests
 
 @user_only
 def prices(request):
+    """Function to show pricing section of La CinePhile"""
     hall_cat = Category.objects.all()
     ticket_cat = ticket.objects.all()
     context={
@@ -36,7 +37,6 @@ def book(request):
         movie = data.get('mid')
         seats = data.get('seat_selected')
         discount = data.get('discountId')
-        print(user.id)
          
 
         mv = Movie_Hall.objects.filter(id=int(movie))[0] #Gets corresponding movie-time
@@ -79,6 +79,7 @@ def book(request):
 
 @user_only
 def movie_json(request):
+    """Function to get movie json"""
     movies = list(Now_Showing.objects.values())
     return JsonResponse({'data':movies})
 
@@ -102,6 +103,7 @@ def hall_json(request, *args, **kwargs):
 
 @user_only
 def date_json(request, *args, **kwargs):
+    """Function to get json dates for selected movie"""
     mselection = kwargs.get('mid')
     hselection = kwargs.get('hid')
     obj_model = Movie_Hall.objects.values('id', 'date').filter(movie__id=mselection, hall__id=hselection)
@@ -118,6 +120,7 @@ def date_json(request, *args, **kwargs):
 
 @user_only
 def time_json(request, *args, **kwargs):
+    """Function to get json times for selected movie and date"""
     mselection = kwargs.get('mid')
     hselection = kwargs.get('hid')
     day = kwargs.get('date')
@@ -135,6 +138,7 @@ def time_json(request, *args, **kwargs):
 
 @user_only
 def seats_json(request, *args, **kwargs):
+    """Function to get json seats for selected movie"""
     mh_id = kwargs.get("id")
     obj_model = Ticket.objects.values('seats').filter(movie__id=mh_id)
     resp=[]
@@ -149,7 +153,7 @@ def seats_json(request, *args, **kwargs):
 
 @user_only
 def dis_price_json(request, *args, **kwargs):
-
+    """Function to retrive json data of price & discount for the selected seats and movie"""
     field = Movie_Hall.objects.get(id=kwargs.get('hmid'))
     price = field.hall.category.price
     time = field.time
@@ -181,6 +185,7 @@ def dis_price_json(request, *args, **kwargs):
 
 
 class KhaltiRequestView(View):
+    """Function to render khalti page"""
     def get(self, request, *args, **kwargs):
         id = int(request.GET.get("o_id"))
         detail = Purchase.objects.get(id=id)

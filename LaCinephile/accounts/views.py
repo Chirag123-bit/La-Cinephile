@@ -66,6 +66,7 @@ def logout_user(request):
 @user_only
 @login_required
 def user_profile(request):
+    """Function for retriving profile"""
     profile = request.user.profile
     form = ProfileForm(instance=profile)
     if request.method == "POST":
@@ -80,6 +81,7 @@ def user_profile(request):
 @user_only
 @login_required
 def update_profile(request):
+    """Function for updating profile"""
     profile = request.user.profile
     form = ProfileForm(instance=profile)
     if request.method == "POST":
