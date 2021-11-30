@@ -45,7 +45,7 @@ Nielsen's heuristics for UI design.
   
 ## Feedback
 
-If you have any feedback, please reach me out at 200048@softwarica.edu.np
+If you have any feedback, please reach me out at chiragsimkhada@gmail.com
 
   
 ## Appendix
